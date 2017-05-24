@@ -20,7 +20,6 @@ public class TestBirchMetric {
     public static void main(String[] args) {
         String rutaArchivo = "C:/Users/Ismael/Desktop/XMI de prueba/EA_XMI_2_4_2__UML_2_4_1.xml";
         //String rutaArchivo = "C:/Users/Ismael/Desktop/XMI de prueba/XMI/ICR.xml";
-        //String nombreArtefacto = "ClaseHija1";
         List<String> nombres = Arrays.asList(
                 "Clase Madre",
                 "ClaseHija1",
@@ -33,23 +32,25 @@ public class TestBirchMetric {
                 "ClaseImplementacion",
                 "ClaseAgregacion",
                 "ClaseAgregada");
-        //int metrica = ICalculaMetricas.SPECIALIZATION_INDEX;
+        //int metrica = ICalculaMetricas.NUMBER_OF_METHOD_OVERRIDDEN;
+        int metrica = 14;
         ICalculaMetricas icm = new CalculaMetricas();
 
         //===========================================================Artefactos.
-        /*nombres.stream().forEach(nombre ->{
-            System.err.println("Nombre artefacto: " + nombre);
-        System.err.println("Calculando métrica: " + metrica + "...");
-        icm.getArtifacId(nombre, rutaArchivo)
-                .stream()
-                .forEach(id -> {
-                    System.err.println("Id: " + id);
-                    String result = icm.calcularMetricas(id, rutaArchivo, metrica);
-                    System.err.println("Resultado métrica: " + result);
-                    System.err.println("========================================================");
-                });
-        });*/
+        nombres.stream().forEach(nombre -> {
+            //System.err.println("Nombre artefacto: " + nombre);
+            System.err.println("Calculando métrica: " + metrica + "...");
+            icm.getArtifacId(nombre, rutaArchivo)
+                    .stream()
+                    .forEach(id -> {
+                        //System.err.println("Id: " + id);
+                        String result = icm.calcularMetricas(id, rutaArchivo, metrica);
+                        System.err.println("Resultado métrica: " + result);
+                        System.err.println("========================================================");
+                    });
+        });
         //============================================================Generales.
+        /*
         for (int f = 0; f < 16; f++) {
             System.err.println("Métricas a nivel de sistema");
             System.err.println("Calculando métrica: " + f + "...");
@@ -57,6 +58,7 @@ public class TestBirchMetric {
             System.err.println("Resultado métrica: " + result);
             System.err.println("==================================================");
         }
+         */
     }
 
 }

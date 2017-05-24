@@ -170,7 +170,7 @@ public final class ControlDeRecopilaciones implements IRD {
 //==============================================================================
 //  Métodos secundarios.
 //==============================================================================
-    private String getResult(String idArtifact, String path, int id)
+    private String getResult(String idArtifact, String path, String id)
             throws XQException, Throwable {
         IVC validador = Validador.getInstance();
         IFP selecPersistencia = new SelectorDePersistencias();

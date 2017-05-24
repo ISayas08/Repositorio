@@ -2,14 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/Ismael/Documents/NetBeansProjects/Brich%20Metrics%20prt-3/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/recopiladorDeDatos/IRD.java</file>
-            <file>file:/C:/Users/Ismael/Documents/NetBeansProjects/Brich%20Metrics%20prt-3/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/TestBirchMetric.java</file>
-            <file>file:/C:/Users/Ismael/Documents/NetBeansProjects/Brich%20Metrics%20prt-3/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/CalculaMetricas.java</file>
-            <file>file:/C:/Users/Ismael/Documents/NetBeansProjects/Brich%20Metrics%20prt-3/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/recopiladorDeDatos/ControlDeRecopilaciones.java</file>
-            <file>file:/C:/Users/Ismael/Documents/NetBeansProjects/Brich%20Metrics%20prt-3/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/ICalculaMetricas.java</file>
-            <file>file:/C:/Users/Ismael/Documents/NetBeansProjects/Brich%20Metrics%20prt-3/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/validacionYCompatibilidad/Version2_4_2.java</file>
-            <file>file:/C:/Users/Ismael/Documents/NetBeansProjects/Brich%20Metrics%20prt-3/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/recopiladorDeDatos/RecopiladorDeDatosMG.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

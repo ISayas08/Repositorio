@@ -1,7 +1,7 @@
 package co.edu.unicartagena.birch.logica.validacionYCompatibilidad;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Clase que contiene todas las sentencias para trabajar archivos XMI generados
@@ -46,7 +46,7 @@ public final class Version2_4_2 extends Version {
      * @return un String que contiene la sentencia armada.
      */
     @Override
-    public final String armarSentenciaArtefacto(String nombre, String path, int id, boolean isSearchAsId) {
+    public final String armarSentenciaArtefacto(String nombre, String path, String id, boolean isSearchAsId) {
         return this.prefijo
                 + path
                 + this.getIntermedioArtefactos(isSearchAsId)
@@ -68,7 +68,7 @@ public final class Version2_4_2 extends Version {
      * @return un String que contiene la sentencia armada.
      */
     @Override
-    public final String armarSentenciaArtefacto(String nombre, File file, int id, boolean isSearchAsId) {
+    public final String armarSentenciaArtefacto(String nombre, File file, String id, boolean isSearchAsId) {
         return this.armarSentenciaArtefacto(
                 nombre,
                 file.getAbsolutePath(),
@@ -86,7 +86,7 @@ public final class Version2_4_2 extends Version {
      * @return un String que contiene la sentencia armada.
      */
     @Override
-    public final String armarSentenciaGeneral(String path, int id) {
+    public final String armarSentenciaGeneral(String path, String id) {
         return this.prefijo
                 + path
                 + this.sufijosDiagrama.get(id);
@@ -102,7 +102,7 @@ public final class Version2_4_2 extends Version {
      * @return un String que contiene la sentencia armada.
      */
     @Override
-    public final String armarSentenciaGeneral(File file, int id) {
+    public final String armarSentenciaGeneral(File file, String id) {
         return this.armarSentenciaGeneral(file.getAbsolutePath(), id);
     }
 
@@ -115,40 +115,40 @@ public final class Version2_4_2 extends Version {
      */
     @Override
     protected void llenarSufijosArtefactos() {
-        this.sufijosArtefactos = new ArrayList<>();
+        this.sufijosArtefactos = new HashMap();
 
-        //[0] Atributos totales.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Atributos totales.
+        this.sufijosArtefactos.put("MA Atributos totales", "\"][1];\n"
                 + "\n"
                 + "count($claseAEvaluar/ownedAttribute[not(@association)])");
 
-        //[1] Atributos públicos.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Atributos públicos.
+        this.sufijosArtefactos.put("MA Atributos públicos", "\"][1];\n"
                 + "\n"
                 + "count($claseAEvaluar/ownedAttribute[not(@association)][not(@visibility) or @visibility eq \"public\"])");
 
-        //[2] Atributos estáticos.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Atributos estáticos.
+        this.sufijosArtefactos.put("MA Atributos estáticos", "\"][1];\n"
                 + "\n"
                 + "count($claseAEvaluar/ownedAttribute[not(@association)][@isStatic = \"true\"])");
 
-        //[3] Métodos totales.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Métodos totales.
+        this.sufijosArtefactos.put("MA Métodos totales", "\"][1];\n"
                 + "\n"
                 + "count($claseAEvaluar/ownedOperation)");
 
-        //[4] Métodos públicos.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Métodos públicos.
+        this.sufijosArtefactos.put("MA Métodos públicos", "\"][1];\n"
                 + "\n"
                 + "count($claseAEvaluar/ownedOperation[@visibility=\"public\" or not(@visibility)])");
 
-        //[5] Métodos estáticos.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Métodos estáticos.
+        this.sufijosArtefactos.put("MA Métodos estáticos", "\"][1];\n"
                 + "\n"
                 + "count($claseAEvaluar/ownedOperation[@isStatic = \"true\"])");
 
-        //[6] Datos de los métodos de una clase especifica.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Datos de los métodos de una clase especifica.
+        this.sufijosArtefactos.put("MA Datos métodos", "\"][1];\n"
                 + "\n"
                 + "declare function local:parametros($metodo as element())as xs:string{\n"
                 + "	fn:string-join($metodo/ownedParameter[not(fn:exists(@direction))]/@type, \"#\")\n"
@@ -160,8 +160,8 @@ public final class Version2_4_2 extends Version {
                 + "	 let $parametros := local:parametros($metodo)\n"
                 + "	 return fn:string-join(($tipoRetorno, $nombreMetodo, $parametros), \"%\")");
 
-        //[7] Ides clases padre de una clase especifica.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Ides clases padre de una clase especifica.
+        this.sufijosArtefactos.put("MA Ides clases padre", "\"][1];\n"
                 + "\n"
                 + "declare variable $generalizacion := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Realization\"];\n"
                 + "declare function local:nombre-padres($clase)as xs:string{\n"
@@ -173,8 +173,8 @@ public final class Version2_4_2 extends Version {
                 + "\n"
                 + "local:nombre-padres($claseAEvaluar)");
         
-        //[8] Atributos heredados.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Atributos heredados.
+        this.sufijosArtefactos.put("MA Atributos heredados", "\"][1];\n"
                 + "declare function local:metodos-heredados($clase as element(packagedElement)) as xs:integer{\n"
                 + "if(not(fn:exists($clase/generalization))) then\n"
                 + "0 else \n"
@@ -183,8 +183,8 @@ public final class Version2_4_2 extends Version {
                 + "};\n"
                 + "local:metodos-heredados($claseAEvaluar)");
 
-        //[9] Métodos heredados.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Métodos heredados.
+        this.sufijosArtefactos.put("MA Métodos heredados", "\"][1];\n"
                 + "\n"
                 + "declare function local:metodos-heredados($clase as element(packagedElement)) as xs:integer\n"
                 + "{\n"
@@ -198,13 +198,13 @@ public final class Version2_4_2 extends Version {
                 + "\n"
                 + "local:metodos-heredados($claseAEvaluar)");
 
-        //[10] Parámetros totales.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Parámetros totales.
+        this.sufijosArtefactos.put("MA Parámetros totales", "\"][1];\n"
                 + "\n"
                 + "count($claseAEvaluar/ownedOperation/ownedParameter[@name != \"return\"])");
 
-        //[11] Profundidad del arbol de herencias.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Profundidad del arbol de herencias.
+        this.sufijosArtefactos.put("MA DHT", "\"][1];\n"
                 + "\n"
                 + "declare function local:DIT($clase as element(packagedElement)) as xs:integer\n"
                 + "{\n"
@@ -217,16 +217,16 @@ public final class Version2_4_2 extends Version {
                 + "\n"
                 + "local:DIT($claseAEvaluar)");
 
-        //[12] Hijos inmediatos.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Hijos inmediatos.
+        this.sufijosArtefactos.put("MA Hijos inmediatos", "\"][1];\n"
                 + "\n"
                 + "count($clases[generalization/@general eq $claseAEvaluar/@xmi:id])");
 
-        //[13] Acoplamiento.
-        this.sufijosArtefactos.add("\"][1];\n"
+        //Acoplamiento.
+        this.sufijosArtefactos.put("MA Acoplamiento", "\"][1];\n"
                 + "\n"
-                + "declare variable $realizaciones := $doc//packagedElement[@xmi:type = \"uml:Realization\"];\n"
-                + "declare variable $dependencias := $doc//packagedElement[@xmi:type = \"uml:Dependency\"];\n"
+                + "declare variable $realizaciones := $doc//uml:Model//packagedElement[@xmi:type = \"uml:Realization\"];\n"
+                + "declare variable $dependencias := $doc//uml:Model//packagedElement[@xmi:type = \"uml:Dependency\"];\n"
                 + "\n"
                 + "(:Relaciones eferentes:)\n"
                 + "declare variable $conHerenciaE := count($claseAEvaluar//generalization);\n"
@@ -241,19 +241,16 @@ public final class Version2_4_2 extends Version {
                 + "\n"
                 + " $conAsociacionesE + $conAsociacionesA + $conHerenciaE + $conRealizacionE + $conDependenciaE + $conHerenciaA + $conRealizacionA + $conDependenciaA");
 
-        //[14] Datos herencia clase.
-        this.sufijosArtefactos.add("\"][1];\n"
-                + "\n"
+        //Datos herencia clase.
+        this.sufijosArtefactos.put("MA Datos de herencia", "\"][1];\n"
                 + "data($claseAEvaluar/generalization/@general)");
 
-        //[15] Verificación de artefacto.
-        this.sufijosArtefactos.add("\"][1];\n"
-                + "\n"
+        //Verificación de artefacto.
+        this.sufijosArtefactos.put("MA Verificar artefacto", "\"][1];\n"
                 + "exists($claseAEvaluar)");
 
-        //[16] Get ids.
-        this.sufijosArtefactos.add("\"];\n"
-                + "\n"
+        //Get ids.
+        this.sufijosArtefactos.put("MA Get id", "\"];\n"
                 + "fn:string-join(data($claseAEvaluar/@xmi:id), \";\")");
     }
 
@@ -263,82 +260,70 @@ public final class Version2_4_2 extends Version {
      */
     @Override
     protected void llenarSufijosGenerales() {
-        this.sufijosDiagrama = new ArrayList<>();
+        this.sufijosDiagrama = new HashMap();
 
-        //[0] Número total de clases.
-        this.sufijosDiagrama.add("\") ;\n"
-                + "\n"
+        //Número total de clases.
+        this.sufijosDiagrama.put("MS Total clases", "\") ;\n"
                 + "declare variable $clase := $doc//uml:Model//packagedElement[@xmi:type = \"uml:Class\"];\n"
                 + "count($clase)");
 
-        //[1] Número total de clases abstractas.
-        this.sufijosDiagrama.add("\") ;\n"
-                + "\n"
+        //Número total de clases abstractas.
+        this.sufijosDiagrama.put("MS Total clases abstractas", "\") ;\n"
                 + "declare variable $claseAbstracta := $doc//uml:Model//packagedElement[@xmi:type = \"uml:Class\" and @isAbstract = \"true\"];\n"
                 + "count($claseAbstracta)");
 
-        //[2] Número total de interfaces.
-        this.sufijosDiagrama.add("\");\n"
-                + "\n"
+        //Número total de interfaces.
+        this.sufijosDiagrama.put("MS Total interfaces", "\");\n"
                 + "declare variable $interface := $doc//uml:Model//packagedElement[@xmi:type = \"uml:Interface\" ];\n"
                 + "count($interface)");
 
-        //[3] Número total de paquetes.
-        this.sufijosDiagrama.add("\") ;\n"
-                + "\n"
+        //Número total de paquetes.
+        this.sufijosDiagrama.put("MS Total paquetes", "\") ;\n"
                 + "declare variable $paquete := $doc//uml:Model//packagedElement[@xmi:type = \"uml:Package\"];\n"
                 + "count($paquete)");
 
-        //[4] Número total de atributos.
-        this.sufijosDiagrama.add("\");\n"
+        //Número total de atributos.
+        this.sufijosDiagrama.put("MS Total atributos", "\");\n"
                 + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
-                + "\n"
                 + "count($clases/ownedAttribute[not(@association)])");
 
-        //[5] Número total de atributos públicos.
-        this.sufijosDiagrama.add("\");\n"
+        //Número total de atributos públicos.
+        this.sufijosDiagrama.put("MS Total atributos públicos", "\");\n"
                 + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
-                + "\n"
                 + "declare variable $clase := $clases[@xmi:type eq \"uml:Class\"];\n"
                 + "count($clase/ownedAttribute[not(@association)][not(@visibility) or @visibility = \"public\"])");
 
-        //[6] Número total de métodos.
-        this.sufijosDiagrama.add("\");\n"
+        //Número total de métodos.
+        this.sufijosDiagrama.put("MS Total métodos", "\");\n"
                 + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
-                + "\n"
                 + "count($clases/ownedOperation)");
 
-        //[7] Número total de métodos públicos.
-        this.sufijosDiagrama.add("\");\n"
+        //Número total de métodos públicos.
+        this.sufijosDiagrama.put("MS Total métodos públicos", "\");\n"
                 + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
-                + "\n"
                 + "count($clases/ownedOperation[not(@visibility) or @visibility = \"public\"])");
 
-        //[8] Obtener todas las ids de los artefactos del diagrama.
-        this.sufijosDiagrama.add("\");\n"
-                + "\n"
-                + "declare variable $clases := $doc//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
+        //Obtener todas las ids de los artefactos del diagrama.
+        this.sufijosDiagrama.put("MS Get Ids", "\");\n"
+                + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
                 + "fn:string-join(data($clases/@xmi:id), \";\")");
 
-        //[9] Número total de clases hijas.
-        this.sufijosDiagrama.add("\");\n"
-                + "\n"
-                + "declare variable $clases := $doc//packagedElement[@xmi:type eq \"uml:Class\"];\n"
+        //Número total de clases hijas.
+        this.sufijosDiagrama.put("MS Total clases hijas", "\");\n"
+                + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\"];\n"
                 + "count($clases[not(not(generalization))])");
 
-        //[10] Número total de clusters.
-        this.sufijosDiagrama.add("\");\n"
-                + "\n"
-                + "declare variable $clases := $doc//packagedElement[@xmi:type eq \"uml:Class\"];\n"
+        //Número total de clusters.
+        this.sufijosDiagrama.put("MS Total clusters", "\");\n"
+                + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\"];\n"
                 + "for $clase in $clases\n"
                 + "let $clasesMadre := $clases[@xmi:id eq $clase/generalization/@general]\n"
                 + "where $clasesMadre[not(generalization)]\n"
                 + "return count($clasesMadre)");
 
-        //[11] Número total de relaciones NH.
-        this.sufijosDiagrama.add("\");\n"
-                + "\n"
-                + "declare variable $clases := $doc//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
+        //Número total de relaciones NH.
+        this.sufijosDiagrama.put("MS Total relaciones noH", "\");\n"
+                + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
                 + "declare variable $dependencias := $doc//packagedElement[@xmi:type = \"uml:Dependency\"];\n"
                 + "declare variable $asociaciones := $clases/ownedAttribute[boolean(@association)];\n"
                 + "declare variable $realizaciones := $doc//packagedElement[@xmi:type = \"uml:Realization\"];\n"
@@ -347,14 +332,14 @@ public final class Version2_4_2 extends Version {
                 + "declare variable $conRealizaciones := count($realizaciones);\n"
                 + "$conAsociaciones + $conDependencia + $conRealizaciones");
 
-        //[12] Número total de atributos privados.
-        this.sufijosDiagrama.add("\");\n"
+        //Número total de atributos privados.
+        this.sufijosDiagrama.put("MS Total atributos privados", "\");\n"
                 + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
                 + "\n"
                 + "count($clases/ownedAttribute[not(@association)][@visibility eq \"private\"])");
 
-        //[13] Número total de métodos privados.
-        this.sufijosDiagrama.add("\");\n"
+        //Número total de métodos privados.
+        this.sufijosDiagrama.put("MS Total métodos privados", "\");\n"
                 + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
                 + "\n"
                 + "count($clases/ownedOperation[@visibility=\"private\"])");

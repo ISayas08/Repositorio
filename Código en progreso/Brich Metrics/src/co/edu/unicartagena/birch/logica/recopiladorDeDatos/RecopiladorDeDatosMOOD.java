@@ -209,7 +209,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
      * @throws XQException
      * @throws Throwable
      */
-    private String getResult(String path, int id)
+    private String getResult(String path, String id)
             throws XQException, Throwable {
         IVC validador = Validador.getInstance();
         IFP selecPersistencia = new SelectorDePersistencias();

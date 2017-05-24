@@ -235,7 +235,7 @@ public class MetricasMOOD implements IMGenerales {
             sumatoriaMO += mO;
             sumatoriaMAxDC += (mAñadidos * nDescendientes);
         }
-
+        System.err.println("MétricasMOOD, línea 238: MO: " + sumatoriaMO + " MAxDC: " + sumatoriaMAxDC);
         return Double.toString((double) sumatoriaMO / (double) sumatoriaMAxDC);
     }
 

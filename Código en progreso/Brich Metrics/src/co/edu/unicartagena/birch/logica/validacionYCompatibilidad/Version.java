@@ -1,7 +1,7 @@
 package co.edu.unicartagena.birch.logica.validacionYCompatibilidad;
 
 import java.io.File;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * Clase abstracta que contiene algunoas atributos y comportamientos comunes
@@ -47,7 +47,7 @@ public abstract class Version {
      * información de artefactos. Éstos son la última parte de la sentencia y
      * van justo después del nombre del artefacto.
      */
-    protected List<String> sufijosArtefactos;
+    protected HashMap sufijosArtefactos;
 
     /**
      * Los sufijos de diagrama se utilizan para formar sentencias XQuery en
@@ -55,7 +55,7 @@ public abstract class Version {
      * recopilar información de todo el diagrama. Éstos son la última parte de
      * la sentencia y van justo después de la ruta del archivo.
      */
-    protected List<String> sufijosDiagrama;
+    protected HashMap sufijosDiagrama;
 
 //==============================================================================
 //  Constructores y metodos de inicialización.
@@ -83,7 +83,7 @@ public abstract class Version {
      * armará a través de la id del artefacto o a través del nombre.
      * @return un String que contiene la sentencia armada.
      */
-    public abstract String armarSentenciaArtefacto(String nombre, String path, int id, boolean isSearchAsId);
+    public abstract String armarSentenciaArtefacto(String nombre, String path, String id, boolean isSearchAsId);
 
     /**
      * Método que permite armar una sentencia especifica para recopilar datos de
@@ -98,7 +98,7 @@ public abstract class Version {
      * armará a través de la id del artefacto o a través del nombre.
      * @return un String que contiene la sentencia armada.
      */
-    public abstract String armarSentenciaArtefacto(String nombre, File file, int id, boolean isSearchAsId);
+    public abstract String armarSentenciaArtefacto(String nombre, File file, String id, boolean isSearchAsId);
 
     /**
      * Método que permite armar una sentencia especifica para recopilar datos
@@ -109,7 +109,7 @@ public abstract class Version {
      * @param id la ide que identifica la sentencia deseada.
      * @return un String que contiene la sentencia armada.
      */
-    public abstract String armarSentenciaGeneral(String path, int id);
+    public abstract String armarSentenciaGeneral(String path, String id);
 
     /**
      * Método que permite armar una sentencia especifica para recopilar datos
@@ -120,7 +120,7 @@ public abstract class Version {
      * @param id la ide que identifica la sentencia deseada.
      * @return un String que contiene la sentencia armada.
      */
-    public abstract String armarSentenciaGeneral(File file, int id);
+    public abstract String armarSentenciaGeneral(File file, String id);
 //==============================================================================
 //  Métodos sin cuerpo.
 //==============================================================================
@@ -140,19 +140,19 @@ public abstract class Version {
 //  Getters and Setters.
 //==============================================================================
 
-    public List<String> getSufijosArtefactos() {
+    public HashMap getSufijosArtefactos() {
         return sufijosArtefactos;
     }
 
-    public void setSufijosArtefactos(List<String> sufijosArtefactos) {
+    public void setSufijosArtefactos(HashMap sufijosArtefactos) {
         this.sufijosArtefactos = sufijosArtefactos;
     }
 
-    public List<String> getSufijosDiagrama() {
+    public HashMap getSufijosDiagrama() {
         return sufijosDiagrama;
     }
 
-    public void setSufijosDiagrama(List<String> sufijosDiagrama) {
+    public void setSufijosDiagrama(HashMap sufijosDiagrama) {
         this.sufijosDiagrama = sufijosDiagrama;
     }
 

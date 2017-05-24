@@ -150,7 +150,7 @@ public final class Validador implements IVC {
      */
     @Override
     public boolean verificarArtefacto(String nombre, String path, boolean isIdSearch) {
-        String sentencia = this.version.armarSentenciaArtefacto(nombre, path, 14, isIdSearch);
+        String sentencia = this.version.armarSentenciaArtefacto(nombre, path, "MA Verificar artefacto", isIdSearch);
         String result = this.getResult(sentencia);
 
         return result.equals("true");

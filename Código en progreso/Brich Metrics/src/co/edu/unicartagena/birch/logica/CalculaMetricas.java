@@ -52,7 +52,11 @@ public class CalculaMetricas implements ICalculaMetricas {
         String result = "NA";
         IResultado resultados = null;
         IVC validador = Validador.getInstance();
-        ICM cCalculo = new ControlDeCalculoDeMetricas();
+        ICM cCalculo = new ControlDeCalculoDeMetricas(
+                ICalculaMetricas.NUMERO_DE_MA_CYK,
+                ICalculaMetricas.NUMERO_DE_MA_LYK,
+                ICalculaMetricas.NUMERO_DE_MS_MG,
+                ICalculaMetricas.NUMERO_DE_MS_MOOD);
 
         //Se modifica la ruta para de asegurar que sea compatible con XQuery.
         path = this.modificarRuta(path);
@@ -128,7 +132,11 @@ public class CalculaMetricas implements ICalculaMetricas {
         String result = "NA";
         IResultado resultados = null;
         IVC validador = Validador.getInstance();
-        ICM cCalculo = new ControlDeCalculoDeMetricas();
+        ICM cCalculo = new ControlDeCalculoDeMetricas(
+                ICalculaMetricas.NUMERO_DE_MA_CYK,
+                ICalculaMetricas.NUMERO_DE_MA_LYK,
+                ICalculaMetricas.NUMERO_DE_MS_MG,
+                ICalculaMetricas.NUMERO_DE_MS_MOOD);
 
         //Modificamos la rota para asegurar que sea compatible con XQuery.
         path = this.modificarRuta(path);
@@ -196,13 +204,19 @@ public class CalculaMetricas implements ICalculaMetricas {
         //Declaración de variables
         String dato = "NA";
 
-        //Se verifica que la id sea válida.
-        if (verificarId(id, true)) {
+        //Se verifica que la id sea válida
+        //y se obtiene la familia a la que pertenece.
+        String familia = verificarId(id, true);
+        if (!familia.equals("False")) {
             //En caso de que la id sea válida.
             //Se declaran el resto de variables.
             String result = "NA";
             IVC validador = Validador.getInstance();
-            ICM cCalculo = new ControlDeCalculoDeMetricas();
+            ICM cCalculo = new ControlDeCalculoDeMetricas(
+                ICalculaMetricas.NUMERO_DE_MA_CYK,
+                ICalculaMetricas.NUMERO_DE_MA_LYK,
+                ICalculaMetricas.NUMERO_DE_MS_MG,
+                ICalculaMetricas.NUMERO_DE_MS_MOOD);
 
             //Se modifica la ruta para de asegurar que sea compatible con XQuery.
             path = this.modificarRuta(path);
@@ -216,7 +230,7 @@ public class CalculaMetricas implements ICalculaMetricas {
                     //Si el artefacto es válido.
                     //Se llama al método que calcula la métrica 
                     //y se asigna el resultado en la variable dato.
-                    dato = "" + cCalculo.calcularMetricasArtefacto(artifactId, path, id);
+                    dato = "" + cCalculo.calcularMetricasArtefacto(artifactId, path, id, familia);
                 } else {
                     //Si el artefacto no es válido.
                     //Se informa por consola.
@@ -284,12 +298,17 @@ public class CalculaMetricas implements ICalculaMetricas {
         String dato = "NA";
 
         //Se verifica que la id sea válida.
-        if (verificarId(id, false)) {
+        String familia = verificarId(id, false);
+        if (!familia.equals("False")) {
             //En caso de que la id sea válida.
             //Se declaran el resto de variables.
             String result = "NA";
             IVC validador = Validador.getInstance();
-            ICM cCalculo = new ControlDeCalculoDeMetricas();
+            ICM cCalculo = new ControlDeCalculoDeMetricas(
+                ICalculaMetricas.NUMERO_DE_MA_CYK,
+                ICalculaMetricas.NUMERO_DE_MA_LYK,
+                ICalculaMetricas.NUMERO_DE_MS_MG,
+                ICalculaMetricas.NUMERO_DE_MS_MOOD);
 
             //Modificamos la ruta para asegurar que sea compatible con XQuery.
             path = this.modificarRuta(path);
@@ -300,7 +319,7 @@ public class CalculaMetricas implements ICalculaMetricas {
                 //Si el archivo es válido.
                 //Se llama el método que realiza el cálculo de la métrica.
                 //Se asigna el valor a la variable dato.
-                dato = "" + cCalculo.calcularMetricasGenerales(path, id);
+                dato = "" + cCalculo.calcularMetricasGenerales(path, id, familia);
             } else {
                 //En caso de que el archivo no sea válido.
                 //Se informa por consola.
@@ -370,10 +389,18 @@ public class CalculaMetricas implements ICalculaMetricas {
      * @return retorna true si la id está en el rango apropiado, false en caso
      * contrario.
      */
-    private boolean verificarId(int id, boolean isNivelArtefacto) {
+    private String verificarId(int id, boolean isNivelArtefacto) {
         return isNivelArtefacto
-                ? (id >= 0 && id <= 14) //Ids para métricas a nivel de artefacto.
-                : (id >= 0 && id <= 15); //Ids para métricas a nivel de sistema.
+                ? (id >= 0 && id < ICalculaMetricas.NUMERO_DE_MA_CYK)
+                        ? ICalculaMetricas.FAMILIA_CYK
+                        : (id < ICalculaMetricas.NUMERO_DE_M_ARTEFACTO)
+                                ? ICalculaMetricas.FAMILIA_LYK
+                                : "False"
+                : (id >= 0 && id < ICalculaMetricas.NUMERO_DE_MS_MG)
+                        ? ICalculaMetricas.FAMILIA_MG
+                        : (id < ICalculaMetricas.NUMERO_DE_M_SISTEMA)
+                                ? ICalculaMetricas.FAMILIA_MOOD
+                                : "False";
     }
 
     /**
@@ -381,8 +408,7 @@ public class CalculaMetricas implements ICalculaMetricas {
      * Es necesario proporcionar la ruta del archivo y el nombre del(los)
      * artefacto(s).
      *
-     * @param path la ruta del archivo
-     * XMI.
+     * @param path la ruta del archivo XMI.
      * @param name el nombre del los artefactos a los que se desea conocer la
      * id.
      * @return Una lista de String que contiene las ids de los artefactos que
@@ -454,7 +480,8 @@ public class CalculaMetricas implements ICalculaMetricas {
     /**
      * Método que ermite obtener todos las id o todos los nombres del diagrama.
      *
-     * @param file una instancia de la clase File que contiene la ruta del archivo XMI.
+     * @param file una instancia de la clase File que contiene la ruta del
+     * archivo XMI.
      * @param isLookingForIds un boolean que especifica si se quiere obtener las
      * id o los nombres.
      * @return una lista de Strings que contiene todos los datos.

@@ -33,7 +33,7 @@ public class TestBirchMetric {
                 "ClaseAgregacion",
                 "ClaseAgregada");
         //int metrica = ICalculaMetricas.NUMBER_OF_METHOD_OVERRIDDEN;
-        int metrica = 14;
+        int metrica = 3;
         ICalculaMetricas icm = new CalculaMetricas();
 
         //===========================================================Artefactos.
@@ -56,7 +56,7 @@ public class TestBirchMetric {
             System.err.println("Calculando métrica: " + f + "...");
             String result = icm.calcularMetricas(rutaArchivo, f);
             System.err.println("Resultado métrica: " + result);
-            System.err.println("==================================================");
+            System.err.println("=============================================");
         }
          */
     }

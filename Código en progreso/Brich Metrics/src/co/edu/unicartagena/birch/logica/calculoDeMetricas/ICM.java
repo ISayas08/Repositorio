@@ -12,6 +12,11 @@ import java.io.File;
  */
 public interface ICM {
     
+    public static final String FAMILIA_CYK = "CyK";
+    public static final String FAMILIA_LYK = "LyK";
+    public static final String FAMILIA_MG = "MG";
+    public static final String FAMILIA_MOOD = "MOOD";
+
     public static final int DEPTH_OF_INHERITANCE_TREE = 0;
     public static final int NUMBER_OF_CHILDREN = 1;
     public static final int COUPLING_BETWEEN_OBJECT_CLASSES = 2;
@@ -27,7 +32,6 @@ public interface ICM {
     public static final int NUMBER_OF_NEW_METHOD = 12;
     public static final int AVERAGE_PARAMETER_PER_METHOD = 13;
     public static final int SPECIALIZATION_INDEX = 14;
-    public static final int ID = 15;
 
     public static final int NUMBER_OF_CLASSES = 0;
     public static final int NUMBER_OF_ABSTRACT_CLASSES = 1;
@@ -87,10 +91,12 @@ public interface ICM {
      * cual se calculará la métrica.
      * @param path un String que contiene la ruta del archivo XMI.
      * @param id un entero que identifica la métrica a calcular.
+     * @param familia un string que especifica la familia de métricas a la que
+     * pertenece la métrica.
      * @return un double que contiene los datos resultantes de calcular la
      * métrica.
      */
-    public double calcularMetricasArtefacto(String artifactId, String path, int id);
+    public double calcularMetricasArtefacto(String artifactId, String path, int id, String familia);
 
     /**
      * Método que permite calcular una métrica especifica sobre un artefacto.
@@ -99,10 +105,12 @@ public interface ICM {
      * cual se calculará la métrica.
      * @param file un objeto File que contiene la ruta del archivo XMI.
      * @param id un entero que identifica la métrica a calcular.
+     * @param familia un string que especifica la familia de métricas a la que
+     * pertenece la métrica.
      * @return un double que contiene los datos resultantes de calcular la
      * métrica.
      */
-    public double calcularMetricasArtefacto(String artifactId, File file, int id);
+    public double calcularMetricasArtefacto(String artifactId, File file, int id, String familia);
 
     /**
      * Método que permite calcular una métrica especifica sobre todo el
@@ -110,10 +118,12 @@ public interface ICM {
      *
      * @param path un String que contiene la ruta del archivo XMI.
      * @param id un entero que indentifica la métrica que se calculará.
+     * @param familia un string que especifica la familia de métricas a la que
+     * pertenece la métrica.
      * @return un double que contiene los datos esultantes de calcular la
      * métrica.
      */
-    public double calcularMetricasGenerales(String path, int id);
+    public double calcularMetricasGenerales(String path, int id, String familia);
 
     /**
      * Método que permite calcular una métrica especifica sobre todo el
@@ -121,8 +131,10 @@ public interface ICM {
      *
      * @param file un objeto File que contiene la ruta del archivo XMI.
      * @param id un entero que indentifica la métrica que se calculará.
+     * @param familia un string que especifica la familia de métricas a la que
+     * pertenece la métrica.
      * @return un double que contiene los datos esultantes de calcular la
      * métrica.
      */
-    public double calcularMetricasGenerales(File file, int id);
+    public double calcularMetricasGenerales(File file, int id, String familia);
 }

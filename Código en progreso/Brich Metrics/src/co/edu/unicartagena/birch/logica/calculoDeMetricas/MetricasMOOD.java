@@ -227,9 +227,15 @@ public class MetricasMOOD implements IMGenerales {
 
         for (Artefacto artefacto : artefactos) {
             int mO = (int) ccm.calcularMetricasArtefacto(
-                    artefacto.getId(), path, ICM.NUMBER_OF_METHOD_OVERRIDDEN);
+                    artefacto.getId(),
+                    path,
+                    ICM.NUMBER_OF_METHOD_OVERRIDDEN,
+                    ICM.FAMILIA_LYK);
             int mAñadidos = (int) ccm.calcularMetricasArtefacto(
-                    artefacto.getId(), path, ICM.NUMBER_OF_NEW_METHOD);
+                    artefacto.getId(),
+                    path,
+                    ICM.NUMBER_OF_NEW_METHOD,
+                    ICM.FAMILIA_LYK);
             int nDescendientes = this.hijosTotales(artefacto, artefactos);
 
             sumatoriaMO += mO;

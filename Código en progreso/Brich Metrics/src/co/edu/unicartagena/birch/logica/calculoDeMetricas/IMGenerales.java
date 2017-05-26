@@ -21,7 +21,7 @@ public interface IMGenerales {
      * @throws java.lang.IllegalAccessException
      * @throws java.lang.reflect.InvocationTargetException
      */
-    public String calcularMetrica(String path, int id) throws
+    public String calcularMetrica(String path, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException;
 
@@ -34,7 +34,7 @@ public interface IMGenerales {
      * @throws java.lang.reflect.InvocationTargetException
      * @throws java.lang.IllegalAccessException
      */
-    public String calcularMetrica(File file, int id) throws
+    public String calcularMetrica(File file, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException;
 }

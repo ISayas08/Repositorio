@@ -200,7 +200,7 @@ public class CalculaMetricas implements ICalculaMetricas {
      * consola.
      */
     @Override
-    public String calcularMetricas(String artifactId, String path, int id) {
+    public String calcularMetrica(String artifactId, String path, String id) {
         //Declaración de variables
         String dato = "NA";
 
@@ -213,10 +213,10 @@ public class CalculaMetricas implements ICalculaMetricas {
             String result = "NA";
             IVC validador = Validador.getInstance();
             ICM cCalculo = new ControlDeCalculoDeMetricas(
-                ICalculaMetricas.NUMERO_DE_MA_CYK,
-                ICalculaMetricas.NUMERO_DE_MA_LYK,
-                ICalculaMetricas.NUMERO_DE_MS_MG,
-                ICalculaMetricas.NUMERO_DE_MS_MOOD);
+                    ICalculaMetricas.NUMERO_DE_MA_CYK,
+                    ICalculaMetricas.NUMERO_DE_MA_LYK,
+                    ICalculaMetricas.NUMERO_DE_MS_MG,
+                    ICalculaMetricas.NUMERO_DE_MS_MOOD);
 
             //Se modifica la ruta para de asegurar que sea compatible con XQuery.
             path = this.modificarRuta(path);
@@ -230,12 +230,13 @@ public class CalculaMetricas implements ICalculaMetricas {
                     //Si el artefacto es válido.
                     //Se llama al método que calcula la métrica 
                     //y se asigna el resultado en la variable dato.
-                    dato = "" + cCalculo.calcularMetricasArtefacto(artifactId, path, id, familia);
+                    dato = "" + cCalculo.calcularMetricasArtefacto(
+                            artifactId, path, id, familia);
                 } else {
                     //Si el artefacto no es válido.
                     //Se informa por consola.
-                    System.out.println("Result: The artifact called \"" + artifactId
-                            + "\" is missing.");
+                    System.out.println("Result: The artifact called \""
+                            + artifactId + "\" is missing.");
                 }
             } else {
                 //Si el archivo no es válido.
@@ -277,8 +278,8 @@ public class CalculaMetricas implements ICalculaMetricas {
      * consola.
      */
     @Override
-    public String calcularMetricas(String artifactId, File file, int id) {
-        return this.calcularMetricas(artifactId, file.getAbsolutePath(), id);
+    public String calcularMetrica(String artifactId, File file, String id) {
+        return this.calcularMetrica(artifactId, file.getAbsolutePath(), id);
     }
 
     /**
@@ -293,7 +294,7 @@ public class CalculaMetricas implements ICalculaMetricas {
      * que se haya producido un error, en cuyo caso se informará por consola.
      */
     @Override
-    public String calcularMetricas(String path, int id) {
+    public String calcularMetrica(String path, String id) {
         //Declaración de variables
         String dato = "NA";
 
@@ -305,10 +306,10 @@ public class CalculaMetricas implements ICalculaMetricas {
             String result = "NA";
             IVC validador = Validador.getInstance();
             ICM cCalculo = new ControlDeCalculoDeMetricas(
-                ICalculaMetricas.NUMERO_DE_MA_CYK,
-                ICalculaMetricas.NUMERO_DE_MA_LYK,
-                ICalculaMetricas.NUMERO_DE_MS_MG,
-                ICalculaMetricas.NUMERO_DE_MS_MOOD);
+                    ICalculaMetricas.NUMERO_DE_MA_CYK,
+                    ICalculaMetricas.NUMERO_DE_MA_LYK,
+                    ICalculaMetricas.NUMERO_DE_MS_MG,
+                    ICalculaMetricas.NUMERO_DE_MS_MOOD);
 
             //Modificamos la ruta para asegurar que sea compatible con XQuery.
             path = this.modificarRuta(path);
@@ -357,8 +358,8 @@ public class CalculaMetricas implements ICalculaMetricas {
      * que se haya producido un error, en cuyo caso se informará por consola.
      */
     @Override
-    public String calcularMetricas(File file, int id) {
-        return this.calcularMetricas(file.getAbsolutePath(), id);
+    public String calcularMetrica(File file, String id) {
+        return this.calcularMetrica(file.getAbsolutePath(), id);
     }
 
     /**
@@ -389,18 +390,46 @@ public class CalculaMetricas implements ICalculaMetricas {
      * @return retorna true si la id está en el rango apropiado, false en caso
      * contrario.
      */
-    private String verificarId(int id, boolean isNivelArtefacto) {
-        return isNivelArtefacto
-                ? (id >= 0 && id < ICalculaMetricas.NUMERO_DE_MA_CYK)
-                        ? ICalculaMetricas.FAMILIA_CYK
-                        : (id < ICalculaMetricas.NUMERO_DE_M_ARTEFACTO)
-                                ? ICalculaMetricas.FAMILIA_LYK
-                                : "False"
-                : (id >= 0 && id < ICalculaMetricas.NUMERO_DE_MS_MG)
-                        ? ICalculaMetricas.FAMILIA_MG
-                        : (id < ICalculaMetricas.NUMERO_DE_M_SISTEMA)
-                                ? ICalculaMetricas.FAMILIA_MOOD
-                                : "False";
+    private String verificarId(String id, boolean isNivelArtefacto) {
+        switch (id) {
+            case ICalculaMetricas.DEPTH_OF_INHERITANCE_TREE:
+            case ICalculaMetricas.NUMBER_OF_CHILDREN:
+            case ICalculaMetricas.COUPLING_BETWEEN_OBJECT_CLASSES:
+            case ICalculaMetricas.WEIGHTED_METHODS_PER_CLASS:
+                return ICalculaMetricas.FAMILIA_CYK;
+            case ICalculaMetricas.NUMBER_OF_PUBLIC_METHODS:
+            case ICalculaMetricas.NUMBER_OF_METHODS:
+            case ICalculaMetricas.NUMBER_OF_PUBLIC_VARIABLES:
+            case ICalculaMetricas.NUMBER_OF_VARIABLES:
+            case ICalculaMetricas.NUMBER_OF_CLASS_VARIABLES:
+            case ICalculaMetricas.NUMBER_OF_CLASS_METHOD:
+            case ICalculaMetricas.NUMBER_OF_METHOD_INHERITED:
+            case ICalculaMetricas.NUMBER_OF_METHOD_OVERRIDDEN:
+            case ICalculaMetricas.NUMBER_OF_NEW_METHOD:
+            case ICalculaMetricas.AVERAGE_PARAMETER_PER_METHOD:
+            case ICalculaMetricas.SPECIALIZATION_INDEX:
+                return ICalculaMetricas.FAMILIA_LYK;
+            case ICalculaMetricas.NUMBER_OF_CLASSES:
+            case ICalculaMetricas.NUMBER_OF_ABSTRACT_CLASSES:
+            case ICalculaMetricas.NUMBER_OF_INTERFACES:
+            case ICalculaMetricas.NUMBER_OF_PACKAGES:
+            case ICalculaMetricas.AVERAGE_METHODS_ARTIFACT:
+            case ICalculaMetricas.AVERAGE_PUBLIC_METHODS_ARTIFACT:
+            case ICalculaMetricas.AVERAGE_ATTRIBUTES_ARTIFACT:
+            case ICalculaMetricas.AVERAGE_PUBLIC_ATTRIBUTE_ARTIFACT:
+                return ICalculaMetricas.FAMILIA_MG;
+            case ICalculaMetricas.METHOD_HIDING_FACTOR:
+            case ICalculaMetricas.ATTRIBUTE_HIDING_FACTOR:
+            case ICalculaMetricas.METHOD_INHERITANCE_FACTOR:
+            case ICalculaMetricas.ATTRIBUTE_INHERITANCE_FACTOR:
+            case ICalculaMetricas.POLYMORPHISM_FACTOR:
+            case ICalculaMetricas.COUPLING_FACTOR:
+            case ICalculaMetricas.CLUSTERING_FACTOR:
+            case ICalculaMetricas.REUSE_FACTOR:
+                return ICalculaMetricas.FAMILIA_MOOD;
+            default:
+                return "False";
+        }
     }
 
     /**

@@ -32,7 +32,7 @@ public final class FactoriaDeFamiliasDeMetricas {
      * instancia que la clase encargada de realizar el cálculo de la familia de
      * métricas CyK.
      */
-    public static final int METRICAS_CyK = 2;
+    public static final int METRICAS_CYK = 2;
 
     /**
      * Variable que se utiliza para especificar al método getInstances el tipo
@@ -40,7 +40,7 @@ public final class FactoriaDeFamiliasDeMetricas {
      * instancia que la clase encargada de realizar el cálculo de la familia de
      * métricas LyK.
      */
-    public static final int METRICAS_LyK = 3;
+    public static final int METRICAS_LYK = 3;
 
 //==============================================================================
 //  Constructores y metodos de inicialización.
@@ -67,11 +67,11 @@ public final class FactoriaDeFamiliasDeMetricas {
         IMArtefactos instance = null;
 
         switch (tipo) {
-            case FactoriaDeFamiliasDeMetricas.METRICAS_CyK:
+            case FactoriaDeFamiliasDeMetricas.METRICAS_CYK:
                 instance = new MetricasCyK();
                 break;
 
-            case FactoriaDeFamiliasDeMetricas.METRICAS_LyK:
+            case FactoriaDeFamiliasDeMetricas.METRICAS_LYK:
                 instance = new MetricasLyK();
                 break;
         }

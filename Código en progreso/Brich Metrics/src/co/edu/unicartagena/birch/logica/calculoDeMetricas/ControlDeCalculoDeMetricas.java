@@ -78,7 +78,7 @@ public class ControlDeCalculoDeMetricas implements ICM {
             datos.add(this.calcularMetricasArtefacto(
                     artifactId,
                     path,
-                    f,
+                    "CyK_" + f,
                     ICM.FAMILIA_CYK));
         }
 
@@ -86,7 +86,7 @@ public class ControlDeCalculoDeMetricas implements ICM {
             datos.add(this.calcularMetricasArtefacto(
                     artifactId,
                     path,
-                    f,
+                    "LyK_" + f,
                     ICM.FAMILIA_LYK));
         }
 
@@ -116,11 +116,13 @@ public class ControlDeCalculoDeMetricas implements ICM {
         List<Double> datos = new ArrayList<>();
 
         for (int f = 0; f < this.getNumeroDeMSMG(); f++) {
-            datos.add(this.calcularMetricasGenerales(path, f, ICM.FAMILIA_MG));
+            datos.add(this.calcularMetricasGenerales(
+                    path, "MG_" + f, ICM.FAMILIA_MG));
         }
 
         for (int f = 0; f < this.getNumeroDeMSMOOD(); f++) {
-            datos.add(this.calcularMetricasGenerales(path, f, ICM.FAMILIA_MOOD));
+            datos.add(this.calcularMetricasGenerales(
+                    path, "MOOD_" + f, ICM.FAMILIA_MOOD));
         }
 
         return new ResultadosDiagrama(datos);
@@ -148,7 +150,7 @@ public class ControlDeCalculoDeMetricas implements ICM {
      * métrica.
      */
     @Override
-    public double calcularMetricasArtefacto(String artifactId, String path, int id, String familia) {
+    public double calcularMetricasArtefacto(String artifactId, String path, String id, String familia) {
         //Declaración de variables.
         //Si el valor del parámetro "id" está entre 0 y 3, quiere decir que la
         //métrica a calcular es una métrica perteneciente a la familia de 
@@ -156,8 +158,8 @@ public class ControlDeCalculoDeMetricas implements ICM {
         //calcular es una métrica perteneciente a la familia de métricas LyK.
 
         int tipo = familia.equals(ICM.FAMILIA_CYK)
-                ? FactoriaDeFamiliasDeMetricas.METRICAS_CyK
-                : FactoriaDeFamiliasDeMetricas.METRICAS_LyK;
+                ? FactoriaDeFamiliasDeMetricas.METRICAS_CYK
+                : FactoriaDeFamiliasDeMetricas.METRICAS_LYK;
 
         try {
             //En primer lugar, se crea un objeto de la clase 
@@ -192,7 +194,7 @@ public class ControlDeCalculoDeMetricas implements ICM {
      * métrica.
      */
     @Override
-    public double calcularMetricasArtefacto(String artifactId, File file, int id, String familia) {
+    public double calcularMetricasArtefacto(String artifactId, File file, String id, String familia) {
         return this.calcularMetricasArtefacto(artifactId, file.getAbsolutePath(), id, familia);
     }
 
@@ -206,7 +208,7 @@ public class ControlDeCalculoDeMetricas implements ICM {
      * métrica o el valor de -1 si se ha encontrado un error.
      */
     @Override
-    public double calcularMetricasGenerales(String path, int id, String familia) {
+    public double calcularMetricasGenerales(String path, String id, String familia) {
         //Declaración de variables.
         //Si el valor del parámetro id es mayor o igual a 0 y menor que 8, 
         //quiere decir que la métrica a calcular es una métrica MG. 
@@ -247,7 +249,7 @@ public class ControlDeCalculoDeMetricas implements ICM {
      * métrica.
      */
     @Override
-    public double calcularMetricasGenerales(File file, int id, String familia) {
+    public double calcularMetricasGenerales(File file, String id, String familia) {
         return this.calcularMetricasGenerales(file.getAbsolutePath(), id, familia);
     }
 //==============================================================================

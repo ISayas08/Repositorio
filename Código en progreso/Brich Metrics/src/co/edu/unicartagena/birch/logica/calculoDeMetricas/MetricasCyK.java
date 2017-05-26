@@ -59,7 +59,7 @@ public final class MetricasCyK implements IMArtefactos {
      * @throws java.lang.reflect.InvocationTargetException
      */
     @Override
-    public String calcularMetrica(String artifactId, String path, int id) throws
+    public String calcularMetrica(String artifactId, String path, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
 
@@ -70,7 +70,7 @@ public final class MetricasCyK implements IMArtefactos {
         //Ejecutamos el método cuyo nombre termine con "_Mi",
         //donde i es el valor de la id.
         String dato = (String) metodos.stream()
-                .filter(m -> m.getName().endsWith("_M" + id))
+                .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, artifactId, path);
 
         return dato == null ? "NA" : dato;
@@ -88,7 +88,7 @@ public final class MetricasCyK implements IMArtefactos {
      * @throws java.lang.reflect.InvocationTargetException
      */
     @Override
-    public String calcularMetrica(String artifactId, File file, int id) throws
+    public String calcularMetrica(String artifactId, File file, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
         return this.calcularMetrica(artifactId, file.getAbsolutePath(), id);
@@ -103,7 +103,7 @@ public final class MetricasCyK implements IMArtefactos {
      * @return un String con el valor de la métrica que corresponde al artefacto
      * evaluado.
      */
-    private String depthOfInheritanceTree_M0(String artifactId, String path) {
+    private String depthOfInheritanceTree_CyK_0(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(artifactId, path,
                 IRD.PROFUNDIDAD_DEL_ARBOL_DE_HERENCIAS);
@@ -118,7 +118,7 @@ public final class MetricasCyK implements IMArtefactos {
      * @return un String que contiene el valor de la métrica que corresponde al
      * artefacto evaluado.
      */
-    private String numbreOfChildren_M1(String artifactId, String path) {
+    private String numbreOfChildren_CyK_1(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(artifactId, path, IRD.HIJOS_INMEDIATOS);
     }
@@ -132,7 +132,7 @@ public final class MetricasCyK implements IMArtefactos {
      * @return un String que contiene el valor de la métrica corresondiente al
      * artefacto evaluado.
      */
-    private String couplingBetweenObjectClasses_M2(String artifactId, String path) {
+    private String couplingBetweenObjectClasses_CyK_2(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(artifactId, path, IRD.ACOPLAMIENTO);
     }
@@ -151,7 +151,7 @@ public final class MetricasCyK implements IMArtefactos {
      * @return un String que contiene el valor de la métrica correspondiente al
      * artefacto evaluado.
      */
-    private String weightedMethodsPerClass_M3(String artifactId, String path) {
+    private String weightedMethodsPerClass_CyK_3(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(artifactId, path, IRD.METODOS_TOTALTES);
     }

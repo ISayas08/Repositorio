@@ -51,7 +51,7 @@ public class MetricasMG implements IMGenerales {
      * @return un String con el resultado de la métrica.
      */
     @Override
-    public String calcularMetrica(String path, int id) throws
+    public String calcularMetrica(String path, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
 
@@ -62,7 +62,7 @@ public class MetricasMG implements IMGenerales {
         //Ejecutamos el método cuyo nombre termine con "_Mi",
         //donde i es el valor de la id.
         String dato = (String) metodos.stream()
-                .filter(m -> m.getName().endsWith("_M" + id))
+                .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, path);
 
         return dato == null ? "NA" : dato;
@@ -76,7 +76,7 @@ public class MetricasMG implements IMGenerales {
      * @return un String con el resultado de la métrica.
      */
     @Override
-    public String calcularMetrica(File file, int id) throws
+    public String calcularMetrica(File file, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
         return this.calcularMetrica(file.getAbsolutePath(), id);
@@ -89,7 +89,7 @@ public class MetricasMG implements IMGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el número total de clases en el diagrama.
      */
-    private String totalClases_M0(String path) {
+    private String totalClases_MG_0(String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(path, IRD.TOTAL_CLASES);
     }
@@ -100,7 +100,7 @@ public class MetricasMG implements IMGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el número total de clases abstractas.
      */
-    private String totalCAbstractas_M1(String path) {
+    private String totalCAbstractas_MG_1(String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(path, IRD.TOTAL_CLASES_ABSTRACTAS);
     }
@@ -111,7 +111,7 @@ public class MetricasMG implements IMGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el número de interfaces en el diagrama.
      */
-    private String totalInterfaces_M2(String path) {
+    private String totalInterfaces_MG_2(String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(path, IRD.TOTAL_INTERFACES);
     }
@@ -122,7 +122,7 @@ public class MetricasMG implements IMGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el número de paquetes en el diagrama.
      */
-    private String totalPaquetes_M3(String path) {
+    private String totalPaquetes_MG_3(String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(path, IRD.TOTAL_PAQUETES);
     }
@@ -133,12 +133,12 @@ public class MetricasMG implements IMGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el valor del cálculo solicitado.
      */
-    private String promedioMetodosClase_M4(String path) {
+    private String promedioMetodosClase_MG_4(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         int NTM = Integer.parseInt(cdr.recopilarDatos(path, IRD.TOTAL_METODOS));
-        int NC = Integer.parseInt(this.totalClases_M0(path));
-        int NI = Integer.parseInt(this.totalInterfaces_M2(path));
+        int NC = Integer.parseInt(this.totalClases_MG_0(path));
+        int NI = Integer.parseInt(this.totalInterfaces_MG_2(path));
 
         return Double.toString((double) NTM / ((double) NC + (double) NI));
     }
@@ -149,13 +149,13 @@ public class MetricasMG implements IMGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el valor del cálculo solicitado.
      */
-    private String promedioMetodosPClase_M5(String path) {
+    private String promedioMetodosPClase_MG_5(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         int NTMP = Integer.parseInt(cdr.recopilarDatos(path,
                 IRD.TOTAL_METODOS_PUBLICOS));
-        int NC = Integer.parseInt(this.totalClases_M0(path));
-        int NI = Integer.parseInt(this.totalInterfaces_M2(path));
+        int NC = Integer.parseInt(this.totalClases_MG_0(path));
+        int NI = Integer.parseInt(this.totalInterfaces_MG_2(path));
 
         return Double.toString((double) NTMP / ((double) NC + (double) NI));
     }
@@ -166,13 +166,13 @@ public class MetricasMG implements IMGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el valor del cálculo solicitado.
      */
-    private String promedioAtributosClase_M6(String path) {
+    private String promedioAtributosClase_MG_6(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         int NTA = Integer.parseInt(cdr.recopilarDatos(path,
                 IRD.TOTAL_ATRIBUTOS));
-        int NC = Integer.parseInt(this.totalClases_M0(path));
-        int NI = Integer.parseInt(this.totalInterfaces_M2(path));
+        int NC = Integer.parseInt(this.totalClases_MG_0(path));
+        int NI = Integer.parseInt(this.totalInterfaces_MG_2(path));
 
         return Double.toString((double) NTA / ((double) NC + (double) NI));
     }
@@ -184,13 +184,13 @@ public class MetricasMG implements IMGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el valor del cálculo solicitado.
      */
-    private String promedioAtributosPClase_M7(String path) {
+    private String promedioAtributosPClase_MG_7(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         int NTAP = Integer.parseInt(cdr.recopilarDatos(path,
                 IRD.TOTAL_ATRIBUTOS_PUBLICOS));
-        int NC = Integer.parseInt(this.totalClases_M0(path));
-        int NI = Integer.parseInt(this.totalInterfaces_M2(path));
+        int NC = Integer.parseInt(this.totalClases_MG_0(path));
+        int NI = Integer.parseInt(this.totalInterfaces_MG_2(path));
 
         return Double.toString((double) NTAP / ((double) NC + (double) NI));
     }

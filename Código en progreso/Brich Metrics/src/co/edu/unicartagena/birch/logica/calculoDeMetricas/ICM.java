@@ -17,38 +17,44 @@ public interface ICM {
     public static final String FAMILIA_MG = "MG";
     public static final String FAMILIA_MOOD = "MOOD";
 
-    public static final int DEPTH_OF_INHERITANCE_TREE = 0;
-    public static final int NUMBER_OF_CHILDREN = 1;
-    public static final int COUPLING_BETWEEN_OBJECT_CLASSES = 2;
-    public static final int WEIGHTED_METHODS_PER_CLASS = 3;
-    public static final int NUMBER_OF_PUBLIC_METHODS = 4;
-    public static final int NUMBER_OF_METHODS = 5;
-    public static final int NUMBER_OF_PUBLIC_VARIABLES = 6;
-    public static final int NUMBER_OF_VARIABLES = 7;
-    public static final int NUMBER_OF_CLASS_VARIABLES = 8;
-    public static final int NUMBER_OF_CLASS_METHOD = 9;
-    public static final int NUMBER_OF_METHODS_INHERITED = 10;
-    public static final int NUMBER_OF_METHOD_OVERRIDDEN = 11;
-    public static final int NUMBER_OF_NEW_METHOD = 12;
-    public static final int AVERAGE_PARAMETER_PER_METHOD = 13;
-    public static final int SPECIALIZATION_INDEX = 14;
+    //Métricas de la familia CyK.
+    public static final String DEPTH_OF_INHERITANCE_TREE = "CyK_0";
+    public static final String NUMBER_OF_CHILDREN = "CyK_1";
+    public static final String COUPLING_BETWEEN_OBJECT_CLASSES = "CyK_2";
+    public static final String WEIGHTED_METHODS_PER_CLASS = "CyK_3";
 
-    public static final int NUMBER_OF_CLASSES = 0;
-    public static final int NUMBER_OF_ABSTRACT_CLASSES = 1;
-    public static final int NUMBER_OF_INTERFACES = 2;
-    public static final int NUMBER_OF_PACKAGES = 3;
-    public static final int AVERAGE_METHODS_CLASS = 4;
-    public static final int AVERAGE_PUBLIC_METHODS_CLASS = 5;
-    public static final int AVERAGE_ATTRIBUTES_CLASS = 6;
-    public static final int AVERAGE_PUBLIC_ATTRIBUTE_CLASS = 7;
-    public static final int METHOD_HIDING_FACTOR = 8;
-    public static final int ATTRIBUTE_HIDING_FACTOR = 9;
-    public static final int METHOD_INHERITANCE_FACTOR = 10;
-    public static final int ATTRIBUTE_INHERITANCE_FACTOR = 11;
-    public static final int POLYMORPHISM_FACTOR = 12;
-    public static final int COUPLING_FACTOR = 13;
-    public static final int CLUSTERING_FACTOR = 14;
-    public static final int REUSE_FACTOR = 15;
+    //Métricas para la familia LyK.
+    public static final String NUMBER_OF_PUBLIC_METHODS = "LyK_0";
+    public static final String NUMBER_OF_METHODS = "LyK_1";
+    public static final String NUMBER_OF_PUBLIC_VARIABLES = "LyK_2";
+    public static final String NUMBER_OF_VARIABLES = "LyK_3";
+    public static final String NUMBER_OF_CLASS_VARIABLES = "LyK_4";
+    public static final String NUMBER_OF_CLASS_METHOD = "LyK_5";
+    public static final String NUMBER_OF_METHOD_INHERITED = "LyK_6";
+    public static final String NUMBER_OF_METHOD_OVERRIDDEN = "LyK_7";
+    public static final String NUMBER_OF_NEW_METHOD = "LyK_8";
+    public static final String AVERAGE_PARAMETER_PER_METHOD = "LyK_9";
+    public static final String SPECIALIZATION_INDEX = "LyK_10";
+
+    //Métricas para la familia MG.
+    public static final String NUMBER_OF_CLASSES = "MG_0";
+    public static final String NUMBER_OF_ABSTRACT_CLASSES = "MG_1";
+    public static final String NUMBER_OF_INTERFACES = "MG_2";
+    public static final String NUMBER_OF_PACKAGES = "MG_3";
+    public static final String AVERAGE_METHODS_ARTIFACT = "MG_4";
+    public static final String AVERAGE_PUBLIC_METHODS_ARTIFACT = "MG_5";
+    public static final String AVERAGE_ATTRIBUTES_ARTIFACT = "MG_6";
+    public static final String AVERAGE_PUBLIC_ATTRIBUTE_ARTIFACT = "MG_7";
+
+    //Métricas para la familia MOOD.
+    public static final String METHOD_HIDING_FACTOR = "MOOD_0";
+    public static final String ATTRIBUTE_HIDING_FACTOR = "MOOD_1";
+    public static final String METHOD_INHERITANCE_FACTOR = "MOOD_2";
+    public static final String ATTRIBUTE_INHERITANCE_FACTOR = "MOOD_3";
+    public static final String POLYMORPHISM_FACTOR = "MOOD_4";
+    public static final String COUPLING_FACTOR = "MOOD_5";
+    public static final String CLUSTERING_FACTOR = "MOOD_6";
+    public static final String REUSE_FACTOR = "MOOD_7";
 
     /**
      * Método que permite calcular las métricas para un artefacto especifico.
@@ -96,7 +102,7 @@ public interface ICM {
      * @return un double que contiene los datos resultantes de calcular la
      * métrica.
      */
-    public double calcularMetricasArtefacto(String artifactId, String path, int id, String familia);
+    public double calcularMetricasArtefacto(String artifactId, String path, String id, String familia);
 
     /**
      * Método que permite calcular una métrica especifica sobre un artefacto.
@@ -110,7 +116,7 @@ public interface ICM {
      * @return un double que contiene los datos resultantes de calcular la
      * métrica.
      */
-    public double calcularMetricasArtefacto(String artifactId, File file, int id, String familia);
+    public double calcularMetricasArtefacto(String artifactId, File file, String id, String familia);
 
     /**
      * Método que permite calcular una métrica especifica sobre todo el
@@ -123,7 +129,7 @@ public interface ICM {
      * @return un double que contiene los datos esultantes de calcular la
      * métrica.
      */
-    public double calcularMetricasGenerales(String path, int id, String familia);
+    public double calcularMetricasGenerales(String path, String id, String familia);
 
     /**
      * Método que permite calcular una métrica especifica sobre todo el
@@ -136,5 +142,5 @@ public interface ICM {
      * @return un double que contiene los datos esultantes de calcular la
      * métrica.
      */
-    public double calcularMetricasGenerales(File file, int id, String familia);
+    public double calcularMetricasGenerales(File file, String id, String familia);
 }

@@ -33,7 +33,7 @@ public class TestBirchMetric {
                 "ClaseAgregacion",
                 "ClaseAgregada");
         //int metrica = ICalculaMetricas.NUMBER_OF_METHOD_OVERRIDDEN;
-        int metrica = 3;
+        String metrica = ICalculaMetricas.NUMBER_OF_METHOD_INHERITED;
         ICalculaMetricas icm = new CalculaMetricas();
 
         //===========================================================Artefactos.
@@ -44,21 +44,29 @@ public class TestBirchMetric {
                     .stream()
                     .forEach(id -> {
                         //System.err.println("Id: " + id);
-                        String result = icm.calcularMetricas(id, rutaArchivo, metrica);
+                        String result = icm.calcularMetrica(id, rutaArchivo, metrica);
                         System.err.println("Resultado métrica: " + result);
                         System.err.println("========================================================");
                     });
         });
         //============================================================Generales.
-        /*
-        for (int f = 0; f < 16; f++) {
-            System.err.println("Métricas a nivel de sistema");
+        
+        for (int f = 0; f < ICalculaMetricas.NUMERO_DE_MS_MG; f++) {
+            System.err.println("Métricas a nivel de sistema, MG");
             System.err.println("Calculando métrica: " + f + "...");
-            String result = icm.calcularMetricas(rutaArchivo, f);
+            String result = icm.calcularMetrica(rutaArchivo, "MG_" + f);
             System.err.println("Resultado métrica: " + result);
             System.err.println("=============================================");
         }
-         */
+        
+        for (int f = 0; f < ICalculaMetricas.NUMERO_DE_MS_MOOD; f++) {
+            System.err.println("Métricas a nivel de sistema, MOOD");
+            System.err.println("Calculando métrica: " + f + "...");
+            String result = icm.calcularMetrica(rutaArchivo, "MOOD_" + f);
+            System.err.println("Resultado métrica: " + result);
+            System.err.println("=============================================");
+        }
+         
     }
 
 }

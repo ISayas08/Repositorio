@@ -8,7 +8,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
 /**
@@ -56,7 +55,7 @@ public class MetricasMOOD implements IMGenerales {
      * @throws java.lang.reflect.InvocationTargetException
      */
     @Override
-    public String calcularMetrica(String path, int id) throws
+    public String calcularMetrica(String path, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
 
@@ -67,7 +66,7 @@ public class MetricasMOOD implements IMGenerales {
         //Ejecutamos el método cuyo nombre termine con "_Mi",
         //donde i es el valor de la id.
         String dato = (String) metodos.stream()
-                .filter(m -> m.getName().endsWith("_M" + id))
+                .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, path);
 
         return dato == null ? "NA" : dato;
@@ -83,7 +82,7 @@ public class MetricasMOOD implements IMGenerales {
      * @throws java.lang.IllegalAccessException
      */
     @Override
-    public String calcularMetrica(File file, int id) throws
+    public String calcularMetrica(File file, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
         return this.calcularMetrica(file.getAbsolutePath(), id);
@@ -95,7 +94,7 @@ public class MetricasMOOD implements IMGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el valor calculado de la métrica.
      */
-    private String methodHidingFactor_M8(String path) {
+    private String methodHidingFactor_MOOD_0(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         int nMPrivadosD = Integer.parseInt(cdr.
@@ -112,7 +111,7 @@ public class MetricasMOOD implements IMGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el valor calculado de la métrica.
      */
-    private String attributeHidingFactor_M9(String path) {
+    private String attributeHidingFactor_MOOD_1(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         int nAPrivadosD = Integer.parseInt(cdr.
@@ -131,7 +130,7 @@ public class MetricasMOOD implements IMGenerales {
      * @return un String que contiene el valor resultante del cálculo de la
      * métrica.
      */
-    private String methodInheritanceFactor_M10(String path) {
+    private String methodInheritanceFactor_MOOD_2(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         //Se solicitan todas las ides de las clases del diagrama y se almacenan
@@ -162,7 +161,7 @@ public class MetricasMOOD implements IMGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el resultado de la métrica calculada.
      */
-    private String attributeInheritanceFactor_M11(String path) {
+    private String attributeInheritanceFactor_MOOD_3(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         //Se solicitan todas las ides de las clases del diagrama y se almacenan
@@ -193,7 +192,7 @@ public class MetricasMOOD implements IMGenerales {
      * @return un String que contiene el valor resultante del cálculo de la
      * métrica.
      */
-    private String polymorphismFactor_M12(String path) {
+    private String polymorphismFactor_MOOD_4(String path) {
         IRD cdr = new ControlDeRecopilaciones();
         List<Artefacto> artefactos = new ArrayList<>();
 
@@ -278,7 +277,7 @@ public class MetricasMOOD implements IMGenerales {
      * @return un String que contiene el valor resultadod el cálculo de la
      * métrica.
      */
-    private String couplingFactor_M13(String path) {
+    private String couplingFactor_MOOD_5(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         int nAsociacionesNHD = Integer.parseInt(cdr.
@@ -298,7 +297,7 @@ public class MetricasMOOD implements IMGenerales {
      * @return un String que contiene el valor resultante de calcular la
      * métrica.
      */
-    private String clusteringFactor_M14(String path) {
+    private String clusteringFactor_MOOD_6(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         int nClusterD = Integer.parseInt(cdr.
@@ -315,7 +314,7 @@ public class MetricasMOOD implements IMGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el resultado de la métrica calculada.
      */
-    private String reuseFactor_M15(String path) {
+    private String reuseFactor_MOOD_7(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         int nCHijosD = Integer.parseInt(cdr.

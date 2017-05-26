@@ -113,13 +113,13 @@ public class ResultadosArtefacto implements IResultado {
                         "" + this.numberOfNewMethods,
                         "" + this.avarageParametersPerMethod,
                         "" + this.specializationIndex);
-            case CyK_ONLY:
+            case CYK_ONLY:
                 return Arrays.asList(
                         "" + this.depthOfInheritanceTree,
                         "" + this.numberOfChildren,
                         "" + this.couplingBetweenObjectClasses,
                         "" + this.weightedMethodsPerClass);
-            case LyK_ONLY:
+            case LYK_ONLY:
                 return Arrays.asList("" + this.numberOfPublicMethods,
                         "" + this.numberOfMethods,
                         "" + this.numberOfPublicVariables,
@@ -292,7 +292,7 @@ public class ResultadosArtefacto implements IResultado {
                 datos.put("Indice de especialización",
                         this.specializationIndex);
                 break;
-            case CyK_ONLY:
+            case CYK_ONLY:
                 datos.put("Depth of Inheritance Tree",
                         this.depthOfInheritanceTree);
                 datos.put(IResultado.DEPTH_OF_INHERITANCE_TREE,
@@ -318,7 +318,7 @@ public class ResultadosArtefacto implements IResultado {
                 datos.put("Promedio de métodos por clases",
                         this.weightedMethodsPerClass);
                 break;
-            case LyK_ONLY:
+            case LYK_ONLY:
                 datos.put("Number of Public Methods",
                         this.numberOfPublicMethods);
                 datos.put(IResultado.NUMBER_OF_PUBLIC_METHODS,
@@ -484,7 +484,7 @@ public class ResultadosArtefacto implements IResultado {
             default:
                 datos.put("Name",
                         this.artifactId);
-                datos.put(IResultado.NAME,
+                datos.put(IResultado.ID,
                         this.artifactId);
                 datos.put("Nombre",
                         this.artifactId);
@@ -598,7 +598,7 @@ public class ResultadosArtefacto implements IResultado {
         String dato = "NA";
 
         switch (idDato) {
-            case IResultado.NAME:
+            case IResultado.ID:
                 dato = artifactId;
                 break;
             case IResultado.DEPTH_OF_INHERITANCE_TREE:

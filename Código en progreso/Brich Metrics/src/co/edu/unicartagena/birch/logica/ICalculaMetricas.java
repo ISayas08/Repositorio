@@ -15,60 +15,64 @@ public interface ICalculaMetricas {
 //==============================================================================
 //  Atributos generales.
 //==============================================================================
+
     public static final String FAMILIA_CYK = "CyK";
     public static final String FAMILIA_LYK = "LyK";
     public static final String FAMILIA_MG = "MG";
     public static final String FAMILIA_MOOD = "MOOD";
-    
+
     public static final int NUMERO_DE_MA_CYK = 4;
     public static final int NUMERO_DE_MA_LYK = 11;
     public static final int NUMERO_DE_MS_MG = 8;
     public static final int NUMERO_DE_MS_MOOD = 8;
-    public static final int NUMERO_DE_M_ARTEFACTO = NUMERO_DE_MA_CYK + NUMERO_DE_MA_LYK;
-    public static final int NUMERO_DE_M_SISTEMA = NUMERO_DE_MS_MG + NUMERO_DE_MS_MOOD;
-    public static final int NUMERO_DE_METRICAS = NUMERO_DE_M_ARTEFACTO + NUMERO_DE_M_SISTEMA;
-    
+    public static final int NUMERO_DE_M_ARTEFACTO = NUMERO_DE_MA_CYK
+            + NUMERO_DE_MA_LYK;
+    public static final int NUMERO_DE_M_SISTEMA = NUMERO_DE_MS_MG
+            + NUMERO_DE_MS_MOOD;
+    public static final int NUMERO_DE_METRICAS = NUMERO_DE_M_ARTEFACTO
+            + NUMERO_DE_M_SISTEMA;
+
 //==============================================================================
 //  Ides para las mátricas.
 //==============================================================================
     //Métricas de la familia CyK.
-    public static final int DEPTH_OF_INHERITANCE_TREE = 0;
-    public static final int NUMBER_OF_CHILDREN = 1;
-    public static final int COUPLING_BETWEEN_OBJECT_CLASSES = 2;
-    public static final int WEIGHTED_METHODS_PER_CLASS = 3;
-    
+    public static final String DEPTH_OF_INHERITANCE_TREE = "CyK_0";
+    public static final String NUMBER_OF_CHILDREN = "CyK_1";
+    public static final String COUPLING_BETWEEN_OBJECT_CLASSES = "CyK_2";
+    public static final String WEIGHTED_METHODS_PER_CLASS = "CyK_3";
+
     //Métricas para la familia LyK.
-    public static final int NUMBER_OF_PUBLIC_METHODS = 4;
-    public static final int NUMBER_OF_METHODS = 5;
-    public static final int NUMBER_OF_PUBLIC_VARIABLES = 6;
-    public static final int NUMBER_OF_VARIABLES = 7;
-    public static final int NUMBER_OF_CLASS_VARIABLES = 8;
-    public static final int NUMBER_OF_CLASS_METHOD = 9;
-    public static final int NUMBER_OF_METHOD_INHERITED = 10;
-    public static final int NUMBER_OF_METHOD_OVERRIDDEN = 11;
-    public static final int NUMBER_OF_NEW_METHOD = 12;
-    public static final int AVERAGE_PARAMETER_PER_METHOD = 13;
-    public static final int SPECIALIZATION_INDEX = 14;
+    public static final String NUMBER_OF_PUBLIC_METHODS = "LyK_0";
+    public static final String NUMBER_OF_METHODS = "LyK_1";
+    public static final String NUMBER_OF_PUBLIC_VARIABLES = "LyK_2";
+    public static final String NUMBER_OF_VARIABLES = "LyK_3";
+    public static final String NUMBER_OF_CLASS_VARIABLES = "LyK_4";
+    public static final String NUMBER_OF_CLASS_METHOD = "LyK_5";
+    public static final String NUMBER_OF_METHOD_INHERITED = "LyK_6";
+    public static final String NUMBER_OF_METHOD_OVERRIDDEN = "LyK_7";
+    public static final String NUMBER_OF_NEW_METHOD = "LyK_8";
+    public static final String AVERAGE_PARAMETER_PER_METHOD = "LyK_9";
+    public static final String SPECIALIZATION_INDEX = "LyK_10";
 
     //Métricas para la familia MG.
-    public static final int NUMBER_OF_CLASSES = 0;
-    public static final int NUMBER_OF_ABSTRACT_CLASSES = 1;
-    public static final int NUMBER_OF_INTERFACES = 2;
-    public static final int NUMBER_OF_PACKAGES = 3;
-    public static final int AVERAGE_METHODS_CLASS = 4;
-    public static final int AVERAGE_PUBLIC_METHODS_CLASS = 5;
-    public static final int AVERAGE_ATTRIBUTES_CLASS = 6;
-    public static final int AVERAGE_PUBLIC_ATTRIBUTE_CLASS = 7;
-    
+    public static final String NUMBER_OF_CLASSES = "MG_0";
+    public static final String NUMBER_OF_ABSTRACT_CLASSES = "MG_1";
+    public static final String NUMBER_OF_INTERFACES = "MG_2";
+    public static final String NUMBER_OF_PACKAGES = "MG_3";
+    public static final String AVERAGE_METHODS_ARTIFACT = "MG_4";
+    public static final String AVERAGE_PUBLIC_METHODS_ARTIFACT = "MG_5";
+    public static final String AVERAGE_ATTRIBUTES_ARTIFACT = "MG_6";
+    public static final String AVERAGE_PUBLIC_ATTRIBUTE_ARTIFACT = "MG_7";
+
     //Métricas para la familia MOOD.
-    public static final int METHOD_HIDING_FACTOR = 8;
-    public static final int ATTRIBUTE_HIDING_FACTOR = 9;
-    public static final int METHOD_INHERITANCE_FACTOR = 10;
-    public static final int ATTRIBUTE_INHERITANCE_FACTOR = 11;
-    public static final int POLYMORPHISM_FACTOR = 12;
-    public static final int COUPLING_FACTOR = 13;
-    public static final int CLUSTERING_FACTOR = 14;
-    public static final int REUSE_FACTOR = 15;
+    public static final String METHOD_HIDING_FACTOR = "MOOD_0";
+    public static final String ATTRIBUTE_HIDING_FACTOR = "MOOD_1";
+    public static final String METHOD_INHERITANCE_FACTOR = "MOOD_2";
+    public static final String ATTRIBUTE_INHERITANCE_FACTOR = "MOOD_3";
+    public static final String POLYMORPHISM_FACTOR = "MOOD_4";
+    public static final String COUPLING_FACTOR = "MOOD_5";
+    public static final String CLUSTERING_FACTOR = "MOOD_6";
+    public static final String REUSE_FACTOR = "MOOD_7";
 
 //==============================================================================
 //  Declaración de métodos.
@@ -147,7 +151,7 @@ public interface ICalculaMetricas {
      * que haya habido un error. De resultar el últmo evento se informará por
      * consola.
      */
-    public String calcularMetricas(String artifactId, String path, int id);
+    public String calcularMetrica(String artifactId, String path, String id);
 
     /**
      * Método que permite obtener el resultado de calcular una métrica
@@ -163,7 +167,7 @@ public interface ICalculaMetricas {
      * que haya habido un error. De resultar el últmo evento se informará por
      * consola.
      */
-    public String calcularMetricas(String artifactId, File file, int id);
+    public String calcularMetrica(String artifactId, File file, String id);
 
     /**
      * Método que permite obtener el resultado de calcular una métrica
@@ -176,7 +180,7 @@ public interface ICalculaMetricas {
      * @return un String que contiene el valor de la métrica o "NA" en caso de
      * que se haya producido un error, en cuyo caso se informará por consola.
      */
-    public String calcularMetricas(String path, int id);
+    public String calcularMetrica(String path, String id);
 
     /**
      * Método que permite obtener el resultado de calcular una métrica
@@ -189,7 +193,7 @@ public interface ICalculaMetricas {
      * @return un String que contiene el valor de la métrica o "NA" en caso de
      * que se haya producido un error, en cuyo caso se informará por consola.
      */
-    public String calcularMetricas(File file, int id);
+    public String calcularMetrica(File file, String id);
 
     /**
      * Método que permite obtener los id de las clases con un nombre especifico.
@@ -231,7 +235,8 @@ public interface ICalculaMetricas {
     /**
      * Método que ermite obtener todos las id o todos los nombres del diagrama.
      *
-     * @param file una instancia de la clase File que contiene la ruta del archivo XMI.
+     * @param file una instancia de la clase File que contiene la ruta del
+     * archivo XMI.
      * @param isLookingForIds un boolean que especifica si se quiere obtener las
      * id o los nombres.
      * @return una lista de Strings que contiene todos los datos.

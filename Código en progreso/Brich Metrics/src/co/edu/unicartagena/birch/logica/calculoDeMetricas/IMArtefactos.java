@@ -23,7 +23,7 @@ public interface IMArtefactos {
      * @throws java.lang.IllegalAccessException
      * @throws java.lang.reflect.InvocationTargetException
      */
-    public String calcularMetrica(String artifactId, String path, int id) throws
+    public String calcularMetrica(String artifactId, String path, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException;
 
@@ -38,7 +38,7 @@ public interface IMArtefactos {
      * @throws java.lang.IllegalAccessException
      * @throws java.lang.reflect.InvocationTargetException
      */
-    public String calcularMetrica(String artifactId, File file, int id) throws
+    public String calcularMetrica(String artifactId, File file, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException;
 }

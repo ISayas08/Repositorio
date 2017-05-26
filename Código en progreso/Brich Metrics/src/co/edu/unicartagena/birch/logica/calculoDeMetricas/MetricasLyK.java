@@ -59,7 +59,7 @@ public final class MetricasLyK implements IMArtefactos {
      * @throws java.lang.reflect.InvocationTargetException
      */
     @Override
-    public String calcularMetrica(String artifactId, String path, int id)
+    public String calcularMetrica(String artifactId, String path, String id)
             throws IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
 
@@ -70,7 +70,7 @@ public final class MetricasLyK implements IMArtefactos {
         //Ejecutamos el método cuyo nombre termine con "_Mi",
         //donde i es el valor de la id.
         String dato = (String) metodos.stream()
-                .filter(m -> m.getName().endsWith("_M" + id))
+                .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, artifactId, path);
 
         return dato == null ? "NA" : dato;
@@ -88,7 +88,7 @@ public final class MetricasLyK implements IMArtefactos {
      * @throws java.lang.reflect.InvocationTargetException
      */
     @Override
-    public String calcularMetrica(String artifactId, File file, int id)
+    public String calcularMetrica(String artifactId, File file, String id)
             throws IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
         return this.calcularMetrica(artifactId, file.getAbsolutePath(), id);
@@ -102,7 +102,7 @@ public final class MetricasLyK implements IMArtefactos {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene el valor de la mètric solicitada.
      */
-    private String numbeOfPublicMethods_M4(String artifactId, String path) {
+    private String numbeOfPublicMethods_LyK_0(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(artifactId, path, IRD.METODOS_PUBLICOS);
     }
@@ -116,7 +116,7 @@ public final class MetricasLyK implements IMArtefactos {
      * @return un String que contiene el número de método que teiene el
      * artefacto evaluado.
      */
-    private String numberOfMethods_M5(String artifactId, String path) {
+    private String numberOfMethods_LyK_1(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(artifactId, path, IRD.METODOS_TOTALTES);
     }
@@ -130,7 +130,7 @@ public final class MetricasLyK implements IMArtefactos {
      * @return un String que contiene el número de atributos públicos del
      * artefacto evaluado.
      */
-    private String numberOfPublicVariables_M6(String artifactId, String path) {
+    private String numberOfPublicVariables_LyK_2(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(artifactId, path, IRD.ATRIBUTOS_PUBLICOS);
     }
@@ -143,7 +143,7 @@ public final class MetricasLyK implements IMArtefactos {
      * @return un String que contiene el numero de atributos del artefacto
      * evaluado.
      */
-    private String numberOfVariables_M7(String artifactId, String path) {
+    private String numberOfVariables_LyK_3(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(artifactId, path, IRD.ATRIBUTOS_TOTALES);
     }
@@ -157,7 +157,7 @@ public final class MetricasLyK implements IMArtefactos {
      * @return un String que contiene el número de atributos estáticos del
      * artefacto a evaluar.
      */
-    private String numberOfClassVariables_M8(String artifactId, String path) {
+    private String numberOfClassVariables_LyK_4(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(artifactId, path, IRD.ATRIBUTOS_ESTATICOS);
     }
@@ -171,7 +171,7 @@ public final class MetricasLyK implements IMArtefactos {
      * @return un String que contiene el número de métodos estáticos del
      * artefacto evaluado.
      */
-    private String numberOfClassMethods_M9(String artifactId, String path) {
+    private String numberOfClassMethods_LyK_5(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(artifactId, path, IRD.METODOS_ESTATICOS);
     }
@@ -184,7 +184,7 @@ public final class MetricasLyK implements IMArtefactos {
      * @return un String que contiene el número de métodos heredados por el
      * artefacto evaluado.
      */
-    private String numberOfMethodInherited_M10(String artifactId, String path) {
+    private String numberOfMethodInherited_LyK_6(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(artifactId, path, IRD.METODOS_HEREDADOS);
     }
@@ -198,7 +198,7 @@ public final class MetricasLyK implements IMArtefactos {
      * @return un String que contiene el número de métodos que sobrescribe el
      * artefacto evaluado.
      */
-    private String numberOfMethodOverridden_M11(String artifactId, String path) {
+    private String numberOfMethodOverridden_LyK_7(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         List<Artefacto> clasesPadres = new ArrayList<>();
         Artefacto claseAEvaluar = new Artefacto(artifactId);
@@ -267,13 +267,13 @@ public final class MetricasLyK implements IMArtefactos {
      * @return un String que contiene el número de métodos que añade el
      * artefacto evaluado.
      */
-    private String numberOfNewMethods_M12(String artifactId, String path) {
+    private String numberOfNewMethods_LyK_8(String artifactId, String path) {
         //Se solicitan los métodos totales de la clase.
         int metodosTotales = Integer.parseInt(
-                this.numberOfMethods_M5(artifactId, path));
+                this.numberOfMethods_LyK_1(artifactId, path));
         //Se solicitan los métodos sobreescritos.
         int metodosSobrescritos = Integer.parseInt(
-                this.numberOfMethodOverridden_M11(artifactId, path));
+                this.numberOfMethodOverridden_LyK_7(artifactId, path));
 
         //Los métodos añadidos son aquellos métodos de la clase que no son
         //sobrescritos. Por lo tanto:
@@ -295,7 +295,7 @@ public final class MetricasLyK implements IMArtefactos {
         int nParametros = Integer.parseInt(cdr.
                 recopilarDatos(artifactId, path, IRD.PARAMETROS_TOTALES));
 
-        int NM = Integer.parseInt(this.numberOfMethods_M5(artifactId, path));
+        int NM = Integer.parseInt(this.numberOfMethods_LyK_1(artifactId, path));
 
         return Double.toString((double) nParametros / (double) NM);
     }
@@ -313,13 +313,13 @@ public final class MetricasLyK implements IMArtefactos {
         IRD cdr = new ControlDeRecopilaciones();
 
         int NMO = Integer.parseInt(
-                this.numberOfMethodOverridden_M11(artifactId, path));
+                this.numberOfMethodOverridden_LyK_7(artifactId, path));
 
         int DIT = Integer.parseInt(cdr.
                 recopilarDatos(artifactId, path,
                         IRD.PROFUNDIDAD_DEL_ARBOL_DE_HERENCIAS));
 
-        int NM = Integer.parseInt(this.numberOfMethods_M5(artifactId, path));
+        int NM = Integer.parseInt(this.numberOfMethods_LyK_1(artifactId, path));
 
         return Double.toString(((double) NMO * (double) DIT) / (double) NM);
     }

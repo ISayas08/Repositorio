@@ -30,7 +30,7 @@ public interface IResultado {
     public static final int NUMBER_OF_NEW_METHOD = 12;
     public static final int AVERAGE_PARAMETER_PER_METHOD = 13;
     public static final int SPECIALIZATION_INDEX = 14;
-    public static final int NAME = 15;
+    public static final int ID = 15;
 
     public static final int NUMBER_OF_CLASSES_D = 0;
     public static final int N_ABSTRACT_CLASSES_D = 1;
@@ -51,8 +51,8 @@ public interface IResultado {
     public static final int REUSE_FACTOR = 15;
 
     public static final int WITHOUT_NAME = 1;
-    public static final int CyK_ONLY = 2;
-    public static final int LyK_ONLY = 3;
+    public static final int CYK_ONLY = 2;
+    public static final int LYK_ONLY = 3;
     public static final int GM_ONLY = 4;
     public static final int MOOD_ONLY = 5;
     public static final int INTEGERS_ONLY = 6;

@@ -52,7 +52,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return un String que contiene los datos requeridos.
      */
     @Override
-    public String recopilar(String iDArtifact, String path, int id) throws
+    public String recopilar(String iDArtifact, String path, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
 
@@ -63,7 +63,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
         //Ejecutamos el método cuyo nombre termine con "_Mi",
         //donde i es el valor de la id.
         String dato = (String) metodos.stream()
-                .filter(m -> m.getName().endsWith("_M" + id))
+                .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, iDArtifact, path);
 
         return dato == null ? "-1" : dato;
@@ -80,7 +80,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return un String que contiene los datos requeridos.
      */
     @Override
-    public String recopilar(String iDAritifact, File file, int id) throws
+    public String recopilar(String iDAritifact, File file, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
         return this.recopilar(iDAritifact, file.getAbsolutePath(), id);
@@ -93,7 +93,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @param path la dirección del archivo XMI.
      * @return Un entero que representa la cantidad de atributos en la clase.
      */
-    private String atributosTotales_M3(String identifier, String path) {
+    private String atributosTotales_LyK_0(String identifier, String path) {
         try {
             return this.getResult(identifier, path,
                     UtileriaRDD.SA_CONTAR_ATRIBUTOS_TOTALES);
@@ -116,7 +116,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return Un entero que representa la cantidad de atributos públicos en la
      * clase.
      */
-    private String atributosPublicos_M4(String iDArtifact, String path) {
+    private String atributosPublicos_LyK_1(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
                     UtileriaRDD.SA_CONTAR_ATRIBUTOS_PUBLICOS);
@@ -139,7 +139,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return Un entero que representa la cantidad de atributos estáticos en la
      * clase.
      */
-    private String atributosEstaticos_M5(String iDArtifact, String path) {
+    private String atributosEstaticos_LyK_2(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
                     UtileriaRDD.SA_CONTAR_ATRIBUTOS_ESTATICOS);
@@ -162,7 +162,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return Un entero que representa la cantidad de métodos totales en la
      * clase.
      */
-    private String metodosTotales_M6(String iDArtifact, String path) {
+    private String metodosTotales_LyK_3(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
                     UtileriaRDD.SA_CONTAR_METODOS_TOTALES);
@@ -185,7 +185,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return Un entero que representa la cantidad de métodos públicos en la
      * clase.
      */
-    private String metodosPublicos_M7(String iDArtifact, String path) {
+    private String metodosPublicos_LyK_4(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
                     UtileriaRDD.SA_CONTAR_METODOS_PUBLICOS);
@@ -208,7 +208,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return Un entero que representa la cantidad de métodos estáticos en la
      * clase.
      */
-    private String metodosEstaticos_M8(String iDArtifact, String path) {
+    private String metodosEstaticos_LyK_5(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
                     UtileriaRDD.SA_CONTAR_METODOS_ESTATICOS);
@@ -231,7 +231,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return Un entero que representa la cantidad de métodos añadidos en la
      * clase.
      */
-    private String datosMetodosClase_M9(String idArtifact, String path) {
+    private String datosMetodosClase_LyK_6(String idArtifact, String path) {
         try {
             return this.getResult(idArtifact, path,
                     UtileriaRDD.SA_DATOS_METODOS_CLASE);
@@ -254,7 +254,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return Un entero que representa la cantidad de métodos sobrescritos en
      * la clase.
      */
-    private String nombresClasesPadres_M10(String iDArtifact, String path) {
+    private String nombresClasesPadres_LyK_7(String iDArtifact, String path) {
         try {
             String dato = this.getResult(iDArtifact, path,
                     UtileriaRDD.SA_IDES_CLASES_PADRE);
@@ -276,7 +276,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @param path la ruta del archivo XMI.
      * @return un String que contiene el dato recopialdo.
      */
-    private String atributosHeredados_M11(String idArtifact, String path) {
+    private String atributosHeredados_LyK_8(String idArtifact, String path) {
         try {
             return this.getResult(idArtifact, path,
                     UtileriaRDD.SA_CONTAR_ATRIBUTOS_HEREDADOS);
@@ -299,7 +299,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return Un entero que representa la cantidad de métodos heredados en la
      * clase.
      */
-    private String metodosHeredados_M12(String iDArtifact, String path) {
+    private String metodosHeredados_LyK_9(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
                     UtileriaRDD.SA_CONTAR_METODOS_HEREDADOS);
@@ -322,7 +322,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return Un entero que representa la cantidad de parámetros totales en la
      * clase.
      */
-    private String parametrosTotales_M13(String iDArtifact, String path) {
+    private String parametrosTotales_LyK_10(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
                     UtileriaRDD.SA_CONTAR_PARAMETROS_TOTALES);
@@ -345,7 +345,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return Un entero que representa la cantidad de parámetros totales en la
      * clase.
      */
-    private String datosDeHerencia_M14(String iDArtifact, String path) {
+    private String datosDeHerencia_LyK_11(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
                     UtileriaRDD.SA_DATOS_HERENCIA_CLASES);

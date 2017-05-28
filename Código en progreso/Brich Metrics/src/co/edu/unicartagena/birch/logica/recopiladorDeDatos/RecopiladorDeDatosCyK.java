@@ -52,7 +52,7 @@ public final class RecopiladorDeDatosCyK implements IRArtefactos {
      * @return un String que contiene los datos requeridos.
      */
     @Override
-    public String recopilar(String nombre, String path, int id) throws
+    public String recopilar(String nombre, String path, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
 
@@ -63,7 +63,7 @@ public final class RecopiladorDeDatosCyK implements IRArtefactos {
         //Ejecutamos el método cuyo nombre termine con "_Mi",
         //donde i es el valor de la id.
         String dato = (String) metodos.stream()
-                .filter(m -> m.getName().endsWith("_M" + id))
+                .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, nombre, path);
 
         return dato == null ? "-1" : dato;
@@ -80,7 +80,7 @@ public final class RecopiladorDeDatosCyK implements IRArtefactos {
      * @return un String que contiene los datos requeridos.
      */
     @Override
-    public String recopilar(String nombre, File file, int id) throws
+    public String recopilar(String nombre, File file, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
         return this.recopilar(nombre, file.getAbsolutePath(), id);
@@ -95,7 +95,7 @@ public final class RecopiladorDeDatosCyK implements IRArtefactos {
      * @return un entero que representa la profundidad del arbol de herencias de
      * la clase.
      */
-    private String profArbolHerencias_M0(String nombre, String path) {
+    private String profArbolHerencias_CyK_0(String nombre, String path) {
         try {
             return this.getResult(nombre, path,
                     UtileriaRDD.SA_CONTAR_PROFUNDIDAD_ARBOL_HERENCIAS);
@@ -118,7 +118,7 @@ public final class RecopiladorDeDatosCyK implements IRArtefactos {
      * @param path la dirección del archivo XMI.
      * @return Un entero que representa la cantidad de hijos de la clase.
      */
-    private String hijosInmediatos_M1(String nombre, String path) {
+    private String hijosInmediatos_CyK_1(String nombre, String path) {
         try {
             return this.getResult(nombre, path,
                     UtileriaRDD.SA_CONTAR_HIJOS_INMEDIATOS);
@@ -141,7 +141,7 @@ public final class RecopiladorDeDatosCyK implements IRArtefactos {
      * @param path la dirección del archivo XMI.
      * @return Un entero que representa el acoplamiento de la clase.
      */
-    private String recopilarAcoplamiento_M2(String nombre, String path) {
+    private String recopilarAcoplamiento_CyK_2(String nombre, String path) {
         try {
             return this.getResult(nombre, path,
                     UtileriaRDD.SA_CONTAR_ACOPLAMIENTO);

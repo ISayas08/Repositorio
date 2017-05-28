@@ -49,7 +49,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
      * @return un String que contiene el daato solicitado.
      */
     @Override
-    public String recopilar(String path, int id) throws
+    public String recopilar(String path, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
 
@@ -59,7 +59,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
         //Ejecutamos el método cuyo nombre termine con "_Mi",
         //donde i es el valor de la id.
         String dato = (String) metodos.stream()
-                .filter(m -> m.getName().endsWith("_M" + id))
+                .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, path);
 
         //Se retornan los datos.
@@ -74,7 +74,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
      * @return un String que contiene el dato solicitado.
      */
     @Override
-    public String recopilar(File file, int id) throws
+    public String recopilar(File file, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
         return this.recopilar(file.getAbsolutePath(), id);
@@ -88,7 +88,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
      * @return un entero que reresenta el número total de métodos en el
      * diagrama.
      */
-    private String totalClasesHijas_M9(String path) {
+    private String totalClasesHijas_MOOD_0(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_CLASES_HIJAS);
@@ -111,7 +111,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
      * @return un entero que reresenta el número total de métodos en el
      * diagrama.
      */
-    private String totalClusters_M10(String path) {
+    private String totalClusters_MOOD_1(String path) {
         try {
             return "" + Arrays.asList(this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_CLUSTERS)
@@ -136,7 +136,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
      * @return un entero que reresenta el número total de métodos en el
      * diagrama.
      */
-    private String totalRelacionesNH_M11(String path) {
+    private String totalRelacionesNH_MOOD_2(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_RELACIONES_NH);
@@ -159,7 +159,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
      * @return un entero que reresenta el número total de métodos en el
      * diagrama.
      */
-    private String totalAtributosPrivados_M12(String path) {
+    private String totalAtributosPrivados_MOOD_3(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_ATRIBUTOS_PRIVADOS);
@@ -182,7 +182,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
      * @return un entero que reresenta el número total de métodos privados en el
      * diagrama.
      */
-    private String totalMetodosPrivados_M13(String path) {
+    private String totalMetodosPrivados_MOOD_4(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_METODOS_PRIVADOS);

@@ -104,7 +104,7 @@ public final class MetricasLyK implements IMArtefactos {
      */
     private String numbeOfPublicMethods_LyK_0(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.METODOS_PUBLICOS);
+        return cdr.recopilarDatos(artifactId, path, IRD.METODOS_PUBLICOS, IRD.FAMILIA_LYK);
     }
 
     /**
@@ -118,7 +118,7 @@ public final class MetricasLyK implements IMArtefactos {
      */
     private String numberOfMethods_LyK_1(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.METODOS_TOTALTES);
+        return cdr.recopilarDatos(artifactId, path, IRD.METODOS_TOTALTES, IRD.FAMILIA_LYK);
     }
 
     /**
@@ -132,7 +132,7 @@ public final class MetricasLyK implements IMArtefactos {
      */
     private String numberOfPublicVariables_LyK_2(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.ATRIBUTOS_PUBLICOS);
+        return cdr.recopilarDatos(artifactId, path, IRD.ATRIBUTOS_PUBLICOS, IRD.FAMILIA_LYK);
     }
 
     /**
@@ -145,7 +145,7 @@ public final class MetricasLyK implements IMArtefactos {
      */
     private String numberOfVariables_LyK_3(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.ATRIBUTOS_TOTALES);
+        return cdr.recopilarDatos(artifactId, path, IRD.ATRIBUTOS_TOTALES, IRD.FAMILIA_LYK);
     }
 
     /**
@@ -159,7 +159,7 @@ public final class MetricasLyK implements IMArtefactos {
      */
     private String numberOfClassVariables_LyK_4(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.ATRIBUTOS_ESTATICOS);
+        return cdr.recopilarDatos(artifactId, path, IRD.ATRIBUTOS_ESTATICOS, IRD.FAMILIA_LYK);
     }
 
     /**
@@ -173,7 +173,7 @@ public final class MetricasLyK implements IMArtefactos {
      */
     private String numberOfClassMethods_LyK_5(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.METODOS_ESTATICOS);
+        return cdr.recopilarDatos(artifactId, path, IRD.METODOS_ESTATICOS, IRD.FAMILIA_LYK);
     }
 
     /**
@@ -186,7 +186,7 @@ public final class MetricasLyK implements IMArtefactos {
      */
     private String numberOfMethodInherited_LyK_6(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.METODOS_HEREDADOS);
+        return cdr.recopilarDatos(artifactId, path, IRD.METODOS_HEREDADOS, IRD.FAMILIA_LYK);
     }
 
     /**
@@ -205,7 +205,7 @@ public final class MetricasLyK implements IMArtefactos {
 
         //Llenando los datos de la clase a evaluar.
         //Solicitamos los nombres de los métodos de la clase a evaluar.
-        Arrays.asList(cdr.recopilarDatos(artifactId, path, IRD.DATOS_METODOS_CLASE)
+        Arrays.asList(cdr.recopilarDatos(artifactId, path, IRD.DATOS_METODOS_CLASE, IRD.FAMILIA_LYK)
                 .split(";"))
                 .stream()
                 .forEach(ms -> {
@@ -214,7 +214,7 @@ public final class MetricasLyK implements IMArtefactos {
 
         //Solicitamos la id de las clases de las cules hereda la clase a evluar.
         List<String> iDCPadres = Arrays.asList(cdr.
-                recopilarDatos(artifactId, path, IRD.IDS_CLASES_PADRE)
+                recopilarDatos(artifactId, path, IRD.IDS_CLASES_PADRE, IRD.FAMILIA_LYK)
                 .split(";"));
 
         if (iDCPadres.get(0).equals("NA")) {
@@ -226,7 +226,7 @@ public final class MetricasLyK implements IMArtefactos {
             iDCPadres.stream().forEach(iDCP -> {
                 Artefacto a = new Artefacto(iDCP);
                 Arrays.asList(cdr
-                        .recopilarDatos(iDCP, path, IRD.DATOS_METODOS_CLASE)
+                        .recopilarDatos(iDCP, path, IRD.DATOS_METODOS_CLASE, IRD.FAMILIA_LYK)
                         .split(";"))
                         .stream()
                         .forEach(ms -> {
@@ -289,11 +289,11 @@ public final class MetricasLyK implements IMArtefactos {
      * @return un String que contiene el valor de la mètrica corresponiente al
      * artefacto evaluado.
      */
-    private String averageParameterPerMethod_M13(String artifactId, String path) {
+    private String averageParameterPerMethod_LyK_9(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         int nParametros = Integer.parseInt(cdr.
-                recopilarDatos(artifactId, path, IRD.PARAMETROS_TOTALES));
+                recopilarDatos(artifactId, path, IRD.PARAMETROS_TOTALES, IRD.FAMILIA_LYK));
 
         int NM = Integer.parseInt(this.numberOfMethods_LyK_1(artifactId, path));
 
@@ -309,7 +309,7 @@ public final class MetricasLyK implements IMArtefactos {
      * @return un String que contiene el valor de la mètrica correspondiente al
      * artefacto evaluado.
      */
-    private String specializationIndex_M14(String artifactId, String path) {
+    private String specializationIndex_LyK_10(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
         int NMO = Integer.parseInt(
@@ -317,7 +317,7 @@ public final class MetricasLyK implements IMArtefactos {
 
         int DIT = Integer.parseInt(cdr.
                 recopilarDatos(artifactId, path,
-                        IRD.PROFUNDIDAD_DEL_ARBOL_DE_HERENCIAS));
+                        IRD.PROFUNDIDAD_DEL_ARBOL_DE_HERENCIAS, IRD.FAMILIA_CYK));
 
         int NM = Integer.parseInt(this.numberOfMethods_LyK_1(artifactId, path));
 

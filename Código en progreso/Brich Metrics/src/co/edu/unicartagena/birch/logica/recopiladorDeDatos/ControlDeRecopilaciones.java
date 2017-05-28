@@ -26,6 +26,14 @@ import javax.xml.xquery.XQResultSequence;
  */
 public final class ControlDeRecopilaciones implements IRD {
 
+    private int numeroDeRecopilaciones;
+    private int numeroDeRArtefacto;
+    private int numeroDeRACyK;
+    private int numeroDeRALyK;
+    private int numeroDeRSistema;
+    private int numeroDeRSMG;
+    private int numeroDeRSMOOD;
+
 //==============================================================================
 //  Constructores y metodos de inicialización.
 //==============================================================================
@@ -33,7 +41,13 @@ public final class ControlDeRecopilaciones implements IRD {
      * Constructor por defecto.
      */
     public ControlDeRecopilaciones() {
-
+        this.numeroDeRACyK = 3;
+        this.numeroDeRALyK = 12;
+        this.numeroDeRSMG = 9;
+        this.numeroDeRSMOOD = 5;
+        this.numeroDeRArtefacto = numeroDeRACyK + numeroDeRALyK;
+        this.numeroDeRSistema = numeroDeRSMG + numeroDeRSMOOD;
+        this.numeroDeRecopilaciones = numeroDeRArtefacto + numeroDeRSistema;
     }
 
 //==============================================================================
@@ -50,10 +64,10 @@ public final class ControlDeRecopilaciones implements IRD {
      * @return un String que contiene el dato solicitado.
      */
     @Override
-    public String recopilarDatos(String nombreArtefacto, String ruta, int id) {
-        int tipo = (id < 3) // Las recopilaciones de CyK van de 0 a 2.
-                ? FactoriaDeRecopiladores.RECOPILADOR_CyK
-                : FactoriaDeRecopiladores.RECOPILADOR_LyK;
+    public String recopilarDatos(String nombreArtefacto, String ruta, String id, String familia) {
+        int tipo = familia.equals(IRD.FAMILIA_CYK)
+                ? FactoriaDeRecopiladores.RECOPILADOR_CYK
+                : FactoriaDeRecopiladores.RECOPILADOR_LYK;
 
         try {
             return new FactoriaDeRecopiladores()
@@ -71,7 +85,7 @@ public final class ControlDeRecopilaciones implements IRD {
      * Mètodo que permite calcular un dato especifico sobre una clase o
      * interface del diagrama.
      *
-     * @param nombreArtefacto un String que contiene el nombre de la clase o
+     * @param idArtifact un String que contiene el nombre de la clase o
      * interface a evaluar.
      * @param file un objeto de la clase File que contiene la ruta del archivo
      * XMI.
@@ -79,8 +93,12 @@ public final class ControlDeRecopilaciones implements IRD {
      * @return un String que contiene el dato solicitado.
      */
     @Override
-    public String recopilarDatos(String nombreArtefacto, File file, int id) {
-        return this.recopilarDatos(nombreArtefacto, file.getAbsolutePath(), id);
+    public String recopilarDatos(String idArtifact, File file, String id, String familia) {
+        return this.recopilarDatos(
+                idArtifact,
+                file.getAbsolutePath(),
+                id,
+                familia);
     }
 
     /**
@@ -93,8 +111,8 @@ public final class ControlDeRecopilaciones implements IRD {
      * @return un String que contiene el dato solicitado.
      */
     @Override
-    public String recopilarDatos(String ruta, int id) {
-        int tipo = (id < 9) // Las recopilaciones MG van de 0 a 8.
+    public String recopilarDatos(String ruta, String id, String familia) {
+        int tipo = familia.equals(IRD.FAMILIA_MG)
                 ? FactoriaDeRecopiladores.RECOPILADOR_MG
                 : FactoriaDeRecopiladores.RECOPILADOR_MOOD;
 
@@ -120,8 +138,8 @@ public final class ControlDeRecopilaciones implements IRD {
      * @return un String que contiene el dato solicitado.
      */
     @Override
-    public String recopilarDatos(File file, int id) {
-        return this.recopilarDatos(file.getAbsolutePath(), id);
+    public String recopilarDatos(File file, String id, String familia) {
+        return this.recopilarDatos(file.getAbsolutePath(), id, familia);
     }
 
     /**
@@ -136,10 +154,11 @@ public final class ControlDeRecopilaciones implements IRD {
     public List<String> getArtifacId(String nombre, String path) {
         List<String> ids = new ArrayList<>();
         try {
-            String idss =this.getResult(nombre, path, UtileriaRDD.SA_GET_IDS);
+            String idss = this.getResult(nombre, path, UtileriaRDD.SA_GET_IDS);
             ids = Arrays.asList(idss.split(";"));
         } catch (Throwable ex) {
-            Logger.getLogger(ControlDeRecopilaciones.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControlDeRecopilaciones.class.getName())
+                    .log(Level.SEVERE, null, ex);
         }
         return ids;
     }
@@ -156,7 +175,7 @@ public final class ControlDeRecopilaciones implements IRD {
     public List<String> getArtifacId(String nombre, File file) {
         return this.getArtifacId(nombre, file.getAbsolutePath());
     }
-    
+
     @Override
     public List<String> getAllIdentifier(String path, boolean isLookingForIds) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -199,5 +218,60 @@ public final class ControlDeRecopilaciones implements IRD {
 //  Getters and Setters.
 //==============================================================================
 
-    
+    public int getNumeroDeMetricas() {
+        return numeroDeRecopilaciones;
+    }
+
+    public void setNumeroDeMetricas(int numeroDeMetricas) {
+        this.numeroDeRecopilaciones = numeroDeMetricas;
+    }
+
+    public int getNumeroDeMArtefacto() {
+        return numeroDeRArtefacto;
+    }
+
+    public void setNumeroDeMArtefacto(int numeroDeMArtefacto) {
+        this.numeroDeRArtefacto = numeroDeMArtefacto;
+    }
+
+    public int getNumeroDeMACyK() {
+        return numeroDeRACyK;
+    }
+
+    public void setNumeroDeMACyK(int numeroDeMACyK) {
+        this.numeroDeRACyK = numeroDeMACyK;
+    }
+
+    public int getNumeroDeMALyK() {
+        return numeroDeRALyK;
+    }
+
+    public void setNumeroDeMALyK(int numeroDeMALyK) {
+        this.numeroDeRALyK = numeroDeMALyK;
+    }
+
+    public int getNumeroDeMSistema() {
+        return numeroDeRSistema;
+    }
+
+    public void setNumeroDeMSistema(int numeroDeMSistema) {
+        this.numeroDeRSistema = numeroDeMSistema;
+    }
+
+    public int getNumeroDeMSMG() {
+        return numeroDeRSMG;
+    }
+
+    public void setNumeroDeMSMG(int numeroDeMSMG) {
+        this.numeroDeRSMG = numeroDeMSMG;
+    }
+
+    public int getNumeroDeMSMOOD() {
+        return numeroDeRSMOOD;
+    }
+
+    public void setNumeroDeMSMOOD(int numeroDeMSMOOD) {
+        this.numeroDeRSMOOD = numeroDeMSMOOD;
+    }
+
 }

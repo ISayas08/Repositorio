@@ -14,14 +14,14 @@ public final class FactoriaDeRecopiladores {
      * getIRArtefactos para retornar un recopilador de datos para la familia de
      * métricas de CyK.
      */
-    public static final int RECOPILADOR_CyK = 0;
+    public static final int RECOPILADOR_CYK = 0;
 
     /**
      * Atributo utilizado para especificar el valor que debe recibir el método
      * getIRArtefactos para retornar un recopilador de datos para la familia de
      * métricas de LyK.
      */
-    public static final int RECOPILADOR_LyK = 1;
+    public static final int RECOPILADOR_LYK = 1;
 
     /**
      * Atributo utilizado para especificar el valor que debe recibir el método
@@ -62,10 +62,10 @@ public final class FactoriaDeRecopiladores {
         IRArtefactos instance = null;
 
         switch (tipo) {
-            case FactoriaDeRecopiladores.RECOPILADOR_CyK:
+            case FactoriaDeRecopiladores.RECOPILADOR_CYK:
                 instance = new RecopiladorDeDatosCyK();
                 break;
-            case FactoriaDeRecopiladores.RECOPILADOR_LyK:
+            case FactoriaDeRecopiladores.RECOPILADOR_LYK:
                 instance = new RecopiladorDeDatosLyK();
                 break;
         }

@@ -106,7 +106,7 @@ public final class MetricasCyK implements IMArtefactos {
     private String depthOfInheritanceTree_CyK_0(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         return cdr.recopilarDatos(artifactId, path,
-                IRD.PROFUNDIDAD_DEL_ARBOL_DE_HERENCIAS);
+                IRD.PROFUNDIDAD_DEL_ARBOL_DE_HERENCIAS, IRD.FAMILIA_CYK);
     }
 
     /**
@@ -120,7 +120,7 @@ public final class MetricasCyK implements IMArtefactos {
      */
     private String numbreOfChildren_CyK_1(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.HIJOS_INMEDIATOS);
+        return cdr.recopilarDatos(artifactId, path, IRD.HIJOS_INMEDIATOS, IRD.FAMILIA_CYK);
     }
 
     /**
@@ -134,7 +134,7 @@ public final class MetricasCyK implements IMArtefactos {
      */
     private String couplingBetweenObjectClasses_CyK_2(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.ACOPLAMIENTO);
+        return cdr.recopilarDatos(artifactId, path, IRD.ACOPLAMIENTO, IRD.FAMILIA_CYK);
     }
 
     /**
@@ -153,7 +153,7 @@ public final class MetricasCyK implements IMArtefactos {
      */
     private String weightedMethodsPerClass_CyK_3(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.METODOS_TOTALTES);
+        return cdr.recopilarDatos(artifactId, path, IRD.METODOS_TOTALTES, IRD.FAMILIA_LYK);
     }
 //==============================================================================
 //  Métodos sin cuerpo.

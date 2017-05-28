@@ -33,7 +33,7 @@ public class TestBirchMetric {
                 "ClaseAgregacion",
                 "ClaseAgregada");
         //int metrica = ICalculaMetricas.NUMBER_OF_METHOD_OVERRIDDEN;
-        String metrica = ICalculaMetricas.NUMBER_OF_METHOD_INHERITED;
+        String metrica = "LyK_10";
         ICalculaMetricas icm = new CalculaMetricas();
 
         //===========================================================Artefactos.
@@ -50,7 +50,7 @@ public class TestBirchMetric {
                     });
         });
         //============================================================Generales.
-        
+        /*
         for (int f = 0; f < ICalculaMetricas.NUMERO_DE_MS_MG; f++) {
             System.err.println("Métricas a nivel de sistema, MG");
             System.err.println("Calculando métrica: " + f + "...");
@@ -66,7 +66,7 @@ public class TestBirchMetric {
             System.err.println("Resultado métrica: " + result);
             System.err.println("=============================================");
         }
-         
+        */ 
     }
 
 }

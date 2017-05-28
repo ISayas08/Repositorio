@@ -21,7 +21,7 @@ public interface IRGenerales {
      * @throws java.lang.IllegalAccessException
      * @throws java.lang.reflect.InvocationTargetException
      */
-    public String recopilar(String path, int id) throws IllegalArgumentException,
+    public String recopilar(String path, String id) throws IllegalArgumentException,
             IllegalAccessException, InvocationTargetException;
 
     /**
@@ -33,7 +33,7 @@ public interface IRGenerales {
      * @throws java.lang.IllegalAccessException
      * @throws java.lang.reflect.InvocationTargetException
      */
-    public String recopilar(File file, int id) throws IllegalArgumentException,
+    public String recopilar(File file, String id) throws IllegalArgumentException,
             IllegalAccessException, InvocationTargetException;
 ;
 

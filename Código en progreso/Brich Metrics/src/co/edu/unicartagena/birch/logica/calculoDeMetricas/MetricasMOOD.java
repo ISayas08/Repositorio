@@ -98,9 +98,9 @@ public class MetricasMOOD implements IMGenerales {
         IRD cdr = new ControlDeRecopilaciones();
 
         int nMPrivadosD = Integer.parseInt(cdr.
-                recopilarDatos(path, IRD.TOTAL_METODOS_PRIVADOS));
+                recopilarDatos(path, IRD.TOTAL_METODOS_PRIVADOS, IRD.FAMILIA_MOOD));
         int nMetodosD = Integer.parseInt(cdr.
-                recopilarDatos(path, IRD.TOTAL_METODOS));
+                recopilarDatos(path, IRD.TOTAL_METODOS, IRD.FAMILIA_MG));
 
         return Double.toString((double) nMPrivadosD / (double) nMetodosD);
     }
@@ -115,9 +115,9 @@ public class MetricasMOOD implements IMGenerales {
         IRD cdr = new ControlDeRecopilaciones();
 
         int nAPrivadosD = Integer.parseInt(cdr.
-                recopilarDatos(path, IRD.TOTAL_ATRIBUTOS_PRIVADOS));
+                recopilarDatos(path, IRD.TOTAL_ATRIBUTOS_PRIVADOS, IRD.FAMILIA_MOOD));
         int nAtributosD = Integer.parseInt(cdr.
-                recopilarDatos(path, IRD.TOTAL_ATRIBUTOS));
+                recopilarDatos(path, IRD.TOTAL_ATRIBUTOS, IRD.FAMILIA_MG));
 
         return Double.toString((double) nAPrivadosD / (double) nAtributosD);
     }
@@ -137,18 +137,21 @@ public class MetricasMOOD implements IMGenerales {
         //en un arreglo. dado que los datos vienen unidos en un mismo string,
         //hay que separarlos (el elemento que une un string y otro es el ";").
         int sumatoriaMH = 0;
-        sumatoriaMH = Arrays.asList(cdr.recopilarDatos(path, IRD.IDES_CLASES).split(";"))
+        sumatoriaMH = Arrays.asList(cdr.recopilarDatos(
+                path, IRD.IDES_CLASES, IRD.FAMILIA_MG).split(";"))
                 .stream() //Se recorre el arreglo con el método stream()
                 //Se transforman los datos usando el método map() al resuldado
                 //obtenido de calcular los métodos heredados para cada id,
                 //y convertir el resultado a entero.
-                .map(id -> Integer.parseInt(cdr.recopilarDatos(id, path, IRD.METODOS_HEREDADOS)))
+                .map(id -> Integer.parseInt(cdr.recopilarDatos(
+                id, path, IRD.METODOS_HEREDADOS, IRD.FAMILIA_LYK)))
                 //Se suman todos los datos usando el método reduce().
                 //.reduce(0, (sum, nmh) -> sum += nmh);
                 .reduce(sumatoriaMH, Integer::sum);
 
         //Se obtienen el total de métodos en el diagrama.
-        int nMetodosD = Integer.parseInt(cdr.recopilarDatos(path, IRD.TOTAL_METODOS));
+        int nMetodosD = Integer.parseInt(cdr.recopilarDatos(
+                path, IRD.TOTAL_METODOS, IRD.FAMILIA_MG));
 
         //Se divide el número de métodos heredado sobre el número de métodos totales.
         return Double.toString((double) sumatoriaMH / (double) nMetodosD);
@@ -168,17 +171,20 @@ public class MetricasMOOD implements IMGenerales {
         //en un arreglo. dado que los datos vienen unidos en un mismo string,
         //hay que separarlos (el elemento que une un string y otro es el ";").
         int sumatoriaAH = 0;
-        sumatoriaAH = Arrays.asList(cdr.recopilarDatos(path, IRD.IDES_CLASES).split(";"))
+        sumatoriaAH = Arrays.asList(cdr.recopilarDatos(
+                path, IRD.IDES_CLASES, IRD.FAMILIA_MG).split(";"))
                 .stream() //Se recorre el arreglo con el método stream()
                 //Se transforman los datos, usando el método map(), al resuldado
                 //obtenido de calcular los atributos heredados para cada id,
                 //y convertir el resultado a entero.
-                .map(id -> Integer.parseInt(cdr.recopilarDatos(id, path, IRD.ATRIBUTOS_HEREDADOS)))
+                .map(id -> Integer.parseInt(cdr.recopilarDatos(
+                        id, path, IRD.ATRIBUTOS_HEREDADOS, IRD.FAMILIA_LYK)))
                 //Se suman todos los datos usando el método reduce().
                 .reduce(sumatoriaAH, Integer::sum);
 
         //Se obtiene el total de atributos en el diagrama.
-        int nAtributosD = Integer.parseInt(cdr.recopilarDatos(path, IRD.TOTAL_ATRIBUTOS));
+        int nAtributosD = Integer.parseInt(cdr.recopilarDatos(
+                path, IRD.TOTAL_ATRIBUTOS, IRD.FAMILIA_MG));
 
         //Se divide el número de atributos heredados 
         //sobre el número de atributos totales.
@@ -197,18 +203,22 @@ public class MetricasMOOD implements IMGenerales {
         List<Artefacto> artefactos = new ArrayList<>();
 
         //1. Se solicitan todas las ides de las clases del diagrama.
-        Arrays.asList(cdr.recopilarDatos(path, IRD.IDES_CLASES).split(";"))
+        Arrays.asList(cdr.recopilarDatos(
+                path, IRD.IDES_CLASES, IRD.FAMILIA_MG).split(";"))
                 .stream()
                 //Con cada id se crea un artefacto.
                 .forEach(id -> {
                     Artefacto a = new Artefacto(id);
                     //Se solicitan la id de la clase padre.
-                    String idCP = cdr.recopilarDatos(id, path, IRD.DATOS_HERENCIA_CLASE);
+                    String idCP = cdr.recopilarDatos(
+                            id, path, IRD.DATOS_HERENCIA_CLASE, IRD.FAMILIA_LYK);
                     //Se cambia la id de la clase padre.
                     a.setIdPadre(idCP);
 
                     //Se obtienen todos los métodos de la clase y se añaden.
-                    Arrays.asList(cdr.recopilarDatos(id, path, IRD.DATOS_METODOS_CLASE).split(";"))
+                    Arrays.asList(cdr.recopilarDatos(
+                            id, path, IRD.DATOS_METODOS_CLASE, IRD.FAMILIA_LYK)
+                            .split(";"))
                             .stream()
                             .forEach(ms -> {
                                 //Se asignan los datos del método al artefacto
@@ -219,7 +229,8 @@ public class MetricasMOOD implements IMGenerales {
                 });
 
         //2. Se realiza la sumatoria de métodos sobrescritos.
-        //3. Se realiza la sumatoria de los métodos añadidos por el número de descendientes.
+        //3. Se realiza la sumatoria de los métodos añadidos 
+        //por el número de descendientes.
         int sumatoriaMO = 0;
         int sumatoriaMAxDC = 0;
         ICM ccm = new ControlDeCalculoDeMetricas();
@@ -240,7 +251,7 @@ public class MetricasMOOD implements IMGenerales {
             sumatoriaMO += mO;
             sumatoriaMAxDC += (mAñadidos * nDescendientes);
         }
-        System.err.println("MétricasMOOD, línea 238: MO: " + sumatoriaMO + " MAxDC: " + sumatoriaMAxDC);
+
         return Double.toString((double) sumatoriaMO / (double) sumatoriaMAxDC);
     }
 
@@ -281,9 +292,9 @@ public class MetricasMOOD implements IMGenerales {
         IRD cdr = new ControlDeRecopilaciones();
 
         int nAsociacionesNHD = Integer.parseInt(cdr.
-                recopilarDatos(path, IRD.TOTAL_RELACIONES_NH));
+                recopilarDatos(path, IRD.TOTAL_RELACIONES_NH, IRD.FAMILIA_MOOD));
         int nClasesD = Integer.parseInt(cdr.
-                recopilarDatos(path, IRD.TOTAL_CLASES));
+                recopilarDatos(path, IRD.TOTAL_CLASES, IRD.FAMILIA_MG));
 
         return Double.toString((double) nAsociacionesNHD
                 / (Math.pow((double) nClasesD, 2)
@@ -301,9 +312,9 @@ public class MetricasMOOD implements IMGenerales {
         IRD cdr = new ControlDeRecopilaciones();
 
         int nClusterD = Integer.parseInt(cdr.
-                recopilarDatos(path, IRD.TOTAL_CLUSTERS));
+                recopilarDatos(path, IRD.TOTAL_CLUSTERS, IRD.FAMILIA_MOOD));
         int nClasesD = Integer.parseInt(cdr.
-                recopilarDatos(path, IRD.TOTAL_CLASES));
+                recopilarDatos(path, IRD.TOTAL_CLASES, IRD.FAMILIA_MG));
 
         return Double.toString((double) nClusterD / (double) nClasesD);
     }
@@ -318,9 +329,9 @@ public class MetricasMOOD implements IMGenerales {
         IRD cdr = new ControlDeRecopilaciones();
 
         int nCHijosD = Integer.parseInt(cdr.
-                recopilarDatos(path, IRD.TOTAL_CLASES_HIJAS));
+                recopilarDatos(path, IRD.TOTAL_CLASES_HIJAS, IRD.FAMILIA_MOOD));
         int nClasesD = Integer.parseInt(cdr.
-                recopilarDatos(path, IRD.TOTAL_CLASES));
+                recopilarDatos(path, IRD.TOTAL_CLASES, IRD.FAMILIA_MG));
 
         return Double.toString((double) nCHijosD / (double) nClasesD);
     }

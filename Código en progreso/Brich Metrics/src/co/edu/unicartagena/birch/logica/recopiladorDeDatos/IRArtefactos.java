@@ -24,7 +24,7 @@ public interface IRArtefactos {
      * @throws java.lang.IllegalAccessException
      * @throws java.lang.reflect.InvocationTargetException
      */
-    public String recopilar(String nombre, String path, int id) throws
+    public String recopilar(String nombre, String path, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException;
 
@@ -40,7 +40,7 @@ public interface IRArtefactos {
      * @throws java.lang.IllegalAccessException
      * @throws java.lang.reflect.InvocationTargetException
      */
-    public String recopilar(String nombre, File file, int id) throws
+    public String recopilar(String nombre, File file, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException;
 

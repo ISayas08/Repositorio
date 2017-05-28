@@ -48,7 +48,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @return un String que contiene el daato solicitado.
      */
     @Override
-    public String recopilar(String path, int id) throws
+    public String recopilar(String path, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
 
@@ -59,7 +59,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
         //Ejecutamos el método cuyo nombre termine con "_Mi",
         //donde i es el valor de la id.
         String dato = (String) metodos.stream()
-                .filter(m -> m.getName().endsWith("_M" + id))
+                .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, path);
 
         return dato == null ? "-1" : dato;
@@ -73,7 +73,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @return un String que contiene el dato solicitado.
      */
     @Override
-    public String recopilar(File file, int id) throws
+    public String recopilar(File file, String id) throws
             IllegalArgumentException, IllegalAccessException,
             InvocationTargetException {
         return this.recopilar(file.getAbsolutePath(), id);
@@ -85,7 +85,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @param path la dirección del archivo.
      * @return un entero que representa el numero de clases encontradas.
      */
-    private String totalClases_M0(String path) {
+    private String totalClases_MG_0(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_CLASES);
@@ -108,7 +108,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @return un entero que representa el número de clases abstractas
      * encontradas.
      */
-    private String totalCAbstractas_M1(String path) {
+    private String totalCAbstractas_MG_1(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_CLASES_ABSTRACTAS);
@@ -129,7 +129,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @param path la dirección del archivo XMI.
      * @return un entero que representa el número de interfaces encontradas.
      */
-    private String totalInterfaces_M2(String path) {
+    private String totalInterfaces_MG_2(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_INTERFACES);
@@ -150,7 +150,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @param path la dirección del archivo XMI.
      * @return un entero que representa el número de paquetes encontrados.
      */
-    private String totalPaquetes_M3(String path) {
+    private String totalPaquetes_MG_3(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_PAQUETES);
@@ -171,7 +171,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @param path la dirección del archivo XMI.
      * @return un entero que representa el número de atributos encontrados.
      */
-    private String totalAtributos_M4(String path) {
+    private String totalAtributos_MG_4(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_ATRIBUTOS);
@@ -193,7 +193,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @return un entero que representa el número de métodos públicos
      * encontrados.
      */
-    private String totalAPublicos_M5(String path) {
+    private String totalAPublicos_MG_5(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_ATRIBUTOS_PUBLICOS);
@@ -214,7 +214,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @param path la dirección del archivo XMI.
      * @return un entero que representa el número de métodos encontrados.
      */
-    private String totalMetodos_M6(String path) {
+    private String totalMetodos_MG_6(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_METODOS);
@@ -236,7 +236,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @return un entero que representa el número de métodos públicos
      * encontrados.
      */
-    private String totalMPublicos_M7(String path) {
+    private String totalMPublicos_MG_7(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_CONTAR_N_TOTAL_METODOS_PUBLICOS);
@@ -258,7 +258,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene los nombres de todas las clases.
      */
-    private String idesClases_M8(String path) {
+    private String idesClases_MG_8(String path) {
         try {
             return this.getResult(path,
                     UtileriaRDD.SG_OBTENER_TODAS_LAS_IDS);

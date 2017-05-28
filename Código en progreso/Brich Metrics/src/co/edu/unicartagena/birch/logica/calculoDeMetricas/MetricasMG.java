@@ -91,7 +91,7 @@ public class MetricasMG implements IMGenerales {
      */
     private String totalClases_MG_0(String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(path, IRD.TOTAL_CLASES);
+        return cdr.recopilarDatos(path, IRD.TOTAL_CLASES, IRD.FAMILIA_MG);
     }
 
     /**
@@ -102,7 +102,7 @@ public class MetricasMG implements IMGenerales {
      */
     private String totalCAbstractas_MG_1(String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(path, IRD.TOTAL_CLASES_ABSTRACTAS);
+        return cdr.recopilarDatos(path, IRD.TOTAL_CLASES_ABSTRACTAS, IRD.FAMILIA_MG);
     }
 
     /**
@@ -113,7 +113,7 @@ public class MetricasMG implements IMGenerales {
      */
     private String totalInterfaces_MG_2(String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(path, IRD.TOTAL_INTERFACES);
+        return cdr.recopilarDatos(path, IRD.TOTAL_INTERFACES, IRD.FAMILIA_MG);
     }
 
     /**
@@ -124,7 +124,7 @@ public class MetricasMG implements IMGenerales {
      */
     private String totalPaquetes_MG_3(String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(path, IRD.TOTAL_PAQUETES);
+        return cdr.recopilarDatos(path, IRD.TOTAL_PAQUETES, IRD.FAMILIA_MG);
     }
 
     /**
@@ -136,7 +136,8 @@ public class MetricasMG implements IMGenerales {
     private String promedioMetodosClase_MG_4(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
-        int NTM = Integer.parseInt(cdr.recopilarDatos(path, IRD.TOTAL_METODOS));
+        int NTM = Integer.parseInt(cdr.recopilarDatos(
+                path, IRD.TOTAL_METODOS, IRD.FAMILIA_MG));
         int NC = Integer.parseInt(this.totalClases_MG_0(path));
         int NI = Integer.parseInt(this.totalInterfaces_MG_2(path));
 
@@ -153,7 +154,7 @@ public class MetricasMG implements IMGenerales {
         IRD cdr = new ControlDeRecopilaciones();
 
         int NTMP = Integer.parseInt(cdr.recopilarDatos(path,
-                IRD.TOTAL_METODOS_PUBLICOS));
+                IRD.TOTAL_METODOS_PUBLICOS, IRD.FAMILIA_MG));
         int NC = Integer.parseInt(this.totalClases_MG_0(path));
         int NI = Integer.parseInt(this.totalInterfaces_MG_2(path));
 
@@ -170,7 +171,7 @@ public class MetricasMG implements IMGenerales {
         IRD cdr = new ControlDeRecopilaciones();
 
         int NTA = Integer.parseInt(cdr.recopilarDatos(path,
-                IRD.TOTAL_ATRIBUTOS));
+                IRD.TOTAL_ATRIBUTOS, IRD.FAMILIA_MG));
         int NC = Integer.parseInt(this.totalClases_MG_0(path));
         int NI = Integer.parseInt(this.totalInterfaces_MG_2(path));
 
@@ -188,7 +189,7 @@ public class MetricasMG implements IMGenerales {
         IRD cdr = new ControlDeRecopilaciones();
 
         int NTAP = Integer.parseInt(cdr.recopilarDatos(path,
-                IRD.TOTAL_ATRIBUTOS_PUBLICOS));
+                IRD.TOTAL_ATRIBUTOS_PUBLICOS, IRD.FAMILIA_MG));
         int NC = Integer.parseInt(this.totalClases_MG_0(path));
         int NI = Integer.parseInt(this.totalInterfaces_MG_2(path));
 

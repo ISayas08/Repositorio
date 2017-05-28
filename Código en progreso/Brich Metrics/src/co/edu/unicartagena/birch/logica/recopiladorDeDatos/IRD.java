@@ -12,65 +12,45 @@ import java.util.List;
  * @since 16/09/2016
  */
 public interface IRD {
+    
+    public static final String FAMILIA_CYK = "CyK";
+    public static final String FAMILIA_LYK = "LyK";
+    public static final String FAMILIA_MG = "MG";
+    public static final String FAMILIA_MOOD = "MOOD";
 
-    public static final int PROFUNDIDAD_DEL_ARBOL_DE_HERENCIAS = 0;
-
-    public static final int HIJOS_INMEDIATOS = 1;
-
-    public static final int ACOPLAMIENTO = 2;
+    public static final String PROFUNDIDAD_DEL_ARBOL_DE_HERENCIAS = "CyK_0";
+    public static final String HIJOS_INMEDIATOS = "CyK_1";
+    public static final String ACOPLAMIENTO = "CyK_2";
 //
-    public static final int ATRIBUTOS_TOTALES = 3;
-
-    public static final int ATRIBUTOS_PUBLICOS = 4;
-
-    public static final int ATRIBUTOS_ESTATICOS = 5;
-    
-    public static final int METODOS_TOTALTES = 6;
-
-    public static final int METODOS_PUBLICOS = 7;
-
-    public static final int METODOS_ESTATICOS = 8;
-
-    public static final int DATOS_METODOS_CLASE = 9;
-
-    public static final int IDS_CLASES_PADRE = 10;
-    
-    public static final int ATRIBUTOS_HEREDADOS = 11;
-    
-    public static final int METODOS_HEREDADOS = 12;
-
-    public static final int PARAMETROS_TOTALES = 13;
-
-    public static final int DATOS_HERENCIA_CLASE = 14;
+    public static final String ATRIBUTOS_TOTALES = "LyK_0";
+    public static final String ATRIBUTOS_PUBLICOS = "LyK_1";
+    public static final String ATRIBUTOS_ESTATICOS = "LyK_2";
+    public static final String METODOS_TOTALTES = "LyK_3";
+    public static final String METODOS_PUBLICOS = "LyK_4";
+    public static final String METODOS_ESTATICOS = "LyK_5";
+    public static final String DATOS_METODOS_CLASE = "LyK_6";
+    public static final String IDS_CLASES_PADRE = "LyK_7";
+    public static final String ATRIBUTOS_HEREDADOS = "LyK_8";
+    public static final String METODOS_HEREDADOS = "LyK_9";
+    public static final String PARAMETROS_TOTALES = "LyK_10";
+    public static final String DATOS_HERENCIA_CLASE = "LyK_11";
 
     //==========================================================================
-    public static final int TOTAL_CLASES = 0;
-
-    public static final int TOTAL_CLASES_ABSTRACTAS = 1;
-
-    public static final int TOTAL_INTERFACES = 2;
-
-    public static final int TOTAL_PAQUETES = 3;
-
-    public static final int TOTAL_ATRIBUTOS = 4;
-
-    public static final int TOTAL_ATRIBUTOS_PUBLICOS = 5;
-
-    public static final int TOTAL_METODOS = 6;
-
-    public static final int TOTAL_METODOS_PUBLICOS = 7;
-
-    public static final int IDES_CLASES = 8;
-
-    public static final int TOTAL_CLASES_HIJAS = 9;
-
-    public static final int TOTAL_CLUSTERS = 10;
-
-    public static final int TOTAL_RELACIONES_NH = 11;
-
-    public static final int TOTAL_ATRIBUTOS_PRIVADOS = 12;
-
-    public static final int TOTAL_METODOS_PRIVADOS = 13;
+    public static final String TOTAL_CLASES = "MG_0";
+    public static final String TOTAL_CLASES_ABSTRACTAS = "MG_1";
+    public static final String TOTAL_INTERFACES = "MG_2";
+    public static final String TOTAL_PAQUETES = "MG_3";
+    public static final String TOTAL_ATRIBUTOS = "MG_4";
+    public static final String TOTAL_ATRIBUTOS_PUBLICOS = "MG_5";
+    public static final String TOTAL_METODOS = "MG_6";
+    public static final String TOTAL_METODOS_PUBLICOS = "MG_7";
+    public static final String IDES_CLASES = "MG_8";
+//
+    public static final String TOTAL_CLASES_HIJAS = "MOOD_0";
+    public static final String TOTAL_CLUSTERS = "MOOD_1";
+    public static final String TOTAL_RELACIONES_NH = "MOOD_2";
+    public static final String TOTAL_ATRIBUTOS_PRIVADOS = "MOOD_3";
+    public static final String TOTAL_METODOS_PRIVADOS = "MOOD_4";
 
     /**
      * Mètodo que permite calcular un dato especifico sobre una clase o
@@ -80,9 +60,10 @@ public interface IRD {
      * interface a evaluar.
      * @param ruta un String con la ruta donde se encuentra el archivo XMI.
      * @param id un entero que permite identificar el dato que se requiere.
+     * @param familia
      * @return un String que contiene el dato solicitado.
      */
-    public String recopilarDatos(String nombreArtefacto, String ruta, int id);
+    public String recopilarDatos(String nombreArtefacto, String ruta, String id, String familia);
 
     /**
      * Mètodo que permite calcular un dato especifico sobre una clase o
@@ -93,9 +74,10 @@ public interface IRD {
      * @param file un objeto de la clase File que contiene la ruta del archivo
      * XMI.
      * @param id un entero que permite identificar el dato que se requiere.
+     * @param familia
      * @return un String que contiene el dato solicitado.
      */
-    public String recopilarDatos(String nombreArtefacto, File file, int id);
+    public String recopilarDatos(String nombreArtefacto, File file, String id, String familia);
 
     /**
      * Método que permite recopilar un dato especifico relacionado con todo el
@@ -104,9 +86,10 @@ public interface IRD {
      *
      * @param ruta un String que contiene la ruta del archivo XMI.
      * @param id un entero que permite identificar el dato que se requiere.
+     * @param familia
      * @return un String que contiene el dato solicitado.
      */
-    public String recopilarDatos(String ruta, int id);
+    public String recopilarDatos(String ruta, String id, String familia);
 
     /**
      * Método que permite recopilar un dato especifico relacionado con todo el
@@ -115,9 +98,10 @@ public interface IRD {
      *
      * @param file un objeto de la clase File que contiene la ruta del archivo.
      * @param id un entero que permite identificar el dato que se requiere.
+     * @param familia
      * @return un String que contiene el dato solicitado.
      */
-    public String recopilarDatos(File file, int id);
+    public String recopilarDatos(File file, String id, String familia);
 
     /**
      * Método que permite obtener las id de los artefactos que tienen un nombre

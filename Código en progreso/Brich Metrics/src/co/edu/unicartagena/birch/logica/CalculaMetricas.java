@@ -251,12 +251,16 @@ public class CalculaMetricas implements ICalculaMetricas {
                 Logger.getLogger(CalculaMetricas.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
+        } else if (familia.equals("NoCompatible")) {
+            //En caso de que la id no sea compatible con el cálculo que 
+            //se está realizando. Se informa por consola.
+            System.err.println(id + " it is not a compatible id"
+                    + " for artifact-level metrics calculation.");
         } else {
             //En caso de que la id no sea valida.
             //Se informa por consola.
-            System.err.println("La id no es válida. "
-                    + "Para métricas a nivel de artefactos, "
-                    + "sólo se admiten id entre 0 y 14");
+            System.err.println(id + " is not a valid id.\n"
+                    + "Check the ICalculaMetricas interface to find all the ids.");
         }
 
         //Se retorna el resultado.
@@ -334,12 +338,16 @@ public class CalculaMetricas implements ICalculaMetricas {
                 Logger.getLogger(CalculaMetricas.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
+        } else if (familia.equals("NoCompatible")) {
+            //En caso de que la id no sea compatible con el cálculo que 
+            //se está realizando. Se informa por consola.
+            System.err.println(id + " it is not a compatible id"
+                    + " for system-level metrics calculation.");
         } else {
-            //En caso de que la id no sea válida.
+            //En caso de que la id no sea valida.
             //Se informa por consola.
-            System.err.println("La id no es válida. "
-                    + "Para métricas a nivel de sistema, "
-                    + "sólo se admiten id entre 0 y 15");
+            System.err.println(id + " is not a valid id.\n"
+                    + "Check the ICalculaMetricas interface to find all the ids.");
         }
 
         //Se retornan los datos.
@@ -396,7 +404,9 @@ public class CalculaMetricas implements ICalculaMetricas {
             case ICalculaMetricas.NUMBER_OF_CHILDREN:
             case ICalculaMetricas.COUPLING_BETWEEN_OBJECT_CLASSES:
             case ICalculaMetricas.WEIGHTED_METHODS_PER_CLASS:
-                return ICalculaMetricas.FAMILIA_CYK;
+                return isNivelArtefacto
+                        ? ICalculaMetricas.FAMILIA_CYK
+                        : "NoCompatible";
             case ICalculaMetricas.NUMBER_OF_PUBLIC_METHODS:
             case ICalculaMetricas.NUMBER_OF_METHODS:
             case ICalculaMetricas.NUMBER_OF_PUBLIC_VARIABLES:
@@ -408,7 +418,9 @@ public class CalculaMetricas implements ICalculaMetricas {
             case ICalculaMetricas.NUMBER_OF_NEW_METHOD:
             case ICalculaMetricas.AVERAGE_PARAMETER_PER_METHOD:
             case ICalculaMetricas.SPECIALIZATION_INDEX:
-                return ICalculaMetricas.FAMILIA_LYK;
+                return isNivelArtefacto
+                        ? ICalculaMetricas.FAMILIA_LYK
+                        : "NoCompatible";
             case ICalculaMetricas.NUMBER_OF_CLASSES:
             case ICalculaMetricas.NUMBER_OF_ABSTRACT_CLASSES:
             case ICalculaMetricas.NUMBER_OF_INTERFACES:
@@ -417,7 +429,9 @@ public class CalculaMetricas implements ICalculaMetricas {
             case ICalculaMetricas.AVERAGE_PUBLIC_METHODS_ARTIFACT:
             case ICalculaMetricas.AVERAGE_ATTRIBUTES_ARTIFACT:
             case ICalculaMetricas.AVERAGE_PUBLIC_ATTRIBUTE_ARTIFACT:
-                return ICalculaMetricas.FAMILIA_MG;
+                return !isNivelArtefacto
+                        ? ICalculaMetricas.FAMILIA_MG
+                        : "NoCompatible";
             case ICalculaMetricas.METHOD_HIDING_FACTOR:
             case ICalculaMetricas.ATTRIBUTE_HIDING_FACTOR:
             case ICalculaMetricas.METHOD_INHERITANCE_FACTOR:
@@ -426,7 +440,9 @@ public class CalculaMetricas implements ICalculaMetricas {
             case ICalculaMetricas.COUPLING_FACTOR:
             case ICalculaMetricas.CLUSTERING_FACTOR:
             case ICalculaMetricas.REUSE_FACTOR:
-                return ICalculaMetricas.FAMILIA_MOOD;
+                return !isNivelArtefacto
+                        ? ICalculaMetricas.FAMILIA_MOOD
+                        : "NoCompatible";
             default:
                 return "False";
         }
@@ -448,7 +464,6 @@ public class CalculaMetricas implements ICalculaMetricas {
         List<String> ids = new ArrayList();
         String result = "NA";
         IVC validador = Validador.getInstance();
-        IRD cRecopilaciones = new ControlDeRecopilaciones();
 
         //Modificamos la ruta para asegurar que sea compatible con XQuery.
         path = this.modificarRuta(path);
@@ -503,7 +518,21 @@ public class CalculaMetricas implements ICalculaMetricas {
      */
     @Override
     public List<String> getAllIdentifier(String path, boolean isLookingForIds) {
-        return null;
+        List<String> identifiers = new ArrayList();
+
+        IVC validador = Validador.getInstance();
+
+        //Modificamos la ruta para asegurar que sea compatible con XQuery.
+        path = this.modificarRuta(path);
+        //Verificamos que el archivo sea válido.
+        String result = validador.verificarArchivoXMI(path);
+
+        if (result.equals("The file is valid.")) {
+            //Si el archivo es válido, recuperamos todos los nombres o ids.
+            IRD ird = new ControlDeRecopilaciones();
+            identifiers = ird.getAllIdentifier(path, isLookingForIds);
+        }
+        return identifiers;
     }
 
     /**

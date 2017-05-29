@@ -12,16 +12,16 @@ import java.util.List;
  * @since 16/09/2016
  */
 public interface IRD {
-    
+    //Familias de recopilaciones.
     public static final String FAMILIA_CYK = "CyK";
     public static final String FAMILIA_LYK = "LyK";
     public static final String FAMILIA_MG = "MG";
     public static final String FAMILIA_MOOD = "MOOD";
-
+    //Ids para la recopilación de famila de métricas CyK.
     public static final String PROFUNDIDAD_DEL_ARBOL_DE_HERENCIAS = "CyK_0";
     public static final String HIJOS_INMEDIATOS = "CyK_1";
     public static final String ACOPLAMIENTO = "CyK_2";
-//
+    //Ids para la recopilación de la familia de métricas LyK.
     public static final String ATRIBUTOS_TOTALES = "LyK_0";
     public static final String ATRIBUTOS_PUBLICOS = "LyK_1";
     public static final String ATRIBUTOS_ESTATICOS = "LyK_2";
@@ -34,8 +34,7 @@ public interface IRD {
     public static final String METODOS_HEREDADOS = "LyK_9";
     public static final String PARAMETROS_TOTALES = "LyK_10";
     public static final String DATOS_HERENCIA_CLASE = "LyK_11";
-
-    //==========================================================================
+    //Ids para la recopilación de la familia de métricas MG.
     public static final String TOTAL_CLASES = "MG_0";
     public static final String TOTAL_CLASES_ABSTRACTAS = "MG_1";
     public static final String TOTAL_INTERFACES = "MG_2";
@@ -45,7 +44,8 @@ public interface IRD {
     public static final String TOTAL_METODOS = "MG_6";
     public static final String TOTAL_METODOS_PUBLICOS = "MG_7";
     public static final String IDES_CLASES = "MG_8";
-//
+    public static final String NOMBRES_CLASES = "MG_9";
+    //Ids para la recopilación de la familia de métricas MOOD.
     public static final String TOTAL_CLASES_HIJAS = "MOOD_0";
     public static final String TOTAL_CLUSTERS = "MOOD_1";
     public static final String TOTAL_RELACIONES_NH = "MOOD_2";

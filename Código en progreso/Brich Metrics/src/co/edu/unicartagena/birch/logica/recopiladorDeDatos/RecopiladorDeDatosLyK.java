@@ -60,8 +60,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
         List<Method> metodos = Arrays.asList(this.getClass()
                 .getDeclaredMethods());
 
-        //Ejecutamos el método cuyo nombre termine con "_Mi",
-        //donde i es el valor de la id.
+        //Ejecutamos el método cuyo nombre termine con "_id",
         String dato = (String) metodos.stream()
                 .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, iDArtifact, path);
@@ -96,7 +95,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
     private String atributosTotales_LyK_0(String identifier, String path) {
         try {
             return this.getResult(identifier, path,
-                    UtileriaRDD.SA_CONTAR_ATRIBUTOS_TOTALES);
+                    IVC.SA_CONTAR_ATRIBUTOS_TOTALES);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -119,7 +118,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
     private String atributosPublicos_LyK_1(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
-                    UtileriaRDD.SA_CONTAR_ATRIBUTOS_PUBLICOS);
+                    IVC.SA_CONTAR_ATRIBUTOS_PUBLICOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -142,7 +141,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
     private String atributosEstaticos_LyK_2(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
-                    UtileriaRDD.SA_CONTAR_ATRIBUTOS_ESTATICOS);
+                    IVC.SA_CONTAR_ATRIBUTOS_ESTATICOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -165,7 +164,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
     private String metodosTotales_LyK_3(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
-                    UtileriaRDD.SA_CONTAR_METODOS_TOTALES);
+                    IVC.SA_CONTAR_METODOS_TOTALES);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -188,7 +187,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
     private String metodosPublicos_LyK_4(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
-                    UtileriaRDD.SA_CONTAR_METODOS_PUBLICOS);
+                    IVC.SA_CONTAR_METODOS_PUBLICOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -211,7 +210,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
     private String metodosEstaticos_LyK_5(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
-                    UtileriaRDD.SA_CONTAR_METODOS_ESTATICOS);
+                    IVC.SA_CONTAR_METODOS_ESTATICOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -234,15 +233,15 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
     private String datosMetodosClase_LyK_6(String idArtifact, String path) {
         try {
             return this.getResult(idArtifact, path,
-                    UtileriaRDD.SA_DATOS_METODOS_CLASE);
+                    IVC.SA_DATOS_METODOS_CLASE);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
-            return "NA";
+            return "-1";
         } catch (Throwable ex) {
             Logger.getLogger(RecopiladorDeDatosCyK.class.getName())
                     .log(Level.SEVERE, null, ex);
-            return "NA";
+            return "-1";
         }
     }
 
@@ -257,16 +256,16 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
     private String nombresClasesPadres_LyK_7(String iDArtifact, String path) {
         try {
             String dato = this.getResult(iDArtifact, path,
-                    UtileriaRDD.SA_IDES_CLASES_PADRE);
-            return dato.equals("") ? "NA" : dato;
+                    IVC.SA_IDES_CLASES_PADRE);
+            return dato.equals("") ? "-1" : dato;
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
-            return "NA";
+            return "-1";
         } catch (Throwable ex) {
             Logger.getLogger(RecopiladorDeDatosCyK.class.getName())
                     .log(Level.SEVERE, null, ex);
-            return "NA";
+            return "-1";
         }
     }
 
@@ -279,7 +278,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
     private String atributosHeredados_LyK_8(String idArtifact, String path) {
         try {
             return this.getResult(idArtifact, path,
-                    UtileriaRDD.SA_CONTAR_ATRIBUTOS_HEREDADOS);
+                    IVC.SA_CONTAR_ATRIBUTOS_HEREDADOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -302,7 +301,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
     private String metodosHeredados_LyK_9(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
-                    UtileriaRDD.SA_CONTAR_METODOS_HEREDADOS);
+                    IVC.SA_CONTAR_METODOS_HEREDADOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -325,7 +324,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
     private String parametrosTotales_LyK_10(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
-                    UtileriaRDD.SA_CONTAR_PARAMETROS_TOTALES);
+                    IVC.SA_CONTAR_PARAMETROS_TOTALES);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -348,7 +347,7 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
     private String datosDeHerencia_LyK_11(String iDArtifact, String path) {
         try {
             return this.getResult(iDArtifact, path,
-                    UtileriaRDD.SA_DATOS_HERENCIA_CLASES);
+                    IVC.SA_DATOS_HERENCIA_CLASES);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);

@@ -307,6 +307,11 @@ public final class Version2_4_2 extends Version {
         this.sufijosDiagrama.put("MS Get Ids", "\");\n"
                 + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
                 + "fn:string-join(data($clases/@xmi:id), \";\")");
+        
+        //Obtener todas las ids de los artefactos del diagrama.
+        this.sufijosDiagrama.put("MS Get Names", "\");\n"
+                + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
+                + "fn:string-join(data($clases/@name), \";\")");
 
         //Número total de clases hijas.
         this.sufijosDiagrama.put("MS Total clases hijas", "\");\n"

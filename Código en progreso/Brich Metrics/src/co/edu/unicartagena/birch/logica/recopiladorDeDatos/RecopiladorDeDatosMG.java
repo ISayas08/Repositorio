@@ -56,8 +56,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
         List<Method> metodos = Arrays.asList(this.getClass()
                 .getDeclaredMethods());
 
-        //Ejecutamos el método cuyo nombre termine con "_Mi",
-        //donde i es el valor de la id.
+        //Ejecutamos el método cuyo nombre termine con "_id",
         String dato = (String) metodos.stream()
                 .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, path);
@@ -88,7 +87,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
     private String totalClases_MG_0(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_CLASES);
+                    IVC.SG_CONTAR_N_TOTAL_CLASES);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -111,7 +110,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
     private String totalCAbstractas_MG_1(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_CLASES_ABSTRACTAS);
+                    IVC.SG_CONTAR_N_TOTAL_CLASES_ABSTRACTAS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -132,7 +131,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
     private String totalInterfaces_MG_2(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_INTERFACES);
+                    IVC.SG_CONTAR_N_TOTAL_INTERFACES);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -153,7 +152,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
     private String totalPaquetes_MG_3(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_PAQUETES);
+                    IVC.SG_CONTAR_N_TOTAL_PAQUETES);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -174,7 +173,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
     private String totalAtributos_MG_4(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_ATRIBUTOS);
+                    IVC.SG_CONTAR_N_TOTAL_ATRIBUTOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -196,7 +195,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
     private String totalAPublicos_MG_5(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_ATRIBUTOS_PUBLICOS);
+                    IVC.SG_CONTAR_N_TOTAL_ATRIBUTOS_PUBLICOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -217,7 +216,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
     private String totalMetodos_MG_6(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_METODOS);
+                    IVC.SG_CONTAR_N_TOTAL_METODOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -239,7 +238,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
     private String totalMPublicos_MG_7(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_METODOS_PUBLICOS);
+                    IVC.SG_CONTAR_N_TOTAL_METODOS_PUBLICOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -258,18 +257,33 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene los nombres de todas las clases.
      */
-    private String idesClases_MG_8(String path) {
+    private String idesArtifacts_MG_8(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_OBTENER_TODAS_LAS_IDS);
+                    IVC.SG_OBTENER_TODAS_LAS_IDS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
-            return "NA";
+            return "-1";
         } catch (Throwable ex) {
             Logger.getLogger(RecopiladorDeDatosCyK.class.getName())
                     .log(Level.SEVERE, null, ex);
-            return "NA";
+            return "-1";
+        }
+    }
+
+    private String nombresArtifacts_MG_9(String path) {
+        try {
+            return this.getResult(path,
+                    IVC.SG_OBTENER_TODOS_LOS_NOMBRES);
+        } catch (XQException ex) {
+            Logger.getLogger(RecopiladorDeDatosMG.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            return "-1";
+        } catch (Throwable ex) {
+            Logger.getLogger(RecopiladorDeDatosCyK.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            return "-1";
         }
     }
 

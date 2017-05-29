@@ -56,8 +56,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
         //Solicitamos todos los métodos de la clase.
         List<Method> metodos = Arrays.asList(this.getClass().getDeclaredMethods());
 
-        //Ejecutamos el método cuyo nombre termine con "_Mi",
-        //donde i es el valor de la id.
+        //Ejecutamos el método cuyo nombre termine con "_id",
         String dato = (String) metodos.stream()
                 .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, path);
@@ -91,7 +90,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
     private String totalClasesHijas_MOOD_0(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_CLASES_HIJAS);
+                    IVC.SG_CONTAR_N_TOTAL_CLASES_HIJAS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -114,7 +113,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
     private String totalClusters_MOOD_1(String path) {
         try {
             return "" + Arrays.asList(this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_CLUSTERS)
+                    IVC.SG_CONTAR_N_TOTAL_CLUSTERS)
                     .split(";"))
                     .stream().count();
         } catch (XQException ex) {
@@ -139,7 +138,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
     private String totalRelacionesNH_MOOD_2(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_RELACIONES_NH);
+                    IVC.SG_CONTAR_N_TOTAL_RELACIONES_NH);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -162,7 +161,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
     private String totalAtributosPrivados_MOOD_3(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_ATRIBUTOS_PRIVADOS);
+                    IVC.SG_CONTAR_N_TOTAL_ATRIBUTOS_PRIVADOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -185,7 +184,7 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
     private String totalMetodosPrivados_MOOD_4(String path) {
         try {
             return this.getResult(path,
-                    UtileriaRDD.SG_CONTAR_N_TOTAL_METODOS_PRIVADOS);
+                    IVC.SG_CONTAR_N_TOTAL_METODOS_PRIVADOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);

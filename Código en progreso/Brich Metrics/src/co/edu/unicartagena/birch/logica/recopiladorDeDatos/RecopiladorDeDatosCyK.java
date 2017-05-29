@@ -60,8 +60,7 @@ public final class RecopiladorDeDatosCyK implements IRArtefactos {
         List<Method> metodos = Arrays.asList(this.getClass()
                 .getDeclaredMethods());
 
-        //Ejecutamos el método cuyo nombre termine con "_Mi",
-        //donde i es el valor de la id.
+        //Ejecutamos el método cuyo nombre termine con "_id",
         String dato = (String) metodos.stream()
                 .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, nombre, path);
@@ -98,7 +97,7 @@ public final class RecopiladorDeDatosCyK implements IRArtefactos {
     private String profArbolHerencias_CyK_0(String nombre, String path) {
         try {
             return this.getResult(nombre, path,
-                    UtileriaRDD.SA_CONTAR_PROFUNDIDAD_ARBOL_HERENCIAS);
+                    IVC.SA_CONTAR_PROFUNDIDAD_ARBOL_HERENCIAS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -121,7 +120,7 @@ public final class RecopiladorDeDatosCyK implements IRArtefactos {
     private String hijosInmediatos_CyK_1(String nombre, String path) {
         try {
             return this.getResult(nombre, path,
-                    UtileriaRDD.SA_CONTAR_HIJOS_INMEDIATOS);
+                    IVC.SA_CONTAR_HIJOS_INMEDIATOS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -144,7 +143,7 @@ public final class RecopiladorDeDatosCyK implements IRArtefactos {
     private String recopilarAcoplamiento_CyK_2(String nombre, String path) {
         try {
             return this.getResult(nombre, path,
-                    UtileriaRDD.SA_CONTAR_ACOPLAMIENTO);
+                    IVC.SA_CONTAR_ACOPLAMIENTO);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -160,7 +159,8 @@ public final class RecopiladorDeDatosCyK implements IRArtefactos {
      * Método que envía los datos a la persistencia para ejecutar la sentencia y
      * retorna el resultado generado.
      *
-     * @param idArtifact un String con el nombre de la clase que se va a evaluar.
+     * @param idArtifact un String con el nombre de la clase que se va a
+     * evaluar.
      * @param path un String con la dirección del archivo XMI.
      * @param id un entero que especifica la id de la sentencia a ejecurtarse.
      * @return un String que contiene el resultado de la ejecución de la

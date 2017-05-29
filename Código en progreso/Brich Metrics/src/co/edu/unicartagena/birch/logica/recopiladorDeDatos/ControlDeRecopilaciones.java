@@ -43,7 +43,7 @@ public final class ControlDeRecopilaciones implements IRD {
     public ControlDeRecopilaciones() {
         this.numeroDeRACyK = 3;
         this.numeroDeRALyK = 12;
-        this.numeroDeRSMG = 9;
+        this.numeroDeRSMG = 10;
         this.numeroDeRSMOOD = 5;
         this.numeroDeRArtefacto = numeroDeRACyK + numeroDeRALyK;
         this.numeroDeRSistema = numeroDeRSMG + numeroDeRSMOOD;
@@ -154,7 +154,7 @@ public final class ControlDeRecopilaciones implements IRD {
     public List<String> getArtifacId(String nombre, String path) {
         List<String> ids = new ArrayList<>();
         try {
-            String idss = this.getResult(nombre, path, UtileriaRDD.SA_GET_IDS);
+            String idss = this.getResult(nombre, path, IVC.SA_GET_IDS);
             ids = Arrays.asList(idss.split(";"));
         } catch (Throwable ex) {
             Logger.getLogger(ControlDeRecopilaciones.class.getName())
@@ -176,11 +176,38 @@ public final class ControlDeRecopilaciones implements IRD {
         return this.getArtifacId(nombre, file.getAbsolutePath());
     }
 
+    /**
+     * Método que ermite obtener todos las id o todos los nombres del diagrama.
+     *
+     * @param path la ruta del archivo XMI.
+     * @param isLookingForIds un boolean que especifica si se quiere obtener las
+     * id o los nombres.
+     * @return una lista de Strings que contiene todos los datos.
+     */
     @Override
     public List<String> getAllIdentifier(String path, boolean isLookingForIds) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String identifiers = isLookingForIds
+                    ? this.recopilarDatos(path, IRD.IDES_CLASES, FAMILIA_MG)
+                    : this.recopilarDatos(path, IRD.NOMBRES_CLASES, FAMILIA_MG);
+
+            return Arrays.asList(identifiers.split(";"));
+        } catch (Throwable ex) {
+            Logger.getLogger(ControlDeRecopilaciones.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            return new ArrayList<>();
+        }
     }
 
+    /**
+     * Método que ermite obtener todos las id o todos los nombres del diagrama.
+     *
+     * @param file una instancia de la clase File que contiene la ruta del
+     * archivo XMI.
+     * @param isLookingForIds un boolean que especifica si se quiere obtener las
+     * id o los nombres.
+     * @return una lista de Strings que contiene todos los datos.
+     */
     @Override
     public List<String> getAllIdentifier(File file, boolean isLookingForIds) {
         return this.getAllIdentifier(file.getAbsolutePath(), isLookingForIds);
@@ -218,60 +245,60 @@ public final class ControlDeRecopilaciones implements IRD {
 //  Getters and Setters.
 //==============================================================================
 
-    public int getNumeroDeMetricas() {
+    public int getNumeroDeRecopilaciones() {
         return numeroDeRecopilaciones;
     }
 
-    public void setNumeroDeMetricas(int numeroDeMetricas) {
-        this.numeroDeRecopilaciones = numeroDeMetricas;
+    public void setNumeroDeRecopilaciones(int numeroDeRecopilaciones) {
+        this.numeroDeRecopilaciones = numeroDeRecopilaciones;
     }
 
-    public int getNumeroDeMArtefacto() {
+    public int getNumeroDeRArtefacto() {
         return numeroDeRArtefacto;
     }
 
-    public void setNumeroDeMArtefacto(int numeroDeMArtefacto) {
-        this.numeroDeRArtefacto = numeroDeMArtefacto;
+    public void setNumeroDeRArtefacto(int numeroDeRArtefacto) {
+        this.numeroDeRArtefacto = numeroDeRArtefacto;
     }
 
-    public int getNumeroDeMACyK() {
+    public int getNumeroDeRACyK() {
         return numeroDeRACyK;
     }
 
-    public void setNumeroDeMACyK(int numeroDeMACyK) {
-        this.numeroDeRACyK = numeroDeMACyK;
+    public void setNumeroDeRACyK(int numeroDeRACyK) {
+        this.numeroDeRACyK = numeroDeRACyK;
     }
 
-    public int getNumeroDeMALyK() {
+    public int getNumeroDeRALyK() {
         return numeroDeRALyK;
     }
 
-    public void setNumeroDeMALyK(int numeroDeMALyK) {
-        this.numeroDeRALyK = numeroDeMALyK;
+    public void setNumeroDeRALyK(int numeroDeRALyK) {
+        this.numeroDeRALyK = numeroDeRALyK;
     }
 
-    public int getNumeroDeMSistema() {
+    public int getNumeroDeRSistema() {
         return numeroDeRSistema;
     }
 
-    public void setNumeroDeMSistema(int numeroDeMSistema) {
-        this.numeroDeRSistema = numeroDeMSistema;
+    public void setNumeroDeRSistema(int numeroDeRSistema) {
+        this.numeroDeRSistema = numeroDeRSistema;
     }
 
-    public int getNumeroDeMSMG() {
+    public int getNumeroDeRSMG() {
         return numeroDeRSMG;
     }
 
-    public void setNumeroDeMSMG(int numeroDeMSMG) {
-        this.numeroDeRSMG = numeroDeMSMG;
+    public void setNumeroDeRSMG(int numeroDeRSMG) {
+        this.numeroDeRSMG = numeroDeRSMG;
     }
 
-    public int getNumeroDeMSMOOD() {
+    public int getNumeroDeRSMOOD() {
         return numeroDeRSMOOD;
     }
 
-    public void setNumeroDeMSMOOD(int numeroDeMSMOOD) {
-        this.numeroDeRSMOOD = numeroDeMSMOOD;
+    public void setNumeroDeRSMOOD(int numeroDeRSMOOD) {
+        this.numeroDeRSMOOD = numeroDeRSMOOD;
     }
 
 }

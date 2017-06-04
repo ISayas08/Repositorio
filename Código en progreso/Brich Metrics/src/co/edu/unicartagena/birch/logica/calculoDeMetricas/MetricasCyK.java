@@ -73,7 +73,7 @@ public final class MetricasCyK implements IMArtefactos {
                 .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, artifactId, path);
 
-        return dato == null ? "NA" : dato;
+        return dato == null ? "-1" : dato;
     }
 
     /**
@@ -120,7 +120,8 @@ public final class MetricasCyK implements IMArtefactos {
      */
     private String numbreOfChildren_CyK_1(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.HIJOS_INMEDIATOS, IRD.FAMILIA_CYK);
+        return cdr.recopilarDatos(artifactId, path,
+                IRD.HIJOS_INMEDIATOS, IRD.FAMILIA_CYK);
     }
 
     /**
@@ -134,7 +135,8 @@ public final class MetricasCyK implements IMArtefactos {
      */
     private String couplingBetweenObjectClasses_CyK_2(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.ACOPLAMIENTO, IRD.FAMILIA_CYK);
+        return cdr.recopilarDatos(artifactId, path,
+                IRD.ACOPLAMIENTO, IRD.FAMILIA_CYK);
     }
 
     /**
@@ -153,7 +155,8 @@ public final class MetricasCyK implements IMArtefactos {
      */
     private String weightedMethodsPerClass_CyK_3(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
-        return cdr.recopilarDatos(artifactId, path, IRD.METODOS_TOTALTES, IRD.FAMILIA_LYK);
+        return cdr.recopilarDatos(artifactId, path,
+                IRD.METODOS_TOTALTES, IRD.FAMILIA_LYK);
     }
 //==============================================================================
 //  Métodos sin cuerpo.

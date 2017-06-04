@@ -161,19 +161,21 @@ public final class Version2_1 extends Version {
                 + "	 let $parametros := local:parametros($metodo)\n"
                 + "	 return fn:string-join(($tipoRetorno, $nombreMetodo, $parametros), \"%\")");
 
-        //Ides clases padre de una clase especifica.
+        //Ides clases heredadas por una clase especifica.
         this.sufijosArtefactos.put("MA Ides clases padre", "\"][1];\n"
-                + "\n"
-                + "declare variable $generalizacion := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Realization\"];\n"
-                + "declare function local:nombre-padres($clase)as xs:string{\n"
-                + "	\n"
-                + "	if(not(fn:exists($clase/generalization)) and not(fn:exists($generalizacion[@client eq $clase/@xmi:id])))\n"
-                + "	then data(\"\")\n"
-                + "	else fn:string-join((data($clases[@xmi:id eq $clase/generalization/@general]/@xmi:id), data($clases[@xmi:id eq $generalizacion[@client eq $clase/@xmi:id]/@supplier]/@xmi:id), local:nombre-padres($clases[@xmi:id eq $clase/generalization/@general])), \";\")\n"
+                + "declare function local:id-padres($clase)as xs:string{\n"
+                + "   		if(not(fn:exists($clase/generalization)))\n"
+                + "    	then data(\"\")\n"
+                + "    	else \n"
+                + "		fn:string-join((data($clases[@xmi:id eq $clase/generalization/@general]/@xmi:id), local:id-padres($clases[@xmi:id eq $clase/generalization/@general])), \";\")\n"
                 + "};\n"
-                + "\n"
-                + "local:nombre-padres($claseAEvaluar)");
-        
+                + "local:id-padres($claseAEvaluar)");
+
+        //Ides interfaces implementadas por una clase especifica.
+        this.sufijosArtefactos.put("MA Ides interfaces implementadas", "\"][1];\n"
+                + "declare variable $realizacion := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Realization\"];\n"
+                + "fn:string-join(data($clases[@xmi:id = $realizacion[@client = $claseAEvaluar/@xmi:id]/@supplier]/@xmi:id),\";\")");
+
         //Atributos heredados.
         this.sufijosArtefactos.put("MA Atributos heredados", "\"][1];\n"
                 + "declare function local:metodos-heredados($clase as element(packagedElement)) as xs:integer{\n"
@@ -312,6 +314,11 @@ public final class Version2_1 extends Version {
                 + "declare variable $clases := $doc//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
                 + "fn:string-join(data($clases/@xmi:id), \";\")");
 
+        //Obtener todas los nombres de los artefactos del diagrama.
+        this.sufijosDiagrama.put("MS Get Names", "\");\n"
+                + "declare variable $clases := $doc//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
+                + "fn:string-join(data($clases/@name), \";\")");
+
         //Número total de clases hijas.
         this.sufijosDiagrama.put("MS Total clases hijas", "\");\n"
                 + "declare variable $clases := $doc//packagedElement[@xmi:type eq \"uml:Class\"];\n"
@@ -370,5 +377,4 @@ public final class Version2_1 extends Version {
                 + "declare variable $claseAEvaluar := $clases[" + attr + " eq \"";
     }
 
-    
 }

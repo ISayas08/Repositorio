@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
  * <li>Polymorphism Factor</li>
  * <li>Coupling Factor.</li>
  * <li>Clustering Factor.</li>
- * <li></li>
  * </ul>
  *
  * @author Ismael Sayas Arrieta
@@ -69,7 +68,7 @@ public class MetricasMOOD implements IMGenerales {
                 .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, path);
 
-        return dato == null ? "NA" : dato;
+        return dato == null ? "-1" : dato;
     }
 
     /**
@@ -102,7 +101,9 @@ public class MetricasMOOD implements IMGenerales {
         int nMetodosD = Integer.parseInt(cdr.
                 recopilarDatos(path, IRD.TOTAL_METODOS, IRD.FAMILIA_MG));
 
-        return Double.toString((double) nMPrivadosD / (double) nMetodosD);
+        return nMetodosD > 0 //Se vaida división por cero.
+                ? Double.toString((double) nMPrivadosD / (double) nMetodosD)
+                : "0";
     }
 
     /**
@@ -119,7 +120,9 @@ public class MetricasMOOD implements IMGenerales {
         int nAtributosD = Integer.parseInt(cdr.
                 recopilarDatos(path, IRD.TOTAL_ATRIBUTOS, IRD.FAMILIA_MG));
 
-        return Double.toString((double) nAPrivadosD / (double) nAtributosD);
+        return nAtributosD > 0 //Se vaida división por cero.
+                ? Double.toString((double) nAPrivadosD / (double) nAtributosD)
+                : "0";
     }
 
     /**
@@ -154,7 +157,9 @@ public class MetricasMOOD implements IMGenerales {
                 path, IRD.TOTAL_METODOS, IRD.FAMILIA_MG));
 
         //Se divide el número de métodos heredado sobre el número de métodos totales.
-        return Double.toString((double) sumatoriaMH / (double) nMetodosD);
+        return nMetodosD > 0 //Se vaida división por cero.
+                ? Double.toString((double) sumatoriaMH / (double) nMetodosD)
+                : "0";
     }
 
     /**
@@ -178,7 +183,7 @@ public class MetricasMOOD implements IMGenerales {
                 //obtenido de calcular los atributos heredados para cada id,
                 //y convertir el resultado a entero.
                 .map(id -> Integer.parseInt(cdr.recopilarDatos(
-                        id, path, IRD.ATRIBUTOS_HEREDADOS, IRD.FAMILIA_LYK)))
+                id, path, IRD.ATRIBUTOS_HEREDADOS, IRD.FAMILIA_LYK)))
                 //Se suman todos los datos usando el método reduce().
                 .reduce(sumatoriaAH, Integer::sum);
 
@@ -188,7 +193,9 @@ public class MetricasMOOD implements IMGenerales {
 
         //Se divide el número de atributos heredados 
         //sobre el número de atributos totales.
-        return Double.toString((double) sumatoriaAH / (double) nAtributosD);
+        return nAtributosD > 0 //Se vaida división por cero.
+                ? Double.toString((double) sumatoriaAH / (double) nAtributosD)
+                : "0";
     }
 
     /**
@@ -251,8 +258,9 @@ public class MetricasMOOD implements IMGenerales {
             sumatoriaMO += mO;
             sumatoriaMAxDC += (mAñadidos * nDescendientes);
         }
-
-        return Double.toString((double) sumatoriaMO / (double) sumatoriaMAxDC);
+        return sumatoriaMAxDC > 0 //Se vaida división por cero.
+                ? Double.toString((double) sumatoriaMO / (double) sumatoriaMAxDC)
+                : "0";
     }
 
     /**
@@ -296,9 +304,11 @@ public class MetricasMOOD implements IMGenerales {
         int nClasesD = Integer.parseInt(cdr.
                 recopilarDatos(path, IRD.TOTAL_CLASES, IRD.FAMILIA_MG));
 
-        return Double.toString((double) nAsociacionesNHD
-                / (Math.pow((double) nClasesD, 2)
-                - (double) nClasesD));
+        return nClasesD > 0 //Se vaida división por cero.
+                ? Double.toString((double) nAsociacionesNHD
+                        / (Math.pow((double) nClasesD, 2)
+                        - (double) nClasesD))
+                : "0";
     }
 
     /**
@@ -316,7 +326,9 @@ public class MetricasMOOD implements IMGenerales {
         int nClasesD = Integer.parseInt(cdr.
                 recopilarDatos(path, IRD.TOTAL_CLASES, IRD.FAMILIA_MG));
 
-        return Double.toString((double) nClusterD / (double) nClasesD);
+        return nClasesD > 0 //Se vaida división por cero.
+                ? Double.toString((double) nClusterD / (double) nClasesD)
+                : "0";
     }
 
     /**
@@ -333,7 +345,9 @@ public class MetricasMOOD implements IMGenerales {
         int nClasesD = Integer.parseInt(cdr.
                 recopilarDatos(path, IRD.TOTAL_CLASES, IRD.FAMILIA_MG));
 
-        return Double.toString((double) nCHijosD / (double) nClasesD);
+        return nClasesD > 0 //Se vaida división por cero.
+                ? Double.toString((double) nCHijosD / (double) nClasesD)
+                : "0";
     }
 //==============================================================================
 //  Métodos sin cuerpo.

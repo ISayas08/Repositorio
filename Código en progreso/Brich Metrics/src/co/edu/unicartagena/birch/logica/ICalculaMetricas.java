@@ -47,10 +47,10 @@ public interface ICalculaMetricas {
     public static final String NUMBER_OF_PUBLIC_VARIABLES = "LyK_2";
     public static final String NUMBER_OF_VARIABLES = "LyK_3";
     public static final String NUMBER_OF_CLASS_VARIABLES = "LyK_4";
-    public static final String NUMBER_OF_CLASS_METHOD = "LyK_5";
-    public static final String NUMBER_OF_METHOD_INHERITED = "LyK_6";
-    public static final String NUMBER_OF_METHOD_OVERRIDDEN = "LyK_7";
-    public static final String NUMBER_OF_NEW_METHOD = "LyK_8";
+    public static final String NUMBER_OF_CLASS_METHODS = "LyK_5";
+    public static final String NUMBER_OF_METHODS_INHERITED = "LyK_6";
+    public static final String NUMBER_OF_METHODS_OVERRIDDEN = "LyK_7";
+    public static final String NUMBER_OF_NEW_METHODS = "LyK_8";
     public static final String AVERAGE_PARAMETER_PER_METHOD = "LyK_9";
     public static final String SPECIALIZATION_INDEX = "LyK_10";
 

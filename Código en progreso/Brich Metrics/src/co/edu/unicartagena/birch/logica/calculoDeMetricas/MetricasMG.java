@@ -65,7 +65,7 @@ public class MetricasMG implements IMGenerales {
                 .filter(m -> m.getName().endsWith("_" + id))
                 .collect(Collectors.toList()).get(0).invoke(this, path);
 
-        return dato == null ? "NA" : dato;
+        return dato == null ? "-1" : dato;
     }
 
     /**
@@ -141,7 +141,9 @@ public class MetricasMG implements IMGenerales {
         int NC = Integer.parseInt(this.totalClases_MG_0(path));
         int NI = Integer.parseInt(this.totalInterfaces_MG_2(path));
 
-        return Double.toString((double) NTM / ((double) NC + (double) NI));
+        return (NC + NI) > 0 //Se valida la división por cero
+                ? Double.toString((double) NTM / ((double) NC + (double) NI))
+                : "0";
     }
 
     /**
@@ -158,7 +160,9 @@ public class MetricasMG implements IMGenerales {
         int NC = Integer.parseInt(this.totalClases_MG_0(path));
         int NI = Integer.parseInt(this.totalInterfaces_MG_2(path));
 
-        return Double.toString((double) NTMP / ((double) NC + (double) NI));
+        return (NC + NI) > 0 //Se valida la división por cero
+                ? Double.toString((double) NTMP / ((double) NC + (double) NI))
+                : "0";
     }
 
     /**
@@ -175,7 +179,9 @@ public class MetricasMG implements IMGenerales {
         int NC = Integer.parseInt(this.totalClases_MG_0(path));
         int NI = Integer.parseInt(this.totalInterfaces_MG_2(path));
 
-        return Double.toString((double) NTA / ((double) NC + (double) NI));
+        return (NC + NI) > 0 //Se valida la división por cero
+                ? Double.toString((double) NTA / ((double) NC + (double) NI))
+                : "0";
     }
 
     /**
@@ -193,7 +199,9 @@ public class MetricasMG implements IMGenerales {
         int NC = Integer.parseInt(this.totalClases_MG_0(path));
         int NI = Integer.parseInt(this.totalInterfaces_MG_2(path));
 
-        return Double.toString((double) NTAP / ((double) NC + (double) NI));
+        return (NC + NI) > 0 //Se valida la división por cero
+                ? Double.toString((double) NTAP / ((double) NC + (double) NI))
+                : "0";
     }
 
 //==============================================================================

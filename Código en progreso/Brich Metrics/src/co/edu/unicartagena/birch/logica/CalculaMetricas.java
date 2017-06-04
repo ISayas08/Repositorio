@@ -412,10 +412,10 @@ public class CalculaMetricas implements ICalculaMetricas {
             case ICalculaMetricas.NUMBER_OF_PUBLIC_VARIABLES:
             case ICalculaMetricas.NUMBER_OF_VARIABLES:
             case ICalculaMetricas.NUMBER_OF_CLASS_VARIABLES:
-            case ICalculaMetricas.NUMBER_OF_CLASS_METHOD:
-            case ICalculaMetricas.NUMBER_OF_METHOD_INHERITED:
-            case ICalculaMetricas.NUMBER_OF_METHOD_OVERRIDDEN:
-            case ICalculaMetricas.NUMBER_OF_NEW_METHOD:
+            case ICalculaMetricas.NUMBER_OF_CLASS_METHODS:
+            case ICalculaMetricas.NUMBER_OF_METHODS_INHERITED:
+            case ICalculaMetricas.NUMBER_OF_METHODS_OVERRIDDEN:
+            case ICalculaMetricas.NUMBER_OF_NEW_METHODS:
             case ICalculaMetricas.AVERAGE_PARAMETER_PER_METHOD:
             case ICalculaMetricas.SPECIALIZATION_INDEX:
                 return isNivelArtefacto

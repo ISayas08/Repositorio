@@ -63,7 +63,8 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
         //Ejecutamos el método cuyo nombre termine con "_id",
         String dato = (String) metodos.stream()
                 .filter(m -> m.getName().endsWith("_" + id))
-                .collect(Collectors.toList()).get(0).invoke(this, iDArtifact, path);
+                .collect(Collectors.toList())
+                .get(0).invoke(this, iDArtifact, path);
 
         return dato == null ? "-1" : dato;
     }
@@ -253,11 +254,18 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      * @return Un entero que representa la cantidad de métodos sobrescritos en
      * la clase.
      */
-    private String nombresClasesPadres_LyK_7(String iDArtifact, String path) {
+    private String idsCeISobrescritas_LyK_7(String iDArtifact, String path) {
         try {
-            String dato = this.getResult(iDArtifact, path,
+            String clases = this.getResult(iDArtifact, path,
                     IVC.SA_IDES_CLASES_PADRE);
-            return dato.equals("") ? "-1" : dato;
+            String interfaces = this.getResult(iDArtifact, path,
+                    IVC.SA_IDES_INTERFACES_IMPLEMENTADAS);
+
+            return interfaces.equals("")
+                    ? clases
+                    : (clases.equals("")
+                    ? interfaces
+                    : clases + ";" + interfaces);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);

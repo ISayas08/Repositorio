@@ -29,6 +29,8 @@ public interface IVC {
 
     public static final String SA_IDES_CLASES_PADRE = "MA Ides clases padre";
 
+    public static final String SA_IDES_INTERFACES_IMPLEMENTADAS = "MA Ides interfaces implementadas";
+
     public static final String SA_CONTAR_ATRIBUTOS_HEREDADOS = "MA Atributos heredados";
 
     public static final String SA_CONTAR_METODOS_HEREDADOS = "MA Métodos heredados";
@@ -67,7 +69,7 @@ public interface IVC {
     public static final String SG_CONTAR_N_TOTAL_METODOS_PUBLICOS = "MS Total métodos públicos";
 
     public static final String SG_OBTENER_TODAS_LAS_IDS = "MS Get Ids";
-    
+
     public static final String SG_OBTENER_TODOS_LOS_NOMBRES = "MS Get Names";
 
     public static final String SG_CONTAR_N_TOTAL_CLASES_HIJAS = "MS Total clases hijas";

@@ -42,7 +42,7 @@ public final class ControlDeRecopilaciones implements IRD {
      */
     public ControlDeRecopilaciones() {
         this.numeroDeRACyK = 3;
-        this.numeroDeRALyK = 12;
+        this.numeroDeRALyK = 14;
         this.numeroDeRSMG = 10;
         this.numeroDeRSMOOD = 5;
         this.numeroDeRArtefacto = numeroDeRACyK + numeroDeRALyK;

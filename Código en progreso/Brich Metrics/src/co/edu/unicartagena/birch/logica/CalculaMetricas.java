@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
  * ICalcularMetricas.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.5
- * @since 08/02/2017
  */
 public class CalculaMetricas implements ICalculaMetricas {
 
@@ -66,7 +64,7 @@ public class CalculaMetricas implements ICalculaMetricas {
         if (result.equals("The file is valid.")) {
             //Si el archivo es válido.
             //Se verifica que el artefacto exista en el diagrama.
-            if (validador.verificarArtefacto(artifactId, path, false)) {
+            if (validador.verificarArtefacto(artifactId, path, true)) {
                 //Si el artefacto es válido.
                 //Se llama el método que realiza el cálculo de las métricas.
                 //y se asigna el resultado en el objeto resultados.

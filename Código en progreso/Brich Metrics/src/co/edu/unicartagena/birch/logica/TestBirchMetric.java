@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.unicartagena.birch.logica;
 
 import java.io.BufferedWriter;
@@ -226,8 +221,8 @@ public class TestBirchMetric {
 
         //calcularMetricasArtefactos(rutaArchivo2, true);
         //calcularMetricasArtefactos(rutaArchivo2, false);
-        calcularMetricasSistema(rutaArchivo4);
-        //System.out.println(new CalculaMetricas().calcularMetrica(rutaArchivo1, ICalculaMetricas.POLYMORPHISM_FACTOR));
+        //calcularMetricasSistema(rutaArchivo2);
+        //System.out.println(new CalculaMetricas().calcularMetricas(new CalculaMetricas().getArtifacId("Clase Madre", rutaArchivo1).get(0),rutaArchivo1).toString());
     }
 
 }

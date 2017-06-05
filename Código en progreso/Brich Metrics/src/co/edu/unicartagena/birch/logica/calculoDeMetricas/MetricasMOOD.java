@@ -156,9 +156,11 @@ public class MetricasMOOD implements IMGenerales {
         int nMetodosD = Integer.parseInt(cdr.recopilarDatos(
                 path, IRD.TOTAL_METODOS, IRD.FAMILIA_MG));
 
+        int sumNM_MH = nMetodosD + sumatoriaMH;
+
         //Se divide el número de métodos heredado sobre el número de métodos totales.
-        return nMetodosD > 0 //Se vaida división por cero.
-                ? Double.toString((double) sumatoriaMH / (double) nMetodosD)
+        return sumNM_MH > 0 //Se vaida división por cero.
+                ? Double.toString((double) sumatoriaMH / (double) sumNM_MH)
                 : "0";
     }
 
@@ -191,10 +193,12 @@ public class MetricasMOOD implements IMGenerales {
         int nAtributosD = Integer.parseInt(cdr.recopilarDatos(
                 path, IRD.TOTAL_ATRIBUTOS, IRD.FAMILIA_MG));
 
+        int sumNA_AH = nAtributosD + sumatoriaAH;
+
         //Se divide el número de atributos heredados 
         //sobre el número de atributos totales.
-        return nAtributosD > 0 //Se vaida división por cero.
-                ? Double.toString((double) sumatoriaAH / (double) nAtributosD)
+        return sumNA_AH > 0 //Se vaida división por cero.
+                ? Double.toString((double) sumatoriaAH / (double) sumNA_AH)
                 : "0";
     }
 

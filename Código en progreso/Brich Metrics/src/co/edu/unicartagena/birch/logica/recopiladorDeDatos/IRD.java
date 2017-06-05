@@ -12,6 +12,7 @@ import java.util.List;
  * @since 16/09/2016
  */
 public interface IRD {
+
     //Familias de recopilaciones.
     public static final String FAMILIA_CYK = "CyK";
     public static final String FAMILIA_LYK = "LyK";
@@ -29,11 +30,13 @@ public interface IRD {
     public static final String METODOS_PUBLICOS = "LyK_4";
     public static final String METODOS_ESTATICOS = "LyK_5";
     public static final String DATOS_METODOS_CLASE = "LyK_6";
-    public static final String IDS_CLASES_PADRE = "LyK_7";
+    public static final String IDS_CLASES_E_INTEFACES_SOBRESCRITAS = "LyK_7";
     public static final String ATRIBUTOS_HEREDADOS = "LyK_8";
     public static final String METODOS_HEREDADOS = "LyK_9";
     public static final String PARAMETROS_TOTALES = "LyK_10";
     public static final String DATOS_HERENCIA_CLASE = "LyK_11";
+    public static final String IDS_CLASES_PADRE = "LyK_12";
+    public static final String IDS_INTERFACES_IMPLEMENTADAS = "LyK_13";
     //Ids para la recopilación de la familia de métricas MG.
     public static final String TOTAL_CLASES = "MG_0";
     public static final String TOTAL_CLASES_ABSTRACTAS = "MG_1";
@@ -122,7 +125,7 @@ public interface IRD {
      * @return un lista de Strings donde cada string es una id.
      */
     public List<String> getArtifacId(String nombre, File file);
-    
+
     /**
      * Método que ermite obtener todos las id o todos los nombres del diagrama.
      *
@@ -136,7 +139,8 @@ public interface IRD {
     /**
      * Método que ermite obtener todos las id o todos los nombres del diagrama.
      *
-     * @param file una instancia de la clase File que contiene la ruta del archivo XMI.
+     * @param file una instancia de la clase File que contiene la ruta del
+     * archivo XMI.
      * @param isLookingForIds un boolean que especifica si se quiere obtener las
      * id o los nombres.
      * @return una lista de Strings que contiene todos los datos.

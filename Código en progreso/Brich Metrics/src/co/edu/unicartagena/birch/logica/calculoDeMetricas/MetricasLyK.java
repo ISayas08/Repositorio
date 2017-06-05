@@ -220,7 +220,7 @@ public final class MetricasLyK implements IMArtefactos {
                     claseAEvaluar.addNuewMethod(ms);
                 });
 
-        //Solicitamos la id de las clases de las cules hereda la clase a evluar.
+        //Solicitamos la id de las clases de las cules hereda la clase a evaluar.
         List<String> iDCPadres = Arrays.asList(cdr.
                 recopilarDatos(artifactId, path,
                         IRD.IDS_CLASES_PADRE, IRD.FAMILIA_LYK)

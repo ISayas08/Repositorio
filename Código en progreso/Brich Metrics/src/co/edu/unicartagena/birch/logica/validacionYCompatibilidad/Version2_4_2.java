@@ -163,7 +163,7 @@ public final class Version2_4_2 extends Version {
         //Ides clases heredadas por una clase especifica.
         this.sufijosArtefactos.put("MA Ides clases padre", "\"][1];\n"
                 + "declare function local:id-padres($clase)as xs:string{\n"
-                + "   		if(not(fn:exists($clase/generalization)))\n"
+                + "  if(not(fn:exists($clase/generalization)))\n"
                 + "    	then data(\"\")\n"
                 + "    	else \n"
                 + "		fn:string-join((data($clases[@xmi:id eq $clase/generalization/@general]/@xmi:id), local:id-padres($clases[@xmi:id eq $clase/generalization/@general])), \";\")\n"

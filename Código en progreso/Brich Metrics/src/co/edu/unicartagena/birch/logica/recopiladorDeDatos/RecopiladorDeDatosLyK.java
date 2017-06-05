@@ -256,20 +256,14 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
      */
     private String idsCeISobrescritas_LyK_7(String iDArtifact, String path) {
         try {
-            String clases = this.getResult(iDArtifact, path,
-                    IVC.SA_IDES_CLASES_PADRE);
-            String interfaces = this.getResult(iDArtifact, path,
-                    IVC.SA_IDES_INTERFACES_IMPLEMENTADAS);
+            String clases = this.idClasesPadre_LyK_12(iDArtifact, path);
+            String interfaces = this.idInterfacesImplementadas_LyK_13(iDArtifact, path);
 
             return interfaces.equals("")
                     ? clases
                     : (clases.equals("")
                     ? interfaces
                     : clases + ";" + interfaces);
-        } catch (XQException ex) {
-            Logger.getLogger(RecopiladorDeDatosMG.class.getName())
-                    .log(Level.SEVERE, null, ex);
-            return "-1";
         } catch (Throwable ex) {
             Logger.getLogger(RecopiladorDeDatosCyK.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -356,6 +350,51 @@ public final class RecopiladorDeDatosLyK implements IRArtefactos {
         try {
             return this.getResult(iDArtifact, path,
                     IVC.SA_DATOS_HERENCIA_CLASES);
+        } catch (XQException ex) {
+            Logger.getLogger(RecopiladorDeDatosMG.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            return "-1";
+        } catch (Throwable ex) {
+            Logger.getLogger(RecopiladorDeDatosCyK.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            return "-1";
+        }
+    }
+
+    /**
+     * Método que permite conocer las ids de las clases que son heredadas por
+     * una clase en concreto.
+     *
+     * @param iDArtifact Id de la clase en concreto.
+     * @param path La ruta del archivo XMI.
+     * @return un String con las id separadas por punto y coma.
+     */
+    private String idClasesPadre_LyK_12(String iDArtifact, String path) {
+        try {
+            return this.getResult(iDArtifact, path, IVC.SA_IDES_CLASES_PADRE);
+        } catch (XQException ex) {
+            Logger.getLogger(RecopiladorDeDatosMG.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            return "-1";
+        } catch (Throwable ex) {
+            Logger.getLogger(RecopiladorDeDatosCyK.class.getName())
+                    .log(Level.SEVERE, null, ex);
+            return "-1";
+        }
+    }
+
+    /**
+     * Método que permite conocer las ids de las interfaces que son
+     * implementadas por una clase en concreto.
+     *
+     * @param iDArtifact Id de la clase en concreto.
+     * @param path La ruta del archivo XMI.
+     * @return un String con las id separadas por punto y coma.
+     */
+    private String idInterfacesImplementadas_LyK_13(String iDArtifact, String path) {
+        try {
+            return this.getResult(iDArtifact, path,
+                    IVC.SA_IDES_INTERFACES_IMPLEMENTADAS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);

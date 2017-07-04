@@ -4,7 +4,6 @@ import co.edu.unicartagena.birch.persistencia.FPQuery;
 import co.edu.unicartagena.birch.persistencia.IFP;
 import co.edu.unicartagena.birch.persistencia.IQuery;
 import co.edu.unicartagena.birch.persistencia.SelectorDePersistencias;
-import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -150,7 +149,8 @@ public final class Validador implements IVC {
      */
     @Override
     public boolean verificarArtefacto(String nombre, String path, boolean isIdSearch) {
-        String sentencia = this.version.armarSentenciaArtefacto(nombre, path, "MA Verificar artefacto", isIdSearch);
+        String sentencia = this.version.armarSentenciaArtefacto(nombre, path, 
+                "MA Verificar artefacto", isIdSearch);
         String result = this.getResult(sentencia);
 
         return result.equals("true");
@@ -317,7 +317,7 @@ public final class Validador implements IVC {
             if (exceptions.isEmpty()) {
                 return true;
             } else {
-                exceptions.toString();
+                System.err.println(exceptions.toString());
                 return false;
             }
         } catch (SAXException | IOException ex) {

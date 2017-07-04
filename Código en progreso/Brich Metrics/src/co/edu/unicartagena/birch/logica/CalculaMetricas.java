@@ -205,7 +205,7 @@ public class CalculaMetricas implements ICalculaMetricas {
         //Se verifica que la id sea válida
         //y se obtiene la familia a la que pertenece.
         String familia = verificarId(id, true);
-        if (!familia.equals("False")) {
+        if (!familia.equals("False") && !familia.equals("NoCompatible")) {
             //En caso de que la id sea válida.
             //Se declaran el resto de variables.
             String result = "NA";
@@ -302,7 +302,7 @@ public class CalculaMetricas implements ICalculaMetricas {
 
         //Se verifica que la id sea válida.
         String familia = verificarId(id, false);
-        if (!familia.equals("False")) {
+        if (!familia.equals("False") && !familia.equals("NoCompatible")) {
             //En caso de que la id sea válida.
             //Se declaran el resto de variables.
             String result = "NA";

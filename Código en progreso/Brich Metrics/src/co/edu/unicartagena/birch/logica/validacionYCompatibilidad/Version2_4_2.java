@@ -174,7 +174,7 @@ public final class Version2_4_2 extends Version {
         this.sufijosArtefactos.put("MA Ides interfaces implementadas", "\"][1];\n"
                 + "declare variable $realizacion := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Realization\"];\n"
                 + "fn:string-join(data($clases[@xmi:id = $realizacion[@client = $claseAEvaluar/@xmi:id]/@supplier]/@xmi:id),\";\")");
-        
+
         //Atributos heredados.
         this.sufijosArtefactos.put("MA Atributos heredados", "\"][1];\n"
                 + "declare function local:metodos-heredados($clase as element(packagedElement)) as xs:integer{\n"
@@ -207,16 +207,12 @@ public final class Version2_4_2 extends Version {
 
         //Profundidad del arbol de herencias.
         this.sufijosArtefactos.put("MA DHT", "\"][1];\n"
-                + "\n"
-                + "declare function local:DIT($clase as element(packagedElement)) as xs:integer\n"
-                + "{\n"
-                + "  (:Si la clase no hereda de ninguna otra:)\n"
-                + "  if(not(fn:exists($clase/generalization))) then\n"
-                + "	0\n"
-                + "  else \n"
-                + "    1 + local:DIT($clases[@xmi:id eq $clase/generalization/@general])\n"
-                + "};\n"
-                + "\n"
+                + "declare function local:DIT($clase) as xs:integer {\n"
+                + "     if(not(fn:exists($clase/generalization))) then\n"
+                + "         0\n"
+                + "     else \n"
+                + "         1 + local:DIT($clases[@xmi:id = $clase/generalization/@general])\n"
+                + " };\n"
                 + "local:DIT($claseAEvaluar)");
 
         //Hijos inmediatos.
@@ -309,7 +305,7 @@ public final class Version2_4_2 extends Version {
         this.sufijosDiagrama.put("MS Get Ids", "\");\n"
                 + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
                 + "fn:string-join(data($clases/@xmi:id), \";\")");
-        
+
         //Obtener todas los nombres de los artefactos del diagrama.
         this.sufijosDiagrama.put("MS Get Names", "\");\n"
                 + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"

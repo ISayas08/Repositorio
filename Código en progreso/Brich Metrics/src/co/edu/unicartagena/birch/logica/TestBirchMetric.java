@@ -219,10 +219,15 @@ public class TestBirchMetric {
         String rutaArchivo3 = "C:\\Users\\Ismael\\Dropbox\\Tesis\\Resultados\\2.1\\JHotDraw\\Elementos_JHotDraw.xml";
         String rutaArchivo4 = "C:\\Users\\Ismael\\Dropbox\\Tesis\\Resultados\\2.1\\ICR\\ICR.xml";
 
+        String rutaArchivo5 = "C:\\Users\\Ismael\\Downloads\\Relaciones_2.4.2.xml";
+        String rutaArchivo6 = "C:\\Users\\Ismael\\\\Desktop\\multipleHerencia.xml";
+
         //calcularMetricasArtefactos(rutaArchivo2, true);
         //calcularMetricasArtefactos(rutaArchivo2, false);
-        //calcularMetricasSistema(rutaArchivo2);
-        //System.out.println(new CalculaMetricas().calcularMetricas(new CalculaMetricas().getArtifacId("Clase Madre", rutaArchivo1).get(0),rutaArchivo1).toString());
+        //calcularMetricasSistema(rutaArchivo5);
+        List<String> id = new CalculaMetricas().getArtifacId("ClassHija1", rutaArchivo6);
+        System.out.println(new CalculaMetricas().calcularMetrica(id.get(0), rutaArchivo6,
+                 ICalculaMetricas.DEPTH_OF_INHERITANCE_TREE));
     }
 
 }

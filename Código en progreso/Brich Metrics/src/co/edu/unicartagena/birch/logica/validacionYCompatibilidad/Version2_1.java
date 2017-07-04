@@ -208,16 +208,12 @@ public final class Version2_1 extends Version {
 
         //Profundidad del arbol de herencias.
         this.sufijosArtefactos.put("MA DHT", "\"][1];\n"
-                + "\n"
-                + "declare function local:DIT($clase as element(packagedElement)) as xs:integer\n"
-                + "{\n"
-                + "  (:Si la clase no hereda de ninguna otra:)\n"
-                + "  if(not(fn:exists($clase/generalization))) then\n"
-                + "	0\n"
-                + "  else \n"
-                + "    1 + local:DIT($clases[@xmi:id eq $clase/generalization/@general])\n"
-                + "};\n"
-                + "\n"
+                + "declare function local:DIT($clase) as xs:integer {\n"
+                + "     if(not(fn:exists($clase/generalization))) then\n"
+                + "         0\n"
+                + "     else \n"
+                + "         1 + local:DIT($clases[@xmi:id = $clase/generalization/@general])\n"
+                + " };\n"
                 + "local:DIT($claseAEvaluar)");
 
         //Hijos inmediatos.

@@ -8,8 +8,6 @@ import java.util.HashMap;
  * con la versión 2.4.2 o 2.4.1.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.5
- * @since 08/05/2017
  */
 public final class Version2_4_2 extends Version {
 
@@ -222,22 +220,21 @@ public final class Version2_4_2 extends Version {
 
         //Acoplamiento.
         this.sufijosArtefactos.put("MA Acoplamiento", "\"][1];\n"
-                + "\n"
-                + "declare variable $realizaciones := $doc//uml:Model//packagedElement[@xmi:type = \"uml:Realization\"];\n"
-                + "declare variable $dependencias := $doc//uml:Model//packagedElement[@xmi:type = \"uml:Dependency\"];\n"
-                + "\n"
-                + "(:Relaciones eferentes:)\n"
-                + "declare variable $conHerenciaE := count($claseAEvaluar//generalization);\n"
-                + "declare variable $conRealizacionE := count($realizaciones[@client eq $claseAEvaluar/@xmi:id]);\n"
-                + "declare variable $conDependenciaE := count($dependencias[@client eq $claseAEvaluar/@xmi:id]);\n"
-                + "declare variable $conAsociacionesE := count($claseAEvaluar/ownedAttribute[boolean(@association)]);\n"
+                + "declare variable $relacionesRDU := $doc//packagedElement[@xmi:type eq \"uml:Realization\" or @xmi:type eq \"uml:Dependency\" or @xmi:type eq \"uml:Usage\"];\n"
+                + "(:elaciones eferentes:)\n"
+                + "declare variable $conRDUE := $relacionesRDU[@client = $claseAEvaluar/@xmi:id];\n"
+                + "declare variable $conHerenciaE := $claseAEvaluar/generalization;\n"
+                + "declare variable $conAsociacionesE := $clases[ownedAttribute/type/@xmi:idref = $claseAEvaluar/@xmi:id];\n"
+                + "declare variable $conBindE := $claseAEvaluar/templateBinding;\n"
+                + "declare variable $conImportE := $claseAEvaluar/elementImport;\n"
                 + "(:Relaciones aferentes:)\n"
-                + "declare variable $conHerenciaA := count($clases[generalization/@general eq $claseAEvaluar/@xmi:id]);\n"
-                + "declare variable $conRealizacionA := count($realizaciones[@supplier eq $claseAEvaluar/@xmi:id]);\n"
-                + "declare variable $conDependenciaA := count($dependencias[@supplier eq $claseAEvaluar/@xmi:id]);\n"
-                + "declare variable $conAsociacionesA := count($clases[ownedAttribute/type/@xmi:idref = $claseAEvaluar/@xmi:id]);\n"
-                + "\n"
-                + " $conAsociacionesE + $conAsociacionesA + $conHerenciaE + $conRealizacionE + $conDependenciaE + $conHerenciaA + $conRealizacionA + $conDependenciaA");
+                + "declare variable $conRDUA := $relacionesRDU[@supplier eq $claseAEvaluar/@xmi:id];\n"
+                + "declare variable $conHerenciaA := $clases/generalization[@general eq $claseAEvaluar/@xmi:id];\n"
+                + "declare variable $conAsociacionesA := $claseAEvaluar/ownedAttribute[boolean(@association)];\n"
+                + "declare variable $conBindA := $clases/templateBinding[@boundElement eq $claseAEvaluar/@xmi:id];\n"
+                + "declare variable $conImportA := $clases/elementImport[@importedElement eq $claseAEvaluar/@xmi:id];\n"
+                + "count($conRDUE) + count($conHerenciaE) + count($conAsociacionesE) + count($conBindE) + count($conImportE) +\n"
+                + "count($conRDUA) + count($conHerenciaA) + count($conAsociacionesA) + count($conBindA) + count($conImportA)");
 
         //Datos herencia clase.
         this.sufijosArtefactos.put("MA Datos de herencia", "\"][1];\n"
@@ -327,13 +324,12 @@ public final class Version2_4_2 extends Version {
         //Número total de relaciones NH.
         this.sufijosDiagrama.put("MS Total relaciones noH", "\");\n"
                 + "declare variable $clases := $doc//uml:Model//packagedElement[@xmi:type eq \"uml:Class\" or @xmi:type eq \"uml:Interface\"];\n"
-                + "declare variable $dependencias := $doc//packagedElement[@xmi:type = \"uml:Dependency\"];\n"
+                + "declare variable $relacionesRDU := $doc//packagedElement[@xmi:type eq \"uml:Realization\" or @xmi:type eq \"uml:Dependency\" or @xmi:type eq \"uml:Usage\"];               \n"
                 + "declare variable $asociaciones := $clases/ownedAttribute[boolean(@association)];\n"
-                + "declare variable $realizaciones := $doc//packagedElement[@xmi:type = \"uml:Realization\"];\n"
-                + "declare variable $conDependencia := count($dependencias);\n"
-                + "declare variable $conAsociaciones := count($asociaciones);\n"
-                + "declare variable $conRealizaciones := count($realizaciones);\n"
-                + "$conAsociaciones + $conDependencia + $conRealizaciones");
+                + "declare variable $Bind := $clases/templateBinding;\n"
+                + "declare variable $Import := $clases/elementImport;\n"
+                + "\n"
+                + "count($relacionesRDU) + count($asociaciones) + count($Bind) + count($Import) ");
 
         //Número total de atributos privados.
         this.sufijosDiagrama.put("MS Total atributos privados", "\");\n"

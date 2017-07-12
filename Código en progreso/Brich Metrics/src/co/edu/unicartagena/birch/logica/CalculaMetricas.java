@@ -529,6 +529,10 @@ public class CalculaMetricas implements ICalculaMetricas {
             //Si el archivo es válido, recuperamos todos los nombres o ids.
             IRD ird = new ControlDeRecopilaciones();
             identifiers = ird.getAllIdentifier(path, isLookingForIds);
+        } else {
+            //En caso de que el archivo no sea válido.
+            //Se informa por consola.
+            System.out.println("Result: " + result);
         }
         return identifiers;
     }

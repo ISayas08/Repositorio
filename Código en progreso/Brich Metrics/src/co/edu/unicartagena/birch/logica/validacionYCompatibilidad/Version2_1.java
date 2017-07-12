@@ -162,10 +162,10 @@ public final class Version2_1 extends Version {
         //Ides clases heredadas por una clase especifica.
         this.sufijosArtefactos.put("MA Ides clases padre", "\"][1];\n"
                 + "declare function local:id-padres($clase)as xs:string{\n"
-                + "   		if(not(fn:exists($clase/generalization)))\n"
-                + "    	then data(\"\")\n"
-                + "    	else \n"
-                + "		fn:string-join((data($clases[@xmi:id eq $clase/generalization/@general]/@xmi:id), local:id-padres($clases[@xmi:id eq $clase/generalization/@general])), \";\")\n"
+                + "if(not(fn:exists($clase/generalization)))\n"
+                + "then data(\"\")\n"
+                + "else \n"
+                + "fn:string-join((data($clases[@xmi:id = $clase/generalization/@general]/@xmi:id), local:id-padres($clases[@xmi:id = $clase/generalization/@general])), \";\")\n"
                 + "};\n"
                 + "local:id-padres($claseAEvaluar)");
 
@@ -176,32 +176,27 @@ public final class Version2_1 extends Version {
 
         //Atributos heredados.
         this.sufijosArtefactos.put("MA Atributos heredados", "\"][1];\n"
-                + "declare function local:metodos-heredados($clase as element(packagedElement)) as xs:integer{\n"
+                + "declare function local:metodos-heredados($clase) as xs:integer{\n"
                 + "if(not(fn:exists($clase/generalization))) then\n"
-                + "0 else \n"
-                + "count($clases[@xmi:id eq $clase/generalization/@general]/ownedAttribute[not(@association)][@visibility eq \"public\" or not(@visibility) or @visibility eq \"protected\"]) \n"
-                + "+ local:metodos-heredados($clases[@xmi:id eq $clase/generalization/@general])\n"
+                + "0 else\n"
+                + "count($clases[@xmi:id = $clase/generalization/@general]/ownedAttribute[not(@association)][@visibility eq \"public\" or not(@visibility) or @visibility eq \"protected\"]) \n"
+                + "+ local:metodos-heredados($clases[@xmi:id = $clase/generalization/@general])\n"
                 + "};\n"
                 + "local:metodos-heredados($claseAEvaluar)");
 
         //Métodos heredados.
         this.sufijosArtefactos.put("MA Métodos heredados", "\"][1];\n"
-                + "\n"
-                + "declare function local:metodos-heredados($clase as element(packagedElement)) as xs:integer\n"
-                + "{\n"
-                + "(:Si la clase no hereda de ninguna otra:)\n"
-                + "if(not(fn:exists($clase/generalization))) then\n"
-                + "0\n"
-                + "else \n"
-                + "count($clases[@xmi:id eq $clase/generalization/@general]/ownedOperation[@visibility eq \"public\" or not(@visibility) or @visibility eq \"protected\"]) \n"
-                + "+ local:metodos-heredados($clases[@xmi:id eq $clase/generalization/@general])\n"
+                + "declare function local:metodos-heredados($clase) as xs:integer {\n"
+                + "    if(not(fn:exists($clase/generalization))) then\n"
+                + "       0\n"
+                + "    else\n"
+                + "         count($clases[@xmi:id = $clase/generalization/@general]/ownedOperation[@visibility eq \"public\" or not(@visibility) or @visibility eq \"protected\"]) \n"
+                + "          +  local:metodos-heredados($clases[@xmi:id = $clase/generalization/@general])\n"
                 + "};\n"
-                + "\n"
                 + "local:metodos-heredados($claseAEvaluar)");
 
         //Parámetros totales.
         this.sufijosArtefactos.put("MA Parámetros totales", "\"][1];\n"
-                + "\n"
                 + "count($claseAEvaluar/ownedOperation/ownedParameter[@name != \"return\"])");
 
         //Profundidad del arbol de herencias.
@@ -216,8 +211,7 @@ public final class Version2_1 extends Version {
 
         //Hijos inmediatos.
         this.sufijosArtefactos.put("MA Hijos inmediatos", "\"][1];\n"
-                + "\n"
-                + "count($clases[generalization/@general eq $claseAEvaluar/@xmi:id])");
+                + "count($clases/generalization[@general eq $claseAEvaluar/@xmi:id])");
 
         //Acoplamiento.
         this.sufijosArtefactos.put("MA Acoplamiento", "\"][1];\n"
@@ -239,17 +233,14 @@ public final class Version2_1 extends Version {
 
         //Datos herencia clase.
         this.sufijosArtefactos.put("MA Datos de herencia", "\"][1];\n"
-                + "\n"
                 + "data($claseAEvaluar/generalization/@general)");
 
         //Verificación de artefacto.
         this.sufijosArtefactos.put("MA Verificar artefacto", "\"][1];\n"
-                + "\n"
                 + "exists($claseAEvaluar)");
 
         //Get ids.
         this.sufijosArtefactos.put("MA Get id", "\"];\n"
-                + "\n"
                 + "fn:string-join(data($claseAEvaluar/@xmi:id), \";\")");
     }
 
@@ -320,10 +311,8 @@ public final class Version2_1 extends Version {
         //Número total de clusters.
         this.sufijosDiagrama.put("MS Total clusters", "\");\n"
                 + "declare variable $clases := $doc//packagedElement[@xmi:type eq \"uml:Class\"];\n"
-                + "for $clase in $clases\n"
-                + "let $clasesMadre := $clases[@xmi:id eq $clase/generalization/@general]\n"
-                + "where $clasesMadre[not(generalization)]\n"
-                + "return count($clasesMadre)");
+                + "declare variable $clasesMadre := $clases[@xmi:id = $clases/generalization/@general][not(generalization)];\n"
+                + "count($clasesMadre/@name)");
 
         //Número total de relaciones NH.
         this.sufijosDiagrama.put("MS Total relaciones noH", "\");\n"

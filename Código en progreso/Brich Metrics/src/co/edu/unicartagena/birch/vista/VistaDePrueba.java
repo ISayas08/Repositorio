@@ -1,5 +1,7 @@
-package co.edu.unicartagena.birch.logica;
+package co.edu.unicartagena.birch.vista;
 
+import co.edu.unicartagena.birch.logica.CalculaMetricas;
+import co.edu.unicartagena.birch.logica.ICalculaMetricas;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -7,35 +9,48 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author Ismael
+ * @author Ismael Sayas Arrieta
+ * @version 1.0
+ * @since 9/07/2017
  */
-public class TestBirchMetric {
+public class VistaDePrueba {
+    
+    private String state;
+    private String progress;
+    private String totalProgress;
 
-    public static void saveLog(String line, String path) {
-        BufferedWriter writer = null;
-        try {
-            File logFile = new File(path);
-            new File(logFile.getParent()).mkdirs();
+//==============================================================================
+//  Constructores y metodos de inicialización.
+//==============================================================================
+    /**
+     * Constructor por defecto.
+     */
+    public VistaDePrueba() {
 
-            writer = new BufferedWriter(new FileWriter(logFile, true));
-            writer.append(line);
-            writer.newLine();
-            System.out.println(line);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                writer.close();
-            } catch (IOException e) {
-            }
+    }
+
+//==============================================================================
+//  Métodos principales.
+//==============================================================================
+    public void abrirArchivo() {
+        JFileChooser fc = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("XMI", "xmi", "xml");
+        fc.setFileFilter(filter);
+
+        if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            File archivo = fc.getSelectedFile();
+            calcularMetricasArtefactos(archivo.getAbsolutePath(), true);
+            calcularMetricasArtefactos(archivo.getAbsolutePath(), false);
+            calcularMetricasSistema(archivo.getAbsolutePath());
         }
     }
 
-    public static void calcularMetricasArtefactos(String path, boolean isId) {
+    private void calcularMetricasArtefactos(String path, boolean isId) {
         ICalculaMetricas icm = new CalculaMetricas();
         String timeLog = new SimpleDateFormat("yyyy MM dd - HH mm ss")
                 .format(Calendar.getInstance().getTime());
@@ -48,72 +63,76 @@ public class TestBirchMetric {
 
         List<String> identificadores = icm.getAllIdentifier(path, isId);
 
-        line = "File: " + XMIFile.getName();
-        saveLog(line, outPutPath);
-        line = "Calculating artifact-level metrics...";
-        saveLog(line, outPutPath);
+        if (!identificadores.isEmpty()) {
 
-        for (int f = 0; f < ICalculaMetricas.NUMERO_DE_MA_CYK; f++) {
-            line = "==================================================";
+            line = "File: " + XMIFile.getName();
             saveLog(line, outPutPath);
-            line = getMetricName("CyK_" + f);
+            line = "Calculating artifact-level metrics...";
             saveLog(line, outPutPath);
-            for (int c = 0; c < identificadores.size(); c++) {
-                if (isId) {
-                    String result = icm.calcularMetrica(
-                            identificadores.get(c),
-                            path,
-                            "CyK_" + f);
-                    line = identificadores.get(c) + ":\t\t " + result;
-                    saveLog(line, outPutPath);
-                } else {
-                    List<String> ids = icm.getArtifacId(identificadores.get(c), path);
-                    for (String id : ids) {
+
+            for (int f = 0; f < ICalculaMetricas.NUMERO_DE_MA_CYK; f++) {
+                line = "==================================================";
+                saveLog(line, outPutPath);
+                line = getMetricName("CyK_" + f);
+                saveLog(line, outPutPath);
+                for (int c = 0; c < identificadores.size(); c++) {
+                    if (isId) {
                         String result = icm.calcularMetrica(
-                                id,
+                                identificadores.get(c),
                                 path,
                                 "CyK_" + f);
                         line = identificadores.get(c) + ":\t\t " + result;
                         saveLog(line, outPutPath);
+                    } else {
+                        List<String> ids = icm.getArtifacId(identificadores.get(c), path);
+                        for (String id : ids) {
+                            String result = icm.calcularMetrica(
+                                    id,
+                                    path,
+                                    "CyK_" + f);
+                            line = identificadores.get(c) + ":\t\t " + result;
+                            saveLog(line, outPutPath);
+                        }
                     }
+
                 }
+
             }
 
-        }
-
-        for (int f = 0; f < ICalculaMetricas.NUMERO_DE_MA_LYK; f++) {
-            line = "==================================================";
-            saveLog(line, outPutPath);
-            line = getMetricName("LyK_" + f);
-            saveLog(line, outPutPath);
-            for (int c = 0; c < identificadores.size(); c++) {
-                if (isId) {
-                    String result = icm.calcularMetrica(
-                            identificadores.get(c),
-                            path,
-                            "LyK_" + f);
-                    line = identificadores.get(c) + ":\t\t " + result;
-                    saveLog(line, outPutPath);
-                } else {
-                    List<String> ids = icm.getArtifacId(identificadores.get(c), path);
-                    for (String id : ids) {
+            for (int f = 0; f < ICalculaMetricas.NUMERO_DE_MA_LYK; f++) {
+                line = "==================================================";
+                saveLog(line, outPutPath);
+                line = getMetricName("LyK_" + f);
+                saveLog(line, outPutPath);
+                for (int c = 0; c < identificadores.size(); c++) {
+                    if (isId) {
                         String result = icm.calcularMetrica(
-                                id,
+                                identificadores.get(c),
                                 path,
                                 "LyK_" + f);
                         line = identificadores.get(c) + ":\t\t " + result;
                         saveLog(line, outPutPath);
+                    } else {
+                        List<String> ids = icm.getArtifacId(identificadores.get(c), path);
+                        for (String id : ids) {
+                            String result = icm.calcularMetrica(
+                                    id,
+                                    path,
+                                    "LyK_" + f);
+                            line = identificadores.get(c) + ":\t\t " + result;
+                            saveLog(line, outPutPath);
+                        }
                     }
                 }
             }
+            line = "==================================================";
+            saveLog(line, outPutPath);
+            line = "Process completed";
+            saveLog(line, outPutPath);
         }
-        line = "==================================================";
-        saveLog(line, outPutPath);
-        line = "Process completed";
-        saveLog(line, outPutPath);
     }
 
-    public static void calcularMetricasSistema(String path) {
+    private void calcularMetricasSistema(String path) {
         ICalculaMetricas icm = new CalculaMetricas();
         String timeLog = new SimpleDateFormat("yyyy MM dd - HH mm ss")
                 .format(Calendar.getInstance().getTime());
@@ -144,7 +163,31 @@ public class TestBirchMetric {
         saveLog(line, outPutPath);
     }
 
-    private static String getMetricName(String id) {
+//==============================================================================
+//  Métodos secundarios.
+//==============================================================================
+    public static void saveLog(String line, String path) {
+        BufferedWriter writer = null;
+        try {
+            File logFile = new File(path);
+            new File(logFile.getParent()).mkdirs();
+
+            writer = new BufferedWriter(new FileWriter(logFile, true));
+            writer.append(line);
+            writer.newLine();
+            System.out.println(line);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                writer.close();
+            } catch (IOException e) {
+            }
+        }
+    }
+
+    private String getMetricName(String id) {
         switch (id) {
             case ICalculaMetricas.DEPTH_OF_INHERITANCE_TREE:
                 return "Depth of inheritance tree";
@@ -171,7 +214,7 @@ public class TestBirchMetric {
             case ICalculaMetricas.NUMBER_OF_METHODS_OVERRIDDEN:
                 return "Number of methods overridden";
             case ICalculaMetricas.NUMBER_OF_NEW_METHODS:
-                return "Number of new mrthods";
+                return "Number of new methods";
             case ICalculaMetricas.AVERAGE_PARAMETER_PER_METHOD:
                 return "Average parameter per method";
             case ICalculaMetricas.SPECIALIZATION_INDEX:
@@ -213,21 +256,7 @@ public class TestBirchMetric {
         }
     }
 
-    public static void main(String[] args) {
-        String rutaArchivo1 = "C:\\Users\\Ismael\\Dropbox\\Tesis\\Resultados\\2.4\\Archivo de prueba\\EA_XMI_2_4_2__UML_2_4_1.xml";
-        String rutaArchivo2 = "C:\\Users\\Ismael\\Dropbox\\Tesis\\Resultados\\2.1\\ArchivoPrueba\\Archivo2.1.xml";
-        String rutaArchivo3 = "C:\\Users\\Ismael\\Dropbox\\Tesis\\Resultados\\2.1\\JHotDraw\\Elementos_JHotDraw.xml";
-        String rutaArchivo4 = "C:\\Users\\Ismael\\Dropbox\\Tesis\\Resultados\\2.1\\ICR\\ICR.xml";
-
-        String rutaArchivo5 = "C:\\Users\\Ismael\\Downloads\\Relaciones_2.4.2.xml";
-        String rutaArchivo6 = "C:\\Users\\Ismael\\\\Desktop\\multipleHerencia.xml";
-
-        //calcularMetricasArtefactos(rutaArchivo2, true);
-        //calcularMetricasArtefactos(rutaArchivo2, false);
-        //calcularMetricasSistema(rutaArchivo5);
-        List<String> id = new CalculaMetricas().getArtifacId("ClassHija1", rutaArchivo6);
-        System.out.println(new CalculaMetricas().calcularMetrica(id.get(0), rutaArchivo6,
-                 ICalculaMetricas.DEPTH_OF_INHERITANCE_TREE));
-    }
-
+//==============================================================================
+//  Getters and Setters.
+//==============================================================================
 }

@@ -203,7 +203,7 @@ public final class Validador implements IVC {
      * @return true en caso de que el archivo esté ien formado.
      */
     private boolean isArchivoBienFormado(String path) {
-        String sentencia = "doc-available(\"" + path + "\")";
+        String sentencia = "doc-available('" + path + "')";
         return this.getResult(sentencia).equals("true");
     }
 

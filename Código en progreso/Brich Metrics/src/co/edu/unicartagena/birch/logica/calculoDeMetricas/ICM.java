@@ -35,6 +35,7 @@ public interface ICM {
     public static final String NUMBER_OF_NEW_METHOD = "LyK_8";
     public static final String AVERAGE_PARAMETER_PER_METHOD = "LyK_9";
     public static final String SPECIALIZATION_INDEX = "LyK_10";
+    public static final String NUMBER_OF_METHOD_OVERRIDDEN_NO_REALIZATION = "LyK_11";
 
     //Métricas para la familia MG.
     public static final String NUMBER_OF_CLASSES = "MG_0";

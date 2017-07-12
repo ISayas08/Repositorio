@@ -223,7 +223,7 @@ public final class MetricasLyK implements IMArtefactos {
         //Solicitamos la id de las clases de las cules hereda la clase a evaluar.
         List<String> iDCPadres = Arrays.asList(cdr.
                 recopilarDatos(artifactId, path,
-                        IRD.IDS_CLASES_PADRE, IRD.FAMILIA_LYK)
+                        IRD.IDS_CLASES_E_INTEFACES_SOBRESCRITAS, IRD.FAMILIA_LYK)
                 .split(";"));
 
         if (iDCPadres.get(0).equals("-1")) {
@@ -338,6 +338,68 @@ public final class MetricasLyK implements IMArtefactos {
         return NM > 0 //Se valida la división or cero.
                 ? Double.toString(((double) NMO * (double) DIT) / (double) NM)
                 : "0";
+    }
+    
+    private String nMethodOverriddenNoR_LyK_11(String artifactId, String path) {
+        IRD cdr = new ControlDeRecopilaciones();
+        List<Artefacto> clasesPadres = new ArrayList<>();
+        Artefacto claseAEvaluar = new Artefacto(artifactId);
+
+        //Llenando los datos de la clase a evaluar.
+        //Solicitamos los nombres de los métodos de la clase a evaluar.
+        Arrays.asList(cdr.recopilarDatos(artifactId, path,
+                IRD.DATOS_METODOS_CLASE, IRD.FAMILIA_LYK)
+                .split(";"))
+                .stream()
+                .forEach(ms -> {
+                    claseAEvaluar.addNuewMethod(ms);
+                });
+
+        //Solicitamos la id de las clases de las cules hereda la clase a evaluar.
+        List<String> iDCPadres = Arrays.asList(cdr.
+                recopilarDatos(artifactId, path,
+                        IRD.IDS_CLASES_PADRE, IRD.FAMILIA_LYK)
+                .split(";"));
+
+        if (iDCPadres.get(0).equals("-1")) {
+            //Si la clase no tiene padres entonces no tiene métodos sobrescritos.
+            return "0";
+        } else {
+            //Se recopilan los datos de cada clase padre y se almacenan en 
+            //objetos tipo Artefacto, que son añadidos a la lista de clases padres.
+            iDCPadres.stream().forEach(iDCP -> {
+                Artefacto a = new Artefacto(iDCP);
+                Arrays.asList(cdr
+                        .recopilarDatos(iDCP, path,
+                                IRD.DATOS_METODOS_CLASE, IRD.FAMILIA_LYK)
+                        .split(";"))
+                        .stream()
+                        .forEach(ms -> {
+                            a.addNuewMethod(ms);
+                        });
+
+                clasesPadres.add(a);
+            });
+
+            //Creamos la pila de métodos coincidentes para no repetir métodos.
+            List<Metodo> pilaMetodosCoincidentes = new ArrayList<>();
+
+            //Se comparan método a método cada clase padre con la clase a evaluar
+            //para encontrar métodos coincidentes.
+            clasesPadres.stream().forEach((clasesPadre) -> {
+                for (int f = 0; f < clasesPadre.getMetodos().size(); f++) {
+                    for (int c = 0; c < claseAEvaluar.getMetodos().size(); c++) {
+                        if (clasesPadre.getMetodos().get(f).comparar(claseAEvaluar.getMetodos().get(c))) {
+                            if (!pilaMetodosCoincidentes.contains(claseAEvaluar.getMetodos().get(c))) {
+                                pilaMetodosCoincidentes.add(claseAEvaluar.getMetodos().get(c));
+                            }
+                        }
+                    }
+                }
+            });
+
+            return Integer.toString(pilaMetodosCoincidentes.size());
+        }
     }
 
 //==============================================================================

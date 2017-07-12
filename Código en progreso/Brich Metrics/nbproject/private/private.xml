@@ -3,8 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Ismael/Dropbox/Tesis/Repositorio/Código%20en%20progreso/Brich%20Metrics/src/co/edu/unicartagena/birch/vista/TestBirchMetric.java</file>
+            <file>file:/C:/Users/Ismael/Dropbox/Tesis/Repositorio/Código%20en%20progreso/Brich%20Metrics/src/co/edu/unicartagena/birch/vista/VistaDePrueba.java</file>
             <file>file:/C:/Users/Ismael/Dropbox/Tesis/Repositorio/Código%20en%20progreso/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/validacionYCompatibilidad/Version2_1.java</file>
-            <file>file:/C:/Users/Ismael/Dropbox/Tesis/Repositorio/Código%20en%20progreso/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/validacionYCompatibilidad/Version2_4_2.java</file>
+            <file>file:/C:/Users/Ismael/Dropbox/Tesis/Repositorio/Código%20en%20progreso/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/recopiladorDeDatos/RecopiladorDeDatosLyK.java</file>
+            <file>file:/C:/Users/Ismael/Dropbox/Tesis/Repositorio/Código%20en%20progreso/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/calculoDeMetricas/MetricasLyK.java</file>
+            <file>file:/C:/Users/Ismael/Dropbox/Tesis/Repositorio/Código%20en%20progreso/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/recopiladorDeDatos/IRD.java</file>
+            <file>file:/C:/Users/Ismael/Dropbox/Tesis/Repositorio/Código%20en%20progreso/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/calculoDeMetricas/ICM.java</file>
+            <file>file:/C:/Users/Ismael/Dropbox/Tesis/Repositorio/Código%20en%20progreso/Brich%20Metrics/src/co/edu/unicartagena/birch/logica/calculoDeMetricas/MetricasMOOD.java</file>
         </group>
     </open-files>
 </project-private>

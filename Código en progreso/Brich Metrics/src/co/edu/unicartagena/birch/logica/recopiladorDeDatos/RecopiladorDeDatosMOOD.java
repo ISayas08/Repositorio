@@ -112,10 +112,8 @@ public class RecopiladorDeDatosMOOD implements IRGenerales {
      */
     private String totalClusters_MOOD_1(String path) {
         try {
-            return "" + Arrays.asList(this.getResult(path,
-                    IVC.SG_CONTAR_N_TOTAL_CLUSTERS)
-                    .split(";"))
-                    .stream().count();
+            return "" + this.getResult(path,
+                    IVC.SG_CONTAR_N_TOTAL_CLUSTERS);
         } catch (XQException ex) {
             Logger.getLogger(RecopiladorDeDatosMG.class.getName())
                     .log(Level.SEVERE, null, ex);

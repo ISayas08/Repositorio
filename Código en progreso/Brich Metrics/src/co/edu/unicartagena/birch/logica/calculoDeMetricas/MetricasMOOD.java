@@ -250,7 +250,7 @@ public class MetricasMOOD implements IMGenerales {
             int mO = (int) ccm.calcularMetricasArtefacto(
                     artefacto.getId(),
                     path,
-                    ICM.NUMBER_OF_METHOD_OVERRIDDEN,
+                    ICM.NUMBER_OF_METHOD_OVERRIDDEN_NO_REALIZATION,
                     ICM.FAMILIA_LYK);
             int mAñadidos = (int) ccm.calcularMetricasArtefacto(
                     artefacto.getId(),

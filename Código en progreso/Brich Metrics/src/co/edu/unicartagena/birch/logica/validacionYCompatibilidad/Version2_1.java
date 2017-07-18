@@ -148,16 +148,14 @@ public final class Version2_1 extends Version {
 
         //Datos de los métodos de una clase especifica.
         this.sufijosArtefactos.put("MA Datos métodos", "\"][1];\n"
-                + "\n"
                 + "declare function local:parametros($metodo as element())as xs:string{\n"
-                + "	fn:string-join($metodo/ownedParameter[not(fn:exists(@direction))]/@type, \"#\")\n"
+                + "	fn:string-join($metodo/ownedParameter[not(fn:exists(@direction)) or @direction != \"return\"]/@type, \"#\")\n"
                 + "};\n"
-                + "\n"
                 + "for $metodo in $claseAEvaluar/ownedOperation\n"
-                + "     let $tipoRetorno := data($metodo/ownedParameter[fn:exists(@direction)]/@type)\n"
-                + "	 let $nombreMetodo := $metodo/@name\n"
-                + "	 let $parametros := local:parametros($metodo)\n"
-                + "	 return fn:string-join(($tipoRetorno, $nombreMetodo, $parametros), \"%\")");
+                + "     let $tipoRetorno := data($metodo/ownedParameter[fn:exists(@direction) and @direction = \"return\"]/@type)\n"
+                + "     let $nombreMetodo := $metodo/@name\n"
+                + "     let $parametros := local:parametros($metodo)\n"
+                + "     return fn:string-join(($tipoRetorno, $nombreMetodo, $parametros), \"%\")");
 
         //Ides clases heredadas por una clase especifica.
         this.sufijosArtefactos.put("MA Ides clases padre", "\"][1];\n"
@@ -178,8 +176,10 @@ public final class Version2_1 extends Version {
         this.sufijosArtefactos.put("MA Atributos heredados", "\"][1];\n"
                 + "declare function local:metodos-heredados($clase) as xs:integer{\n"
                 + "if(not(fn:exists($clase/generalization))) then\n"
-                + "0 else\n"
+                + "0 \n"
+                + "else\n"
                 + "count($clases[@xmi:id = $clase/generalization/@general]/ownedAttribute[not(@association)][@visibility eq \"public\" or not(@visibility) or @visibility eq \"protected\"]) \n"
+                + "+ count($clases[@xmi:id = $clase/generalization/@general and ../@xmi:id = $clase/../@xmi:id]/ownedAttribute[not(@association)][@visibility eq \"package\"]) \n"
                 + "+ local:metodos-heredados($clases[@xmi:id = $clase/generalization/@general])\n"
                 + "};\n"
                 + "local:metodos-heredados($claseAEvaluar)");
@@ -187,11 +187,12 @@ public final class Version2_1 extends Version {
         //Métodos heredados.
         this.sufijosArtefactos.put("MA Métodos heredados", "\"][1];\n"
                 + "declare function local:metodos-heredados($clase) as xs:integer {\n"
-                + "    if(not(fn:exists($clase/generalization))) then\n"
-                + "       0\n"
-                + "    else\n"
-                + "         count($clases[@xmi:id = $clase/generalization/@general]/ownedOperation[@visibility eq \"public\" or not(@visibility) or @visibility eq \"protected\"]) \n"
-                + "          +  local:metodos-heredados($clases[@xmi:id = $clase/generalization/@general])\n"
+                + "if(not(fn:exists($clase/generalization))) then\n"
+                + "0\n"
+                + "else\n"
+                + "count($clases[@xmi:id = $clase/generalization/@general]/ownedOperation[@visibility eq \"public\" or not(@visibility) or @visibility eq \"protected\"]) \n"
+                + "+ count($clases[@xmi:id = $clase/generalization/@general and ../@xmi:id = $clase/../@xmi:id]/ownedOperation[@visibility eq \"package\"]) \n"
+                + "+  local:metodos-heredados($clases[@xmi:id = $clase/generalization/@general])\n"
                 + "};\n"
                 + "local:metodos-heredados($claseAEvaluar)");
 

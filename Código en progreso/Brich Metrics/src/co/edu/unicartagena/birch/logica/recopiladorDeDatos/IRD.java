@@ -46,7 +46,7 @@ public interface IRD {
     public static final String TOTAL_ATRIBUTOS_PUBLICOS = "MG_5";
     public static final String TOTAL_METODOS = "MG_6";
     public static final String TOTAL_METODOS_PUBLICOS = "MG_7";
-    public static final String IDES_CLASES = "MG_8";
+    public static final String IDES_ARTEFACTOS = "MG_8";
     public static final String NOMBRES_CLASES = "MG_9";
     //Ids para la recopilación de la familia de métricas MOOD.
     public static final String TOTAL_CLASES_HIJAS = "MOOD_0";

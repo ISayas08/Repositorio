@@ -64,7 +64,8 @@ public final class ControlDeRecopilaciones implements IRD {
      * @return un String que contiene el dato solicitado.
      */
     @Override
-    public String recopilarDatos(String nombreArtefacto, String ruta, String id, String familia) {
+    public String recopilarDatos(String nombreArtefacto, String ruta, 
+            String id, String familia) {
         int tipo = familia.equals(IRD.FAMILIA_CYK)
                 ? FactoriaDeRecopiladores.RECOPILADOR_CYK
                 : FactoriaDeRecopiladores.RECOPILADOR_LYK;
@@ -93,7 +94,8 @@ public final class ControlDeRecopilaciones implements IRD {
      * @return un String que contiene el dato solicitado.
      */
     @Override
-    public String recopilarDatos(String idArtifact, File file, String id, String familia) {
+    public String recopilarDatos(String idArtifact, File file, String id, 
+            String familia) {
         return this.recopilarDatos(
                 idArtifact,
                 file.getAbsolutePath(),
@@ -188,7 +190,7 @@ public final class ControlDeRecopilaciones implements IRD {
     public List<String> getAllIdentifier(String path, boolean isLookingForIds) {
         try {
             String identifiers = isLookingForIds
-                    ? this.recopilarDatos(path, IRD.IDES_CLASES, FAMILIA_MG)
+                    ? this.recopilarDatos(path, IRD.IDES_ARTEFACTOS, FAMILIA_MG)
                     : this.recopilarDatos(path, IRD.NOMBRES_CLASES, FAMILIA_MG);
 
             return Arrays.asList(identifiers.split(";"));

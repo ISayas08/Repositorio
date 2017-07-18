@@ -47,6 +47,9 @@ public class VistaDePrueba {
             calcularMetricasArtefactos(archivo.getAbsolutePath(), true);
             calcularMetricasArtefactos(archivo.getAbsolutePath(), false);
             calcularMetricasSistema(archivo.getAbsolutePath());
+            /*System.err.println(new CalculaMetricas().calcularMetrica(
+                    archivo.getAbsolutePath(),
+                    ICalculaMetricas.POLYMORPHISM_FACTOR));*/
         }
     }
 

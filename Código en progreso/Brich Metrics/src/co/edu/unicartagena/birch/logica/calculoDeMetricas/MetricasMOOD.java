@@ -116,7 +116,8 @@ public class MetricasMOOD implements IMGenerales {
         IRD cdr = new ControlDeRecopilaciones();
 
         int nAPrivadosD = Integer.parseInt(cdr.
-                recopilarDatos(path, IRD.TOTAL_ATRIBUTOS_PRIVADOS, IRD.FAMILIA_MOOD));
+                recopilarDatos(path, IRD.TOTAL_ATRIBUTOS_PRIVADOS,
+                        IRD.FAMILIA_MOOD));
         int nAtributosD = Integer.parseInt(cdr.
                 recopilarDatos(path, IRD.TOTAL_ATRIBUTOS, IRD.FAMILIA_MG));
 
@@ -136,12 +137,12 @@ public class MetricasMOOD implements IMGenerales {
     private String methodInheritanceFactor_MOOD_2(String path) {
         IRD cdr = new ControlDeRecopilaciones();
 
-        //Se solicitan todas las ides de las clases del diagrama y se almacenan
+        //Se solicitan todas las ides de los artefactos del diagrama y se almacenan
         //en un arreglo. dado que los datos vienen unidos en un mismo string,
         //hay que separarlos (el elemento que une un string y otro es el ";").
         int sumatoriaMH = 0;
-        sumatoriaMH = Arrays.asList(cdr.recopilarDatos(
-                path, IRD.IDES_CLASES, IRD.FAMILIA_MG).split(";"))
+        sumatoriaMH = Arrays.asList(cdr.recopilarDatos(path, IRD.IDES_ARTEFACTOS,
+                IRD.FAMILIA_MG).split(";"))
                 .stream() //Se recorre el arreglo con el método stream()
                 //Se transforman los datos usando el método map() al resuldado
                 //obtenido de calcular los métodos heredados para cada id,
@@ -178,8 +179,8 @@ public class MetricasMOOD implements IMGenerales {
         //en un arreglo. dado que los datos vienen unidos en un mismo string,
         //hay que separarlos (el elemento que une un string y otro es el ";").
         int sumatoriaAH = 0;
-        sumatoriaAH = Arrays.asList(cdr.recopilarDatos(
-                path, IRD.IDES_CLASES, IRD.FAMILIA_MG).split(";"))
+        sumatoriaAH = Arrays.asList(cdr.recopilarDatos(path, IRD.IDES_ARTEFACTOS,
+                IRD.FAMILIA_MG).split(";"))
                 .stream() //Se recorre el arreglo con el método stream()
                 //Se transforman los datos, usando el método map(), al resuldado
                 //obtenido de calcular los atributos heredados para cada id,
@@ -214,8 +215,8 @@ public class MetricasMOOD implements IMGenerales {
         List<Artefacto> artefactos = new ArrayList<>();
 
         //1. Se solicitan todas las ides de las clases del diagrama.
-        Arrays.asList(cdr.recopilarDatos(
-                path, IRD.IDES_CLASES, IRD.FAMILIA_MG).split(";"))
+        Arrays.asList(cdr.recopilarDatos(path, IRD.IDES_ARTEFACTOS,
+                IRD.FAMILIA_MG).split(";"))
                 .stream()
                 //Con cada id se crea un artefacto.
                 .forEach(id -> {
@@ -278,9 +279,15 @@ public class MetricasMOOD implements IMGenerales {
      */
     private int hijosTotales(Artefacto arfAEvaluar, List<Artefacto> artefactos) {
         //Buscamos las claes que son inmediatamente hijas del atefacto a evaluar.
-        List<Artefacto> hijosInmediatos = artefactos.stream()
-                .filter(a -> a.getIdPadre().equals(arfAEvaluar.getId()))
-                .collect(Collectors.toList());
+        List<Artefacto> hijosInmediatos = new ArrayList<>();
+        int f, c;
+        for (f = 0; f < artefactos.size(); f++) {
+            for (c = 0; c < artefactos.get(f).getIdPadre().size(); c++) {
+                if (artefactos.get(f).getIdPadre().get(c).equals(arfAEvaluar.getId())) {
+                    hijosInmediatos.add(artefactos.get(f));
+                }
+            }
+        }
 
         //Contamos los hijos inmediatos de la clase a evaluar.
         int con = hijosInmediatos.size();

@@ -1,6 +1,7 @@
 package co.edu.unicartagena.birch.logica.calculoDeMetricas;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
 public class Artefacto {
 
     private String id;
-    private String idPadre;
+    private List<String> idPadre;
     private List<Metodo> metodos;
 
 //==============================================================================
@@ -30,7 +31,7 @@ public class Artefacto {
      */
     public Artefacto(String id) {
         this.id = id;
-        this.idPadre = "NA";
+        this.idPadre = new ArrayList<>();
         this.metodos = new ArrayList<>();
     }
 
@@ -78,12 +79,12 @@ public class Artefacto {
         this.id = id;
     }
 
-    public String getIdPadre() {
+    public List<String> getIdPadre() {
         return idPadre;
     }
 
     public void setIdPadre(String idPadre) {
-        this.idPadre = idPadre;
+        this.idPadre = Arrays.asList(idPadre.split(";"));
     }
 
 }

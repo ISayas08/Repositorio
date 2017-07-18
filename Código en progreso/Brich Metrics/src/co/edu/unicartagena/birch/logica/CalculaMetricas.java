@@ -233,7 +233,7 @@ public class CalculaMetricas implements ICalculaMetricas {
                 } else {
                     //Si el artefacto no es válido.
                     //Se informa por consola.
-                    System.out.println("Result: The artifact called \""
+                    System.out.println("Result: The artifact with the id \""
                             + artifactId + "\" is missing.");
                 }
             } else {

@@ -661,7 +661,7 @@ public class ResultadosArtefacto implements IResultado {
 
         if (Locale.getDefault().getDisplayLanguage().equals("español")) {
             return "\tMÉTRICAS ARTEFACTO.\n\n"
-                    + "Nombre del artefacto: " + artifactId + ".\n\n"
+                    + "Id del artefacto: " + artifactId + ".\n\n"
                     + "Métricas CyK.\n\n"
                     + "Profundidad del árbol de herencias: "
                     + depthOfInheritanceTree + ".\n"
@@ -693,7 +693,7 @@ public class ResultadosArtefacto implements IResultado {
                     + df.format(specializationIndex) + ".\n";
         } else {
             return "\tMetrics Artifact.\n\n"
-                    + "Name Artifact: " + artifactId + ".\n\n"
+                    + "Artifact Id: " + artifactId + ".\n\n"
                     + "CyK Metrics.\n\n"
                     + "Depth of inheritance tree: "
                     + depthOfInheritanceTree + ".\n"

@@ -187,27 +187,27 @@ public class ResultadosDiagrama implements IResultado {
                 datos.put("Number of Packages", nPaquetesD);
                 datos.put("Número de paquetes", nPaquetesD);
                 datos.put(IResultado.N_PACKAGE_D, nPaquetesD);
-                datos.put("Average Methods per Class",
+                datos.put("Average Methods per Artifact",
                         promedioMetodosClase);
-                datos.put("Promedio de métodos por clases",
+                datos.put("Promedio de métodos por artefacto",
                         promedioMetodosClase);
                 datos.put(IResultado.AVERAGE_METHODS_CLASS,
                         promedioMetodosClase);
-                datos.put("Average Public Methods per Class",
+                datos.put("Average Public Methods per Artifact",
                         promedioMetodosPClase);
-                datos.put("Promedio de métodos públicos por clases",
+                datos.put("Promedio de métodos públicos por artefacto",
                         promedioMetodosPClase);
                 datos.put(IResultado.AVERAGE_PUBLIC_METHODS_CLASS,
                         promedioMetodosPClase);
-                datos.put("Average Attributes per Class",
+                datos.put("Average Attributes per Artifact",
                         promedioAtributosClase);
-                datos.put("Promedio de atributos por clases",
+                datos.put("Promedio de atributos por artefacto",
                         promedioAtributosClase);
                 datos.put(IResultado.AVERAGE_ATTRIBUTES_CLASS,
                         promedioAtributosClase);
-                datos.put("Average Public Attributes per Class",
+                datos.put("Average Public Attributes per Artifact",
                         promedioAtributosPClase);
-                datos.put("Promedio de atributos públicos por clases",
+                datos.put("Promedio de atributos públicos por artefacto",
                         promedioAtributosPClase);
                 datos.put(IResultado.AVERAGE_PUBLIC_ATTRIBUTE_CLASS,
                         promedioAtributosPClase);
@@ -262,26 +262,26 @@ public class ResultadosDiagrama implements IResultado {
                 datos.put(IResultado.N_PACKAGE_D, nPaquetesD);
                 break;
             case IResultado.DECIMALS_ONLY:
-                datos.put("Average Methods per Class", promedioMetodosClase);
-                datos.put("Promedio de métodos por clases",
+                datos.put("Average Methods per Artifact", promedioMetodosClase);
+                datos.put("Promedio de métodos por artefacto",
                         promedioMetodosClase);
                 datos.put(IResultado.AVERAGE_METHODS_CLASS,
                         promedioMetodosClase);
-                datos.put("Average Public Methods per Class",
+                datos.put("Average Public Methods per Artifact",
                         promedioMetodosPClase);
-                datos.put("Promedio de métodos públicos por clases",
+                datos.put("Promedio de métodos públicos por artefacto",
                         promedioMetodosPClase);
                 datos.put(IResultado.AVERAGE_PUBLIC_METHODS_CLASS,
                         promedioMetodosPClase);
-                datos.put("Average Attributes per Class",
+                datos.put("Average Attributes per Artifact",
                         promedioAtributosClase);
-                datos.put("Promedio de atributos por clases",
+                datos.put("Promedio de atributos por artefacto",
                         promedioAtributosClase);
                 datos.put(IResultado.AVERAGE_ATTRIBUTES_CLASS,
                         promedioAtributosClase);
-                datos.put("Average Public Attributes per Class",
+                datos.put("Average Public Attributes per Artifact",
                         promedioAtributosPClase);
-                datos.put("Promedio de atributos públicos por clases",
+                datos.put("Promedio de atributos públicos por artefacto",
                         promedioAtributosPClase);
                 datos.put(IResultado.AVERAGE_PUBLIC_ATTRIBUTE_CLASS,
                         promedioAtributosPClase);
@@ -332,26 +332,26 @@ public class ResultadosDiagrama implements IResultado {
                 datos.put("Number of Packages", nPaquetesD);
                 datos.put("Número de paquetes", nPaquetesD);
                 datos.put(IResultado.N_PACKAGE_D, nPaquetesD);
-                datos.put("Average Methods per Class", promedioMetodosClase);
-                datos.put("Promedio de métodos por clases",
+                datos.put("Average Methods per Artifact", promedioMetodosClase);
+                datos.put("Promedio de métodos por artefacto",
                         promedioMetodosClase);
                 datos.put(IResultado.AVERAGE_METHODS_CLASS,
                         promedioMetodosClase);
-                datos.put("Average Public Methods per Class",
+                datos.put("Average Public Methods per Artifact",
                         promedioMetodosPClase);
-                datos.put("Promedio de métodos públicos por clases",
+                datos.put("Promedio de métodos públicos por artefacto",
                         promedioMetodosPClase);
                 datos.put(IResultado.AVERAGE_PUBLIC_METHODS_CLASS,
                         promedioMetodosPClase);
-                datos.put("Average Attributes per Class",
+                datos.put("Average Attributes per Artifact",
                         promedioAtributosClase);
-                datos.put("Promedio de atributos por clases",
+                datos.put("Promedio de atributos por artefacto",
                         promedioAtributosClase);
                 datos.put(IResultado.AVERAGE_ATTRIBUTES_CLASS,
                         promedioAtributosClase);
-                datos.put("Average Public Attributes per Class",
+                datos.put("Average Public Attributes per Artifact",
                         promedioAtributosPClase);
-                datos.put("Promedio de atributos públicos por clases",
+                datos.put("Promedio de atributos públicos por artefacto",
                         promedioAtributosPClase);
                 datos.put(IResultado.AVERAGE_PUBLIC_ATTRIBUTE_CLASS,
                         promedioAtributosPClase);
@@ -460,13 +460,13 @@ public class ResultadosDiagrama implements IResultado {
                     + "Número de interfaces en el diagrama: "
                     + nInterfacesD + ".\n"
                     + "Número de paquetes en el diagrama: " + nPaquetesD + ".\n"
-                    + "Promedio de metodos por clases: "
+                    + "Promedio de metodos por artefacto: "
                     + df.format(promedioMetodosClase) + ".\n"
-                    + "Promedio de metodos públicos por clases: "
+                    + "Promedio de metodos públicos por artefacto: "
                     + df.format(promedioMetodosPClase) + ".\n"
                     + "Promedio de atributos por clases: "
                     + df.format(promedioAtributosClase) + ".\n"
-                    + "Promedio de atributos públicos por clases: "
+                    + "Promedio de atributos públicos por artefacto: "
                     + df.format(promedioAtributosPClase) + ".\n"
                     + "\nMétricas MOOD.\n\n"
                     + "Factor de ocultamiento de métodos: "
@@ -494,13 +494,13 @@ public class ResultadosDiagrama implements IResultado {
                     + nInterfacesD + ".\n"
                     + "Number of packages in the diagraman: "
                     + nPaquetesD + ".\n"
-                    + "Average Methods per Class: "
+                    + "Average Methods per Artifact: "
                     + df.format(promedioMetodosClase) + ".\n"
-                    + "Average Public Methods per Class: "
+                    + "Average Public Methods per Artifact: "
                     + df.format(promedioMetodosPClase) + ".\n"
-                    + "Average Attribute per Class: "
+                    + "Average Attribute per Artifact: "
                     + df.format(promedioAtributosClase) + ".\n"
-                    + "Average Public Attribute per Class: "
+                    + "Average Public Attribute per Artifact: "
                     + df.format(promedioAtributosPClase) + ".\n"
                     + "\nMOOD Metrics.\n\n"
                     + "Method hiding factor: "

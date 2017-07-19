@@ -1,5 +1,6 @@
 package co.edu.unicartagena.birch.vista;
 
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -18,5 +19,8 @@ public class TestBirchMetric {
 
         VistaDePrueba vTest = new VistaDePrueba();
         vTest.abrirArchivo();
+        JOptionPane.showMessageDialog(null, "Cálculo terminado",
+                "Birch Metrics",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 }

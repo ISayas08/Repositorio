@@ -340,7 +340,7 @@ public final class MetricasLyK implements IMArtefactos {
                 : "0";
     }
     
-    private String nMethodOverriddenNoR_LyK_11(String artifactId, String path) {
+    private String nMethodOverriddenNoR_LyK__1(String artifactId, String path) {
         IRD cdr = new ControlDeRecopilaciones();
         List<Artefacto> clasesPadres = new ArrayList<>();
         Artefacto claseAEvaluar = new Artefacto(artifactId);

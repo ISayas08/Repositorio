@@ -78,9 +78,10 @@ public interface ICalculaMetricas {
 //  Declaración de métodos.
 //==============================================================================
     /**
-     * Método que permite hacer el calculo de métricas a un único artefacto
-     * perteneciente a un diagrama. Es necesario especificar la id del artefacto
-     * y la ruta del archivo XMI donde se encuentran los datos del mismo.
+     * Método que permite hacer el calculo de todas las métricas, a nivel de
+     * artefacto, a un único artefacto perteneciente a un diagrama. Es necesario
+     * especificar la id del artefacto y la ruta del archivo XMI donde se
+     * encuentran los datos del mismo.
      *
      * @param artifactId un String con la id del artefacto.
      * @param path un String con la ruta para acceder al archivo.
@@ -93,9 +94,10 @@ public interface ICalculaMetricas {
     public IResultado calcularMetricas(String artifactId, String path);
 
     /**
-     * Método que permite hacer el calculo de métricas a un único artefacto
-     * perteneciente a un diagrama. Es necesario especificar la id del artefacto
-     * y la ruta del archivo XMI donde se encuentran los datos del mismo.
+     * Método que permite hacer el calculo de todas las métricas, a nivel de
+     * artefacto, a un único artefacto perteneciente a un diagrama. Es necesario
+     * especificar la id del artefacto y la ruta del archivo XMI donde se
+     * encuentran los datos del mismo.
      *
      * @param artifacId un String con la id del artefacto.
      * @param file un objeto File con la ruta para acceder al archivo.
@@ -146,12 +148,12 @@ public interface ICalculaMetricas {
      *
      * @param artifactId un String con el nombre del artefacto a evaluar.
      * @param path un String con la ruta para acceder al archivo.
-     * @param id un entero con la id de la métrica.
+     * @param metricId un String con la id de la métrica.
      * @return un String que contiene el valor de la métrica, o "NA" en caso de
      * que haya habido un error. De resultar el últmo evento se informará por
      * consola.
      */
-    public String calcularMetrica(String artifactId, String path, String id);
+    public String calcularMetrica(String artifactId, String path, String metricId);
 
     /**
      * Método que permite obtener el resultado de calcular una métrica
@@ -162,12 +164,12 @@ public interface ICalculaMetricas {
      *
      * @param artifactId un String con la id del artefacto a evaluar.
      * @param file un objeto File con la ruta para acceder al archivo.
-     * @param id un entero con la id de la métrica.
+     * @param metricId un String con la id de la métrica.
      * @return un String que contiene el valor de la métrica, o "NA" en caso de
      * que haya habido un error. De resultar el últmo evento se informará por
      * consola.
      */
-    public String calcularMetrica(String artifactId, File file, String id);
+    public String calcularMetrica(String artifactId, File file, String metricId);
 
     /**
      * Método que permite obtener el resultado de calcular una métrica
@@ -176,11 +178,11 @@ public interface ICalculaMetricas {
      * especificadas en la interface ICalculaMetricas.
      *
      * @param path un String con la ruta del archivo.
-     * @param id un entero con la id de la métrica.
+     * @param metricId un String con la id de la métrica.
      * @return un String que contiene el valor de la métrica o "NA" en caso de
      * que se haya producido un error, en cuyo caso se informará por consola.
      */
-    public String calcularMetrica(String path, String id);
+    public String calcularMetrica(String path, String metricId);
 
     /**
      * Método que permite obtener el resultado de calcular una métrica
@@ -189,11 +191,11 @@ public interface ICalculaMetricas {
      * especificadas en la interface ICalculaMetricas.
      *
      * @param file un objeto File con la ruta del archivo.
-     * @param id un entero con la id de la métrica.
+     * @param metricId un String con la id de la métrica.
      * @return un String que contiene el valor de la métrica o "NA" en caso de
      * que se haya producido un error, en cuyo caso se informará por consola.
      */
-    public String calcularMetrica(File file, String id);
+    public String calcularMetrica(File file, String metricId);
 
     /**
      * Método que permite obtener los id de las clases con un nombre especifico.
@@ -227,7 +229,7 @@ public interface ICalculaMetricas {
      *
      * @param path la ruta del archivo XMI.
      * @param isLookingForIds un boolean que especifica si se quiere obtener las
-     * id o los nombres.
+     * id o los nombres. (true = id, false = nombres)
      * @return una lista de Strings que contiene todos los datos.
      */
     public List<String> getAllIdentifier(String path, boolean isLookingForIds);
@@ -238,7 +240,7 @@ public interface ICalculaMetricas {
      * @param file una instancia de la clase File que contiene la ruta del
      * archivo XMI.
      * @param isLookingForIds un boolean que especifica si se quiere obtener las
-     * id o los nombres.
+     * id o los nombres. (true = id, false = nombres)
      * @return una lista de Strings que contiene todos los datos.
      */
     public List<String> getAllIdentifier(File file, boolean isLookingForIds);

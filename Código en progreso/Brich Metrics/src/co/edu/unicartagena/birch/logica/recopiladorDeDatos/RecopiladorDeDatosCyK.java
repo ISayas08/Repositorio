@@ -23,8 +23,6 @@ import javax.xml.xquery.XQResultSequence;
  * de las métricas de CyK (Chidamber & Kemerer).
  *
  * @author Ismael Sayas Arrieta.
- * @version 1.7
- * @since 14/09/2016
  */
 public final class RecopiladorDeDatosCyK implements IRArtefactos {
 

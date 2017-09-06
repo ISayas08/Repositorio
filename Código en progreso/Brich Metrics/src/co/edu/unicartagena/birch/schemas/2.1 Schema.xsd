@@ -2,7 +2,7 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schema.omg.org/spec/XMI/2.1" targetNamespace="http://schema.omg.org/spec/XMI/2.1">
 	<xsd:annotation>
 		<xsd:documentation>
-The following attribute and attribute group declarations are included in the types for MOF classes, but they are not defined in the XMI model.
+			The following attribute and attribute group declarations are included in the types for MOF classes, but they are not defined in the XMI model.
 		</xsd:documentation>
 	</xsd:annotation>
 	<xsd:attribute name="id" type="xsd:ID"/>

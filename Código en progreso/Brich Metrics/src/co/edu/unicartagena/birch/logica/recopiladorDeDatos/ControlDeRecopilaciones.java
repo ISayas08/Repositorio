@@ -21,8 +21,6 @@ import javax.xml.xquery.XQResultSequence;
  * Clase que se encarga de gestionar la recopilación de datos.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.2
- * @since 14/09/2016
  */
 public final class ControlDeRecopilaciones implements IRD {
 
@@ -153,7 +151,7 @@ public final class ControlDeRecopilaciones implements IRD {
      * @return un lista de Strings donde cada string es una id.
      */
     @Override
-    public List<String> getArtifacId(String nombre, String path) {
+    public List<String> getArtifactId(String nombre, String path) {
         List<String> ids = new ArrayList<>();
         try {
             String idss = this.getResult(nombre, path, IVC.SA_GET_IDS);
@@ -174,8 +172,8 @@ public final class ControlDeRecopilaciones implements IRD {
      * @return un lista de Strings donde cada string es una id.
      */
     @Override
-    public List<String> getArtifacId(String nombre, File file) {
-        return this.getArtifacId(nombre, file.getAbsolutePath());
+    public List<String> getArtifactId(String nombre, File file) {
+        return this.getArtifactId(nombre, file.getAbsolutePath());
     }
 
     /**
@@ -187,7 +185,7 @@ public final class ControlDeRecopilaciones implements IRD {
      * @return una lista de Strings que contiene todos los datos.
      */
     @Override
-    public List<String> getAllIdentifier(String path, boolean isLookingForIds) {
+    public List<String> getAllIdentifiers(String path, boolean isLookingForIds) {
         try {
             String identifiers = isLookingForIds
                     ? this.recopilarDatos(path, IRD.IDES_ARTEFACTOS, FAMILIA_MG)
@@ -211,8 +209,8 @@ public final class ControlDeRecopilaciones implements IRD {
      * @return una lista de Strings que contiene todos los datos.
      */
     @Override
-    public List<String> getAllIdentifier(File file, boolean isLookingForIds) {
-        return this.getAllIdentifier(file.getAbsolutePath(), isLookingForIds);
+    public List<String> getAllIdentifiers(File file, boolean isLookingForIds) {
+        return this.getAllIdentifiers(file.getAbsolutePath(), isLookingForIds);
     }
 
 //==============================================================================

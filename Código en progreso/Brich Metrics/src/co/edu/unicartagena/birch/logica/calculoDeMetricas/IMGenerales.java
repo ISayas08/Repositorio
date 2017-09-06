@@ -7,8 +7,6 @@ import java.lang.reflect.InvocationTargetException;
  * Interfaz que provee los métodos para calcular métricas generales.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.1
- * @since 15/09/2016
  */
 public interface IMGenerales {
 

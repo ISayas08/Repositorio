@@ -8,8 +8,6 @@ import java.util.List;
  * datos"
  *
  * @author Ismael Sayas Arrieta.
- * @version 1.3
- * @since 16/09/2016
  */
 public interface IRD {
 
@@ -114,7 +112,7 @@ public interface IRD {
      * @param path la ruta del archivo.
      * @return un lista de Strings donde cada string es una id.
      */
-    public List<String> getArtifacId(String nombre, String path);
+    public List<String> getArtifactId(String nombre, String path);
 
     /**
      * Método que permite obtener las id de los artefactos que tienen un nombre
@@ -124,7 +122,7 @@ public interface IRD {
      * @param file la ruta del archivo.
      * @return un lista de Strings donde cada string es una id.
      */
-    public List<String> getArtifacId(String nombre, File file);
+    public List<String> getArtifactId(String nombre, File file);
 
     /**
      * Método que ermite obtener todos las id o todos los nombres del diagrama.
@@ -134,7 +132,7 @@ public interface IRD {
      * id o los nombres.
      * @return una lista de Strings que contiene todos los datos.
      */
-    public List<String> getAllIdentifier(String path, boolean isLookingForIds);
+    public List<String> getAllIdentifiers(String path, boolean isLookingForIds);
 
     /**
      * Método que ermite obtener todos las id o todos los nombres del diagrama.
@@ -145,6 +143,6 @@ public interface IRD {
      * id o los nombres.
      * @return una lista de Strings que contiene todos los datos.
      */
-    public List<String> getAllIdentifier(File file, boolean isLookingForIds);
+    public List<String> getAllIdentifiers(File file, boolean isLookingForIds);
 
 }

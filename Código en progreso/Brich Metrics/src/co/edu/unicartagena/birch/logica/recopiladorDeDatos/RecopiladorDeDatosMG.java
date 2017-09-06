@@ -22,8 +22,6 @@ import javax.xml.xquery.XQResultSequence;
  * Clase encargada de recopilar toda la información de las métricas generales.
  *
  * @author Ismael Sayas Arrieta.
- * @version 1.5
- * @since 14/09/2016
  */
 public final class RecopiladorDeDatosMG implements IRGenerales {
 
@@ -257,7 +255,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
      * @param path un String que contiene la ruta del archivo XMI.
      * @return un String que contiene los nombres de todas las clases.
      */
-    private String idesArtifacts_MG_8(String path) {
+    private String idsArtifacts_MG_8(String path) {
         try {
             return this.getResult(path,
                     IVC.SG_OBTENER_TODAS_LAS_IDS);
@@ -272,7 +270,7 @@ public final class RecopiladorDeDatosMG implements IRGenerales {
         }
     }
 
-    private String nombresArtifacts_MG_9(String path) {
+    private String namesArtifacts_MG_9(String path) {
         try {
             return this.getResult(path,
                     IVC.SG_OBTENER_TODOS_LOS_NOMBRES);

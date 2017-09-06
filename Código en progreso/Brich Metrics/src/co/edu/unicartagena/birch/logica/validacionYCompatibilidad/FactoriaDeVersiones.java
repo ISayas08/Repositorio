@@ -4,8 +4,6 @@ package co.edu.unicartagena.birch.logica.validacionYCompatibilidad;
  * Clase que permite elegir un tipo determinado de Versión.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.3
- * @since 20/07/2016
  */
 public final class FactoriaDeVersiones {
 

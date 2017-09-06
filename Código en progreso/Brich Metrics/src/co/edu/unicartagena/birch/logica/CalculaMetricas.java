@@ -474,7 +474,7 @@ public class CalculaMetricas implements ICalculaMetricas {
                 //Se llama al método que retorna todas las ids 
                 //y se asigna el resultado en la variable dato.
                 IRD ird = new ControlDeRecopilaciones();
-                ids = ird.getArtifacId(name, path);
+                ids = ird.getArtifactId(name, path);
             } else {
                 //Si el artefacto no es válido.
                 //Se informa por consola.
@@ -528,7 +528,7 @@ public class CalculaMetricas implements ICalculaMetricas {
         if (result.equals("The file is valid.")) {
             //Si el archivo es válido, recuperamos todos los nombres o ids.
             IRD ird = new ControlDeRecopilaciones();
-            identifiers = ird.getAllIdentifier(path, isLookingForIds);
+            identifiers = ird.getAllIdentifiers(path, isLookingForIds);
         } else {
             //En caso de que el archivo no sea válido.
             //Se informa por consola.

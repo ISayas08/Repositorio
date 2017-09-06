@@ -38,8 +38,6 @@ import org.xml.sax.SAXParseException;
  * recoilar la información de cada versión.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.4
- * @since 27/07/2016
  */
 public final class Validador implements IVC {
 
@@ -141,15 +139,15 @@ public final class Validador implements IVC {
      * Método que permite comprobar si el artefacto al que se le desea calcular
      * métricas existe.
      *
-     * @param nombre un String que representa el nombre del artefacto.
+     * @param identifier un String que representa el identificador del artefacto.
      * @param path la ruta del archivo.
      * @param isIdSearch atributoque permite especificar si el artefacto a
      * evaluar se busca a través de la id o del nombre.
      * @return true en caso de que el artefacto exista en el diagrama.
      */
     @Override
-    public boolean verificarArtefacto(String nombre, String path, boolean isIdSearch) {
-        String sentencia = this.version.armarSentenciaArtefacto(nombre, path, 
+    public boolean verificarArtefacto(String identifier, String path, boolean isIdSearch) {
+        String sentencia = this.version.armarSentenciaArtefacto(identifier, path, 
                 "MA Verificar artefacto", isIdSearch);
         String result = this.getResult(sentencia);
 

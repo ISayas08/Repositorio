@@ -8,8 +8,6 @@ import java.util.HashMap;
  * entre las diferentes versiones.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.0
- * @since 21/07/2016
  */
 public abstract class Version {
 

@@ -23,8 +23,6 @@ import javax.xml.xquery.XQResultSequence;
  * de las métricas de FyR (MOOD)(Fernando Brito y Rogerio carpuca).
  *
  * @author Ismael Sayas Arrieta
- * @version 1.3
- * @since 14/09/2016
  */
 public class RecopiladorDeDatosMOOD implements IRGenerales {
 

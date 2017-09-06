@@ -12,8 +12,6 @@ import java.util.List;
  * polimosrfismo.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.0
- * @since 18/09/2016
  */
 public class Artefacto {
 
@@ -53,7 +51,7 @@ public class Artefacto {
      *
      * @param ms un String con los datos del método.
      */
-    void addNuewMethod(String ms) {
+    public void addNuewMethod(String ms) {
         this.getMetodos().add(new Metodo(ms));
     }
 //==============================================================================

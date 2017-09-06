@@ -7,8 +7,6 @@ import java.lang.reflect.InvocationTargetException;
  * Interfaz que provee los métodos a los recopiladores generales.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.2
- * @since 14/09/2016
  */
 public interface IRGenerales {
 

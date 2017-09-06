@@ -8,8 +8,6 @@ import java.util.List;
  * Interface que ofrece los servicios del componente.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.2
- * @since 29/07/2015
  */
 public interface ICalculaMetricas {
 //==============================================================================
@@ -26,11 +24,11 @@ public interface ICalculaMetricas {
     public static final int NUMERO_DE_MS_MG = 8;
     public static final int NUMERO_DE_MS_MOOD = 8;
     public static final int NUMERO_DE_M_ARTEFACTO = NUMERO_DE_MA_CYK
-            + NUMERO_DE_MA_LYK;
+    + NUMERO_DE_MA_LYK;
     public static final int NUMERO_DE_M_SISTEMA = NUMERO_DE_MS_MG
-            + NUMERO_DE_MS_MOOD;
+    + NUMERO_DE_MS_MOOD;
     public static final int NUMERO_DE_METRICAS = NUMERO_DE_M_ARTEFACTO
-            + NUMERO_DE_M_SISTEMA;
+    + NUMERO_DE_M_SISTEMA;
 
 //==============================================================================
 //  Ides para las mátricas.

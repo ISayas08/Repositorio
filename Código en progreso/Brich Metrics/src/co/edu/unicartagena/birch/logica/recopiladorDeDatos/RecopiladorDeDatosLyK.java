@@ -23,8 +23,6 @@ import javax.xml.xquery.XQResultSequence;
  * mètricas de Lorenz y kidd.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.6
- * @since 14/09/2016
  */
 public final class RecopiladorDeDatosLyK implements IRArtefactos {
 

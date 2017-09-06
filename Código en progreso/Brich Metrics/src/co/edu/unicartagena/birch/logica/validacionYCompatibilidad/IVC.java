@@ -5,8 +5,6 @@ package co.edu.unicartagena.birch.logica.validacionYCompatibilidad;
  * y compatibilidad".
  *
  * @author Ismael Sayas Arrieta.
- * @version 1.1
- * @since 27/07/2016
  */
 public interface IVC {
 

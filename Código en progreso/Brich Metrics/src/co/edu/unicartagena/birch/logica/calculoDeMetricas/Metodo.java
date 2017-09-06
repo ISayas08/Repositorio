@@ -11,8 +11,6 @@ import java.util.List;
  * el indice de especialización de la familia de métricas de LyK.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.0
- * @since 18/09/2016
  */
 public class Metodo {
 

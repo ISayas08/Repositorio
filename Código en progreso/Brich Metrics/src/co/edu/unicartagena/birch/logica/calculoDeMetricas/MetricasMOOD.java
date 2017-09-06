@@ -26,8 +26,6 @@ import java.util.stream.Collectors;
  * </ul>
  *
  * @author Ismael Sayas Arrieta
- * @version 1.3
- * @since 16/09/2016
  */
 public class MetricasMOOD implements IMGenerales {
 

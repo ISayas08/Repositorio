@@ -7,8 +7,6 @@ import java.lang.reflect.InvocationTargetException;
  * Interface que provee los métodos para calcular métricas de artefactos.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.0
- * @since 15/09/2016
  */
 public interface IMArtefactos {
 

@@ -12,8 +12,6 @@ import java.util.logging.Logger;
  * servicios ofrecidos por el subcomponente "Calculo de métricas".
  *
  * @author Ismael Sayas Arrieta
- * @version 1.2
- * @since 22/09/2016
  */
 public class ControlDeCalculoDeMetricas implements ICM {
 

@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          	xmlns="http://www.omg.org/spec/XMI/20110701"
-          	targetNamespace="http://www.omg.org/spec/XMI/20110701">
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns="http://www.omg.org/spec/XMI/20110701"
+ targetNamespace="http://www.omg.org/spec/XMI/20110701">
 
-<xsd:attribute name="id" type="xsd:ID"/>
+ <xsd:attribute name="id" type="xsd:ID"/>
 
-<xsd:attributeGroup name="IdentityAttribs">
+ <xsd:attributeGroup name="IdentityAttribs">
    <xsd:attribute name="label" type="xsd:string" use="optional" form="qualified"/>
    <xsd:attribute name="uuid" type="xsd:string" use="optional" form="qualified"/>
-</xsd:attributeGroup>
+ </xsd:attributeGroup>
 
-<xsd:attributeGroup name="LinkAttribs">
+ <xsd:attributeGroup name="LinkAttribs">
    <xsd:attribute name="href" type="xsd:anyURI" use="optional"/>
    <xsd:attribute name="idref" type="xsd:IDREF" use="optional" form="qualified"/>
-</xsd:attributeGroup>
+ </xsd:attributeGroup>
 
-<xsd:attributeGroup name="ObjectAttribs">
+ <xsd:attributeGroup name="ObjectAttribs">
    <xsd:attributeGroup ref="IdentityAttribs"/>
    <xsd:attributeGroup ref="LinkAttribs"/>
    <xsd:attribute name="type" type="xsd:QName" form="qualified"/>
-</xsd:attributeGroup>
+ </xsd:attributeGroup>
 
-<xsd:complexType name="XMI">
+ <xsd:complexType name="XMI">
   <xsd:choice minOccurs="0" maxOccurs="unbounded">
     <xsd:any processContents="lax"/>
   </xsd:choice>
@@ -105,14 +105,14 @@
     <xsd:extension base="Difference">
       <xsd:attribute name="position" type="xsd:integer" use="optional"/>
       <xsd:attribute name="replacement" type="xsd:IDREFS"
-                   use="optional"/>
-    </xsd:extension>
-  </xsd:complexContent>
-</xsd:complexType>
+       use="optional"/>
+     </xsd:extension>
+   </xsd:complexContent>
+ </xsd:complexType>
 
-<xsd:element name="Replace" type="Replace"/>
+ <xsd:element name="Replace" type="Replace"/>
 
-<xsd:complexType name="Delete">
+ <xsd:complexType name="Delete">
   <xsd:complexContent>
     <xsd:extension base="Difference"/>
   </xsd:complexContent>
@@ -122,9 +122,9 @@
 
 <xsd:complexType name="Any">
   <xsd:choice minOccurs="0" maxOccurs="unbounded">
-     <xsd:any processContents="skip"/>
-  </xsd:choice>
-  <xsd:anyAttribute processContents="skip"/>
+   <xsd:any processContents="skip"/>
+ </xsd:choice>
+ <xsd:anyAttribute processContents="skip"/>
 </xsd:complexType>
 
 </xsd:schema>

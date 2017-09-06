@@ -4,8 +4,6 @@ package co.edu.unicartagena.birch.logica.recopiladorDeDatos;
  * Clase encargada de crear los objetos que recopilan la información.
  *
  * @author Ismael Sayas Arrieta.
- * @version 1.5
- * @since 16/09/2016
  */
 public final class FactoriaDeRecopiladores {
 

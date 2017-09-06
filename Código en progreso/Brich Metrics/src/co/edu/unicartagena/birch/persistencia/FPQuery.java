@@ -6,8 +6,6 @@ import javax.xml.xquery.XQException;
  * Clase que proporciona las instancias de persistencias query.
  *
  * @author Ismael Sayas Arrieta
- * @version 1.1
- * @since 17/07/2016
  */
 public final class FPQuery {
 
